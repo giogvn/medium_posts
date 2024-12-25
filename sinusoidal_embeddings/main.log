@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  24 DEC 2024 20:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  25 DEC 2024 17:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -923,7 +923,7 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 (Font)              scaled to size 5.0pt on input line 161.
 
-Overfull \hbox (118.02316pt too wide) detected at line 213
+Overfull \hbox (48.9515pt too wide) detected at line 213
 []
  []
 
@@ -938,7 +938,7 @@ it/10 max[]pos; embed[]dim\OT1/cmr/m/n/10 )$\T1/XCharter-TLF/m/n/10 ,
  []
 
 [4] [5]
-<images/sin_embeds_periodicity.png, id=39, 962.6364pt x 506.6127pt>
+<images/sin_embeds_periodicity.png, id=40, 962.6364pt x 506.6127pt>
 File: images/sin_embeds_periodicity.png Graphic file (type png)
 <use images/sin_embeds_periodicity.png>
 Package pdftex.def Info: images/sin_embeds_periodicity.png  used on input line 
@@ -947,14 +947,14 @@ Package pdftex.def Info: images/sin_embeds_periodicity.png  used on input line
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
 (Font)              scaled to size 5.0pt on input line 339.
  [6 <./images/sin_embeds_periodicity.png>]
-<images/sin_embeds_freq_decay.png, id=45, 864.3492pt x 395.3169pt>
+<images/sin_embeds_freq_decay.png, id=46, 864.3492pt x 395.3169pt>
 File: images/sin_embeds_freq_decay.png Graphic file (type png)
 <use images/sin_embeds_freq_decay.png>
 Package pdftex.def Info: images/sin_embeds_freq_decay.png  used on input line 3
 73.
 (pdftex.def)             Requested size: 455.24411pt x 208.208pt.
  [7 <./images/sin_embeds_freq_decay.png>]
-<images/sin_embeds_scale_invariance.png, id=52, 578.16pt x 433.62pt>
+<images/sin_embeds_scale_invariance.png, id=53, 578.16pt x 433.62pt>
 File: images/sin_embeds_scale_invariance.png Graphic file (type png)
 <use images/sin_embeds_scale_invariance.png>
 Package pdftex.def Info: images/sin_embeds_scale_invariance.png  used on input 
@@ -973,7 +973,7 @@ L3 programming layer <2024-02-20>
 Here is how much of TeX's memory you used:
  20032 strings out of 474116
  377637 string characters out of 5743681
- 2222187 words of memory out of 5000000
+ 2223187 words of memory out of 5000000
  41983 multiletter control sequences out of 15000+600000
  652937 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -992,15 +992,16 @@ s/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 r7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.
-pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt100
-0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.
-pfb>
-Output written on main.pdf (9 pages, 1231928 bytes).
+0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.
+pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
+b></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm1
+0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.
+pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.pf
+b>
+Output written on main.pdf (9 pages, 1240364 bytes).
 PDF statistics:
- 140 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
+ 145 PDF objects out of 1000 (max. 8388607)
+ 88 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  28 words of extra memory for PDF output out of 10000 (max. 10000000)
 
