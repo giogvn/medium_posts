@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  25 DEC 2024 17:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  26 DEC 2024 19:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -947,12 +947,12 @@ Package pdftex.def Info: images/sin_embeds_periodicity.png  used on input line
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
 (Font)              scaled to size 5.0pt on input line 339.
  [6 <./images/sin_embeds_periodicity.png>]
-<images/sin_embeds_freq_decay.png, id=46, 864.3492pt x 395.3169pt>
+<images/sin_embeds_freq_decay.png, id=46, 1156.32pt x 578.16pt>
 File: images/sin_embeds_freq_decay.png Graphic file (type png)
 <use images/sin_embeds_freq_decay.png>
 Package pdftex.def Info: images/sin_embeds_freq_decay.png  used on input line 3
 73.
-(pdftex.def)             Requested size: 455.24411pt x 208.208pt.
+(pdftex.def)             Requested size: 455.24411pt x 227.61641pt.
  [7 <./images/sin_embeds_freq_decay.png>]
 <images/sin_embeds_scale_invariance.png, id=53, 578.16pt x 433.62pt>
 File: images/sin_embeds_scale_invariance.png Graphic file (type png)
@@ -998,7 +998,7 @@ b></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm1
 0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.
 pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.pf
 b>
-Output written on main.pdf (9 pages, 1240364 bytes).
+Output written on main.pdf (9 pages, 20974958 bytes).
 PDF statistics:
  145 PDF objects out of 1000 (max. 8388607)
  88 compressed objects within 1 object stream

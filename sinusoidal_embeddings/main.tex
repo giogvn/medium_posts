@@ -107,7 +107,7 @@ The author's of the \textit{Attention is All You Need} paper define the Sinusoid
 \begin{definition}[Sinusoidal Embeddings]
 	\label{def:sin_embedding}
 	
-	For a position \( pos \) in the sequence and a dimension \( i \) (where \( i \) ranges from 0 to \( \frac{d}{2}-1 \)), the embedding is given by:
+	For a position \( pos \) in the sequence and a dimension \( i \) (where \( i \) ranges from 0 to \( \frac{d}{2}-1 \)), the sinusoidal embedding ($SE$) function is given by:
 	
 	\begin{align}
 		SE_{(pos, 2i)} &= \sin\left(\frac{pos}{10000^{\frac{2i}{d}}}\right) \\
