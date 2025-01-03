@@ -24,6 +24,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{float}
 
 
 \lstset{
@@ -72,7 +73,7 @@ This document contains a summary of the main topics of the second chapter of the
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 
-\section{Probability Functions}
+\section{Random Variables (Section 2.2 from the Book)}
 When modeling a random variable (rv) $X$, there are some functions and notations to memorize and interpret:
 
 \begin{itemize}
@@ -108,26 +109,184 @@ Two major remarks must be notice regarding the pdf defined above:
 
 The $quantile$ function (also called the Percent Point Function or simply $ppf$) is defined as the inverse function of the $cdf$. This means that given a random variable $X$'s cumulative distibution function $CDF(X \leq x)$, its PPF is given by $PPF(q) = CDF^{-1}(X \leq x_q)$. The output of the $PPF$ function is interpreted as the value $X = x_q$ such that $P(X \leq x_q) = q$.
 
-Let's consider the standard normal random variable $X \sim \mathcal{N}(0, 1)$. Suppose we want to calculate $PPF(0.025) = x_q$, i.e., we want to find $x_q$ such that $CDF(X \leq x_q) = 0.025$. We know that $CDF$ is the integral of the $PDF$, i.e., the area under the curve representing the probability density of $X$. Hence, we're looking for find $x_q$ such that $CDF(X \leq x_q) = \int_{-\inf}^{x_q} p(x) \, dx = 0.025$. This means that we're looking for the value in the x-axis for which the integral of the plot adds up to $0.05$, which represents $2.5\%$ of the total area under the curve.
+Let's consider the standard normal random variable $X \sim \mathcal{N}(0, 1)$. Suppose we want to calculate $PPF(0.025) = x_q$, i.e., we want to find $x_q$ such that $CDF(X \leq x_q) = 0.025$. We know that $CDF$ is the integral of the $PDF$, i.e., the area under the curve representing the probability density of $X$. Hence, we're looking for find $x_q$ such that $CDF(X \leq x_q) = \int_{-\inf}^{x_q} p(x) \, dx = 0.025$. This means that we're looking for the value in the x-axis for which the integral of the plot adds up to $0.05$, which represents $2.5\%$ of the total area under the curve. We usually call the $PPF$ input $\frac{\alpha}{2}$ (\textit{alpha} over two).
 
 For $X \sim \mathcal{N}(0, 1)$, $CDF(X \leq x_q) = \int_{-\inf}^{x_q} p(x) \, dx = 0.025 \implies x_q = -1.96 $, i.e., $PPF(0.025) = -1.96$, the red value in the plot below. The blue value is inferred because of the normal distribution symmetry. Hence, if we are interpreting the plot from a Baysian perspective, for a standard normal distributed rv, there is a $2.5\%$ chance that the observed value of it will be less than $-1.96$. On the other hand, the frequentist approach would say that in a long run, $2.5\%$ of the total observations will be of values less or equal to $-1.96$.
+
+\textbf{The Normal Distribution's $PDF$ is an even function.} This means that $PDF(x) = PDF(-x)$. Hence, $PPF(\frac{\alpha}{2})  = x_q \implies PPF(1 - \frac{\alpha}{2}) = -x_q$.
+
+It is easy to  see that the interval $(-1.96, 1.96)$ contains $95\%$ of the standard normal's cumulative probability, which means that $95\%$ of $X \sim \mathcal{N}(0, 1)$ will fall within this interval.
+
+We can generalize this result for non-standard normally distributed rvs. If  $X \sim \mathcal{N}(\mu, \sigma^2)$, then the $95\%$ interval becomes $(\mu - 1.96\sigma, \mu + 1.96\sigma)$, which is generally rounded to $\mu \pm\sigma$.
 
 \begin{figure}[h] 
 	\centering
 	\includegraphics[width=\linewidth]{images/standard_normal_pdf.png}
-	\caption{The sinusoidal embeddings difference vector's modules decrease linearly with the distance between the subtracted vectors}
+	\caption{A visualization of the Normal Distribution's symmetric quantiles}
 	\label{fig:standard_normal_pdf}
 \end{figure}
 
+\subsection{Sets of Related Random Variables}
+
+Suppose we have two rvs $X$ and $Y$. We can define the \textbf{joint distribution} $p(x,y) = p(X = x, Y= y)$. If  $X$ and $Y$ have finite cardinality, one can represent their joint distribution in a 2D table:
+
+\begin{table}[H]
+	\centering
+	\caption{Joint Distribution of Two Binary Random Variables $X$ and $Y$}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		& $Y = 0$ & $Y =  1$  \\ \hline
+		$X = 0$ & $0.3$  & $0.2$  \\ \hline
+		$X = 1$ & $0.2$ & $0.3$ \\ \hline
+	\end{tabular}
+\end{table}
+
+If we are interested in only one of the variables distribution, i.e., we want one of the varibles \textbf{marginal}, we can use the follwing rule:
+
+\begin{definition}[Sum Rule/ Rule of Total Probability]
+	\label{def:sum_rule}
+	
+	Given a joint distribution function  $p(x,y)$, the marginal $p(x)$ is given by:
+ 	
+	\begin{align}
+		p(x) &= \sum_{i = 1}^{n} p(x, Y = y_i)
+	\end{align}
+	
+\end{definition}
+
+The marginal for $y$ (i.e., $p(y)$) is defined exactly the same way.
+
+If $X$ and $Y$ are independent variables, which is written as $X \perp Y$, then  $p(x,y)$ can be defined as the product of the marginals.
+
+\begin{definition}[Joint Distribution of Independent Random Variables]
+	\label{def:joint_dist_of_indep_rvs}
+	
+	If $X$ and $Y$ are two independent random variables, which is written like  $X \perp Y$ then:
+	
+	\begin{align}
+		p(x,y) &= p(x)p(y)\\
+		& \text{which is a product of two vectors}
+	\end{align}
+	
+\end{definition}
+
+On the other hand, is far more common that variables are indeed dependent on each other, so that the definition above cannot be used to define their joint distribution. Hence, we use the $product rule$ instead:
 
 
+\begin{definition}[Product Rule]
+	\label{def:prod_rule}
+	
+	If $X$ and $Y$ are two random variables, then the product rule says that their joint distribution is given by:
+	
+	\begin{align}
+		p(x,y) &= p(x)p(y|x)\\
+	\end{align}
+	
+\end{definition}
 
 
+We might generalize the joint distribution even further for the cases in which we have a set of random variables and we are interested to study their simultaneous behavior.
 
-
+\begin{definition}[Chain Rule of Probability]
+	\label{def:cahin_rule_prob}
+	
+	Given a set of $D$ random variables denoted by $X_1, X_2, \hdots, X_D$, one can define their joint distribution like the following:
+	
+	\begin{align}
+		p(x_{1:D}) &= p(x)p(x_2|x_1)p(x_3| x_2, x_1)\hdots p(x_D|x_{D-1}, \hdots, x_1)\\
+	\end{align}
+	
+\end{definition}
 %------------------------------------------------
 
+A set of random variables $X_1, \hdots, X_D$ is said to be \textbf{mutually independent} if the joint distribution for any subset $\{X_1, \hdots, X_m\}\subseteq \{X_1, \hdots, X_D\}$ can be written as a product of the marginals.
 
+\begin{definition}[Mutual Independence]
+	\label{def:mututal_indep}
+	
+	A set of $D$ random variables $\{X_1, X_2, \hdots, X_D\}$, is said to be mutually independent iff:
+	
+	\begin{align}
+		p(x_1, x_2, \hdots, x_m) = p(x_{1:m}) &= p(x_1)p(x_2)\hdots p(x_m)\\
+		&\text{for any  } m \leq D
+	\end{align}
+	
+\end{definition}
+
+As previously mentioned, a set of variables is rarely mutually independent, which means that the \textbf{chain rule of probability} is usually used to calculate joint distributions of their subsets. Intuitivelly, what this means is that it is very common that one variable influences one-another in a set of rvs. On the other hand, one can often describe $X$'s influence on $Y$ by using another rv $Z$ that medidates the influence such that the $X$ and $Y$  become \textbf{conditionally independent}.
+
+\begin{definition}[Conditional Independence]
+	\label{def:cond_indep}
+	
+	$X$ and $Y$ are said to be \textbf{conditionally independent} on $Z$, which is denoted by $X \perp Y | Z$, iff:
+	
+	\begin{align}
+		p(X = x, Y=y | Z = z) &= p(x | z) p(y | z)
+	\end{align}
+	
+\end{definition}
+
+
+\subsection{Bayes' Rule}
+
+
+\begin{definition}[Bayes Rule]
+	\label{def:bayes_rule}
+	
+	The Bayes' Rule is simply a formula for computing the distribution of a hidden state $H$ given some observed data $Y$ :
+	
+	\begin{align}
+		p(H = h | Y = y) &= \frac{p(Y = y | H = h) p(H = h)}{p(Y=y)}
+	\end{align}
+	
+	This follows directly from the previously defined product rule (\ref{def:prod_rule}).
+	
+\end{definition}
+
+There are some important names for the terms of the Bayes' Rule formula:
+
+\begin{itemize}
+	\item $p(H = h | Y = y)$:  is called the \textbf{posterior distribution}, because it is the distribution of $H$ after observing a certain value of $Y$.
+	\item $p(Y = y | H = h)$: is called the \textbf{likelihood} and is a function of $h$ since $y$ is fixed. It measures how likely it is for $Y = y$ given that $H = h$. Notice this is not a probability distribution because it does not sum up to $1$ for all the differen values of $h$.
+	\item $p(H = h)$: is called the \textbf{prior} distribution and is simply the distribution of $H$ before any knowledge about $Y$ is given.
+	\item $p(Y = y)$: is called the \textbf{marginal likelihood} and can be calculated using the \textbf{sum rule/rule of total probability}, since $p(Y = y) = \sum_{i = 1}^{n} p(y, H = h_i)$.
+\end{itemize}
+
+
+\begin{info} % Information block
+	We call \textbf{Bayesian Inference} the act of passing from sample data to generalizations (inference) with calculations of certainty given by the \textit{Bayes' Rule}. Hence, when we perform this type of inference, we use a set of observed samples (training set) to tell the shape of the posterior distribution of a variable of interest $H$ as a means to be able to qualify its possible outcomes quantitatively in terms of probabilities given an observation of the world $Y = y$.
+\end{info}
+
+
+
+
+
+\subsubsection{The Monty Hall Problem}
+
+\begin{question}
+	Suppose there is a contestant in a TV show in which there is a hidden prize behind only one of three distinct doors. In the beggining of the show, the contestant must choose one of the three doors and as soon as this choice is made, the host opens one of the remaining two doors \textbf{without revealing the prize location}. After such door is opened, the contestant must make a last choice: to keep their first door as the final choice or two switch it by the door that has not been opened by the host. \textbf{Which last choice maximixes the probability that the contestant wins the final prize?}
+	
+	To solve this problem, we first need to model it. Let's say the contestant first selects door $1$. Let's define some variables.
+	
+	\begin{itemize}
+		\item  $C_i$ is the event when the contestant selects door $i$ at the end, $i \in \{1,2,3\}$
+		\item  $H_j$ is the event when the TV host selects door $j \in \{2,3\}$
+		\item $Y_i$ is the event when the prize is behind door $i \in \{1,2,3\}$
+		\item $p(Y_i | H_j)$ is the probability we are interested to maximize. This means we want to the contestant to make a final choice for the door $i$ that is the most likely to have the prize given that the host selected door $j$.
+	\end{itemize}
+	
+	\begin{align}
+		 p(Y_1 | H_2) &= \frac{p(H_2 | Y_1) p(Y_1)}{p(H_2)} = \frac{(1/2) (1/3)}{p(1/2)} = 1/3 \\
+		 p(Y_1 | H_3) &= \frac{p(H_3 | Y_1) p(Y_1)}{p(H_3)} = \frac{(1/2) (1/3)}{p(1/2)} = 1/3 \\
+		 p(Y_2 | H_3) &= \frac{p(H_3 | Y_2) p(Y_2)}{p(H_3)} = \frac{(1) (1/3)}{p(1/2)} = 2/3 \\
+		 p(Y_3 | H_2) &= \frac{p(H_2 | Y_3) p(Y_3)}{p(H_2)} = \frac{(1) (1/3)}{p(1/2)} = 2/3 \\
+	\end{align}
+	
+	Above, we see that $p(Y_2 | H_3)$ and $p(Y_3 | H_2)$ are the posteriors with the largest values. They are modeling the probability that the prize is behind the door that has not been chosen by either the TV host or by the contestant at the begining. \textbf{Hence, the contestant should switch their choice after the host opens a door as it will lead to the event in which the probability of winning is the largest. }
+\end{question}
+
+
+In this section we are going to prove the results that let us define the moments for $E[X^2]$ and $Var[X^2]$
 \subsection{What Properties Should Sinusoidal Embeddings (SE) Should Apply?}
 
 \begin{enumerate}
