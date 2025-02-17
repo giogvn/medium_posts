@@ -1,0 +1,242 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{The Maths Behind Denoising Diffusion Probabilistic Models} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@outlook.com}} % Author name and email address
+
+\date{University of Sao Paulo --- \today} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+ 
+
+\begin{definition}[Variational Lower Bound - Jensen's Inequality]
+	Let's use the Rule Of Total Probability to find a lower bound for the log-likelihood function.
+	\label{def:var_low_bound_jensen}
+	\begin{align}
+		log [p(\mathbf{x})] &=  log \int_\mathbf{Z} p(\mathbf{x_0}, \mathbf{Z} )d\mathbf{Z} \\
+		&=  log \int_\mathbf{Z} p(\mathbf{x_0}, \mathbf{Z} ) \frac{q(\mathbf{Z})}{q(\mathbf{Z})}d\mathbf{Z} 	\\
+	    &= log (\mathbb{E}_q\bigg[\frac{p(\mathbf{x, Z})} {q(\mathbf{Z})}\bigg]) \\
+		\text{the Jensen's inequality tells us}& \\
+		f(\mathbf{E}(\mathbf{X})) &\geq \mathbf{E}(f(\mathbf{X})))\\
+		\text{   for any concave function f.} &\\
+		\text{ log is concave, hence:} &  \\
+		log [p(\mathbf{x})] &\geq \mathbb{E}_q\bigg[log \frac{p(\mathbf{x, Z})} {q(\mathbf{Z})}\bigg] \\
+		\text{The Evidence Lower Bound, or simply ELBO, is :}  &\\
+		L &:=   \mathbb{E}_q\bigg[log \frac{p(\mathbf{x, Z})} {q(\mathbf{Z})}\bigg] \\
+	\end{align}
+\end{definition}
+
+\begin{definition}[Variational Lower Bound - KL Divergence]	
+		Let's use the Kullback-Leibler Divergence function to find a lower bound for the log-likelihood function.
+	\begin{align}
+		\mathbf{D_{KL}}\big[ q(\mathbf{Z}))  ||  p(\mathbf{Z | x}) \big] & := \mathbb{E}_q\big[ log(q(\mathbf{Z})  -  log(p(\mathbf{Z | x })) \big] \\
+		\text{using the Bayes' Rule we can write} & \\
+		p(\mathbf{Z | x}) &= \frac{p(\mathbf{x, Z})}{p(\mathbf{x})} \\
+		\implies 	\mathbf{D_{KL}}\big[ q(\mathbf{Z}))  ||  p(\mathbf{Z | x}) \big] &= \mathbb{E}_q\big[ log(q(\mathbf{Z}))  -  log(p(\mathbf{x, Z})) + log(p(\mathbf{x})) \big] \\
+		\text{the prior of the observed variables X does not depend on q} & \\
+		\mathbf{D_{KL}}\big[ q(\mathbf{Z})  ||  p(\mathbf{Z | x}) \big] &= \mathbb{E}_q\big[ log(q(\mathbf{Z}))  -  log(p(\mathbf{x, Z})) \big] + log(p(\mathbf{x})) \\
+		\implies log(p(\mathbf{x})) = 	\mathbf{D_{KL}}\big[ q(\mathbf{Z}))  ||  p(\mathbf{Z | x}) \big] & -   \mathbb{E}_q\big[ log(q(\mathbf{Z}))  -  log(p(\mathbf{x, Z})) \big] \\
+		 = 	\mathbf{D_{KL}}\big[ q(\mathbf{Z}))  ||  p(\mathbf{Z | x}) \big] & +   \mathbb{E}_q\big[  log(p(\mathbf{x, Z}) - log(q(\mathbf{Z}))) \big] \\
+		\text{but   }	\mathbf{D_{KL}}\big[ q(\mathbf{Z}))  ||  p(\mathbf{Z | x}) \big] & \geq 0 \\
+		\implies log(p(\mathbf{x})) &\geq  \mathbb{E}_q\bigg[log \frac{p(\mathbf{x, Z})} {q(\mathbf{Z})}\bigg] \\
+		\text{The Evidence Lower Bound, or simply ELBO, is :}  &\\
+		L &:=   \mathbb{E}_q\bigg[log \frac{p(\mathbf{x, Z})} {q(\mathbf{Z})}\bigg]
+	\end{align}
+\end{definition}
+
+We have found lower bound $L$ for the log-likelihood function that is tractable if rewritten properly. Our goal is to have a process to sample from $p$ such that $log p(\mathbf{x_0})$ is as large as possible. This means that our process will output very likely outputs $\mathbf{x_0}$. In order to do so, DDPMs work in two steps: \textbf{noise prediction} and \textbf{sampling}. The former is the one responsible for predicting the a noise $\epsilon_\theta$ of an input $\mathbf{x_t}$ which has has been sampled from the forward process' distribution $q$. The latter uses such prediction to sample $\mathbf{x_0}$ from $p$.
+
+\subsubsection{Noise Predictor Training Derivation}
+
+Having ELBO ($L$) as a lower bound for the log likelihood function means we can train our noise predictor model to maximize $L$, i.e., $L$ is a candidate for our model's loss function. In order to do so, further algebraic manipulation must be performed with it in order to make it tractable in a way that the noise that has been added to the input appears somewhere. We demonstrate such manipulations here and will begin by showing that maximing $L$ basically means approximating the distributions $p(\mathbf{x_{t-1} | x_t}) $ and $q(\mathbf{x_{t-1} | x_t,  x_0})$.
+
+
+
+
+
+If we pay attention to equation $41$'s terms above, we see that the first term is parameter free, because $p(\mathbf(x_T))$ is fixed and defined as a Gaussian, while $q(\mathbf(x_T | x_0))$ is also Gaussian from the definition of the forward process. Hence, we are left with the second and third terms. 
+
+As previously mentioned, we are interested in maximizing $L$. Using the equation $41$, we see that doing so is equivalent to minimizing the KL Divergence between $p_\theta (\mathbf{x_{t-1} | x_t})$ and $q(\mathbf{x_{t-1} | x_t,  x_0})$. We know that both distributions are Gaussians, which makes computing the KL Divergence between them easier if we know their mean and variance. We will begin by calculating such moments for $q(\mathbf{x_{t-1} | x_t,  x_0})$.
+	
+\begin{align}
+	 q(\mathbf{x_{t-1} | x_t,  x_0}) &= \frac{q(\mathbf{x_t | x_{t-1}, x_0}) q(\mathbf{x_{t-1}|x_0})}{q(\mathbf{x_t | x_0})} \\
+	 & \text{we know the q distribution from Definition \ref{def:cum_noise}, hence } \\ 
+	 q(\mathbf{x_{t-1} | x_t,  x_0}) &\text{    is a product of known Gaussians over another known Gaussian that lets us define} \\
+	 \mu_q(\mathbf{x_t, x_0}) &= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_0}}{(1-\bar{\alpha_t})} \\
+	 \Sigma_q(t) &= \frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1 - \bar{\alpha}_t}  \mathbf{I} \\
+	 & \implies  q(\mathbf{x_{t-1} | x_t,  x_0}) =   \mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t))
+\end{align}
+
+We have just defined the $q(\mathbf{x_{t-1} | x_t,  x_0})$ distribution. Now let's move on to the  $p_\theta (\mathbf{x_{t-1} | x_t})$ distribution.
+	
+\begin{align}
+	p_\theta(\mathbf{x_{t-1} | x_t}) &=   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_\theta(t)) \\
+	& \text{the reverse process variance is defined as the ground truth variance of the forward process: } \\
+ \Sigma_\theta(t) &= \Sigma_q(t) \\
+	& \text{    we are only left with the distribution's mean   } \mu_\theta \\
+	p_\theta(\mathbf{x_{t-1} | x_t}) &=   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t))
+\end{align}
+
+Equation 50 makes it much easier to calculate $\mathbf{D_{KL}}\big[ p_\theta (\mathbf{x_{t-1} | x_t})  || q(\mathbf{x_{t-1} | x_t,  x_0}) \big]$: now we know we are trying to compute the KL Divergence between two Gaussians with the exact same variance. For that,  there is the following result that arives from the definition of such divergence:
+
+\begin{align}
+	d_1(x) &= \mathcal{N}(\mu_1, \sigma^2)  \\
+	d_2(x) &= \mathcal{N}(\mu_2, \sigma^2) \\
+	\text{The KL divergence   } & D_{KL}(d_1 | d_2)  \text{   is given by:} \\
+	D_{KL}(d_1 | d_2) &= \frac{(\mu_1 - \mu_2)^2}{2\sigma^2}\\
+	&\text{Hence,  }\\
+\mathbf{D_{KL}}\big[ p_\theta (\mathbf{x_{t-1} | x_t})  || q(\mathbf{x_{t-1} | x_t,  x_0}) \big] &=  \mathbf{D_{KL}}\big(   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t)), \mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t)) \big) \\
+&=  \frac{1- \bar{\alpha}_t }{2(1-\alpha_t)(1- \bar\alpha_{t-1})} \big|\big| (\mu_\theta - \mu_q)^2_2\big|\big|
+\end{align}
+
+As our goal is to minimize the KL Divergence, from equation 59 we see that such goal comes down to basically minimizing the 
+difference $\mu_\theta - \mu_q$, i.e., \textbf{we just need to minimize the difference between the means of the reverse and forward processes' distributions}. We need to define the reverse process' distribution mean prediction by taking a look at the forward process' one. 
+\begin{align}
+	 \mu_q(\mathbf{x_t, x_0}) &= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_0}}{(1-\bar{\alpha_t})} \\
+	 & \text{we can define the prediction }\\
+	 \hat\mu_q(\mathbf{x_t, x_0}) &=  \mu_\theta(\mathbf{x_t}) \\
+	 &= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_\theta}}{(1-\bar{\alpha_t})}
+\end{align}
+	
+In equation 63 we see that we are using our reverse process model's prediction $\mathbf{x_\theta}$ in the prediction of its distribution's mean, which let's us rewrite $\big|\big| (\mu_\theta - \mu_q)^2_2\big|\big|$ in terms of $\mathbf{x_0}$ and $\mathbf{x_\theta}$ which leves us with the following for the KL Divergence:
+	
+\begin{align}
+	 \mathbf{D_{KL}}\big(   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t)), \mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t)) \big) &= \frac{(1- \bar{\alpha}_t)(\bar\alpha_{t-1}) }{2(1-\alpha_t)(1- \bar\alpha_{t-1})} \big|\big| (\mathbf{x_\theta - x_0})^2_2 \big|\big|
+\end{align}
+	
+The author's of the DDPM paper mention that equation 64 can be used as the loss function to train the reverse process model. On the other hand, we now that the forward process actually predict the noise that was added to an input $\mathbf{x_t}$ intead of predicting $\mathbf{x_\theta}$ directly. This means that the loss function must account for the error prediction somehow. This is achieved by further analysing $\mathbf{x_0}$ and $\mathbf{x_\theta}$ and remembering how $\mathbf{x_\theta}$ was defined in the forward process. 
+	
+\begin{align}
+	q(x_t|x_0) &:= \mathcal{N}(x_{t}; \sqrt{\bar{\alpha_t}} \times x_0; (1 - \bar{\alpha_t})\mathbb{I}) \\
+	&\text{which  let's us write } \\
+	\mathbf{x_t} &= \sqrt{\bar{\alpha_t}}  x_0 +  \sqrt{1 - \bar{\alpha_t}}\epsilon \\
+	\implies \mathbf{x_0} &= \frac{\mathbf{x_t} -  \sqrt{1-\bar{\alpha_t}}\epsilon}{\sqrt{\bar\alpha_t}}\\
+	\text{for a Standard Gaussian Noise  } &\epsilon. \\
+	\text{We can now define our prediction   } \hat\epsilon& = \epsilon_\theta\\
+	\mathbf{x_\theta}  &= \frac{\mathbf{x_t} -  \sqrt{1-\bar{\alpha_t}}\epsilon_\theta}{\sqrt{\bar\alpha_t}} \\
+	\implies 
+	\frac{(1- \bar{\alpha}_t)(\bar\alpha_{t-1}) }{2(1-\alpha_t)(1- \bar\alpha_{t-1})}\big|\big| (\mathbf{x_\theta - x_0})^2_2 \big|\big| &= 	\frac{(1- \bar{\alpha}_t)(\bar\alpha_{t-1}) }{2(1-\alpha_t)(1- \bar\alpha_{t-1})} \frac{(1-\alpha_t)^2}{(1-\bar\alpha_t)\alpha_t}\big|\big| (\mathbf{\epsilon_\theta- \epsilon})^2_2 \big|\big|
+\end{align}
+
+Even though equation 72 could be used directly as the loss function for the noise predictor, the DDPM paper authors mention that optimizing $\big|\big| (\mathbf{\epsilon_\theta- \epsilon})^2_2 \big|\big|$ without the scaling factor with the cumulative noise $\alpha_t$ is enough. Hence, we have finally defined a function to be minimized for the noise predictor training and hence write its algorithm.
+
+\begin{algorithm} 
+	\begin{algorithmic}[1]
+		\State \textbf{repeat}
+		\State $\mathbf{x_0 \sim q(x_0)}$ \Comment{Sample image from training set}
+		\State $\mathbf{x_0 \sim Uniform(\{1, \hdots, T\})}$ \Comment{Sample the step of the Forward Process Markov Chain}
+		\State $\mathbf{\epsilon \sim \mathcal{N}(0, I)}$ \Comment{Sample standard gaussian noise to be added to the input}
+		\State $\mathbf{x_t = \sqrt{\bar{\alpha_t}}  x_0 +  \sqrt{1 - \bar{\alpha_t}}\epsilon }$ \Comment{Forward Process/ Generating Noisy Image}
+		\State Take Gradient Descent Step on  $\nabla_\theta(\mathbf{|| \epsilon - \epsilon_\theta(x_t, t)|| })$
+		\State \textbf{until} converged
+	\end{algorithmic} 
+	\caption{Noise Predictor Training}
+	\label{alg:algorithm1}
+\end{algorithm}
+
+\subsubsection{Sampling Algorithm Derivation}
+
+
+Now that we have defined a way to predict an input image $\mathbf{x_t}$'s noise, we need a way to use such prediction to reconstruct the original de-noised image $\mathbf{x_0}$, i.e., we need a way to sample from $p(\mathbf{x_0})$. To do so, let's recall how we have defined the $p_\theta (\mathbf{x_{t-1} | x_t})$ distribution.
+
+
+\begin{align}
+	p_\theta(\mathbf{x_{t-1} | x_t}) &=   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t)) \\
+	 \mu_\theta(\mathbf{x_t}) 	 &= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_\theta}}{(1-\bar{\alpha_t})}\\
+	 \mathbf{x_\theta}  &= \frac{\mathbf{x_t} -  \sqrt{1-\bar{\alpha_t}}\epsilon_\theta}{\sqrt{\bar\alpha_t}} \\
+	 \implies  \mu_\theta(\mathbf{x_t}) &= \frac{\mathbf{x_t}}{\sqrt{\alpha_t}} - \frac{(1-\alpha_t)(\sqrt{1-\bar\alpha_t})}{(1-\bar\alpha_t)(\sqrt{\alpha_t})} \epsilon_\theta  = \frac{1}{\sqrt{\alpha_t}}\bigg( \mathbf{x_t} - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha_t}}}\epsilon_\theta\bigg) \\
+	 \Sigma_\theta (t) = \Sigma_q(t) &= \frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1 - \bar{\alpha}_t}  \mathbf{I} \\
+	 \text{We now have defined   } \mathbf{x_{t-1}} &\text{'s mean and variance given   } \mathbf{x_t} \text{  which let's us write it as } \\
+	 \mathbf{x_{t-1}} &= \mu_\theta(\mathbf{x_t}) + \sqrt{\Sigma_\theta(t)} \mathbf{z} \\
+	 &\mathbf{z \sim \mathcal{N}(0, I)}	 
+\end{align}
+
+We have now a way to generate $\mathbf{x_{t-1}}$ from $\mathbf{x_t}$. This means that if we have $\mathbf{x_1}$ we can generate $\mathbf{x_0}$. This let's us finally define our sampling algorithm:
+
+\begin{algorithm} 
+	\begin{algorithmic}[1]
+		\State \textbf{repeat}
+		\State $\mathbf{x_T \sim \mathcal{N}(0, I)}$ \Comment{Sample random noisy image}
+		\State \textbf{for} $t =T, \hdots, 1 $ \textbf{do}
+		\State $\mathbf{z \sim \mathcal{N}(0, I)}$ if $t > 1$ else $\mathbf{z = 0}$
+		\State $\mathbf{x_{t-1}} =  \frac{1}{\sqrt{\alpha_t}}\bigg( \mathbf{x_t} - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha_t}}}\epsilon_\theta(\mathbf{x_t,t})\bigg) + \sqrt{\Sigma_\theta(t)} \mathbf{z} $  \Comment{Sampling  } $\mathbf{x_{t-1}}$ from $p_\theta (\mathbf{x_{t-1} | x_t})$
+		\State \textbf{end for}
+		\State \textbf{return} $\mathbf{x_0}$
+	\end{algorithmic} 
+	\caption{Sampling}
+	\label{alg:sampling}
+\end{algorithm} 
+
+
+\subsection{Recap}
+
+We have studied both the forward and reverse process that make up DDPMs. We have seen that good samples (or images) are generated by maximing the reverse process' likelihood $log p_\theta(\mathbf{x_0})$ lower bound, the Evidence Lower Bound, ELBO, or simply $L$. 
+
+We have rewritten ELBO in a way that its maximization turns out to be dual with minimizing the Kullback-Leibler (KL) divergence between  $p_\theta (\mathbf{x_{t-1} | x_t})$ and $q(\mathbf{x_{t-1} | x_t,  x_0})$. Such KL-Divergence minimization was then translated to a noise predictor training. After the predictor training algorithm was defined, we have shown how to use such prediction to sample from  $p_\theta (\mathbf{x_{t-1} | x_t})$ and finally reconstructing $\mathbf{x_0}$, the original denoised image.
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
