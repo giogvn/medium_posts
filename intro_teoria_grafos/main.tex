@@ -1,0 +1,266 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}
+\newtheorem{corolary}{Corolary}
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Introduction to Graph Theory} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{University of Sao Paulo --- 2025.1} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\section{February 25th, 2025} % Unnumbered section
+
+
+\begin{itemize}
+	\item Bondy \& Murty
+	\item Diestel
+	\item Combinatoria (Botler)
+	\item SageMath
+\end{itemize}
+
+\subsection{Basic Concepts}
+
+\begin{definition}[Grid]
+	\label{def:grade}
+	The grid $G_{m,n}$  is the graph (V,E) such that:
+	\begin{itemize}
+		\item $V = [m] \times [n] = {(x,y) | x \in [m], y \in [n]}$
+		\item $E = \{(u,v), (x,y):  (u = x, \text{  and  } |v-y| = 1) \text{  or  } (v = y \text{  and  } |u -x| = 1)\} $
+	\end{itemize}
+\end{definition}
+
+
+
+\begin{definition}[Cycle]
+	\label{def:cycle}
+	
+	The cycle $G_{m,n}$  is the graph (V,E) such that:
+	\begin{itemize}
+		\item $V = [n]$
+		\item $E = \{(x, (x \mod n) + 1\}) :  x \in [n]\}$
+		
+	\end{itemize}
+	
+\end{definition}
+
+
+\begin{definition}[Order]
+\label{def:order}
+	The order of a graph $G$  is its number of vertices.
+	\begin{itemize}
+		\item $v(G) = |V|$
+	\end{itemize}
+\end{definition}
+
+
+\begin{definition}[Size]
+	\label{def:size}
+	The size of  a graph $G$  is its number of edges.
+	\begin{itemize}
+		\item $e(G) = |E|$
+	\end{itemize}
+\end{definition}
+
+
+\subsection{Adjascency and Incidency}
+
+If $e = uv$, we say that $e$ links $u$ and $v$. We also say:
+
+\begin{itemize}
+	\item $u$ and $v$ are adjascent
+	\item $u$ and $v$ are neighbors
+	\item $e$ is incicent to $u$ and $v$
+	\item We also say that two egdes that share the same vertex are adjascent. 
+	\item Two edges that share both vertices are parallel or multiple
+	\item An edge that links a vertex to itself is called a lasso
+	\item A pair of vertices or edges that are not adjascent are called independent
+	\item A set of vertices such that every pair or two vertices are independent is called an independent set or stable
+\end{itemize}
+
+
+\subsection{Degrees of a Vertex}
+
+The degree of a vertex, denoted by $d_G(v)$ is the number of edges (of $G$) incident to $v$.
+
+\begin{itemize}
+	\item The minimum degree of $G$ is $\delta(G) = min\{d(v) :  v \in V(G)\}$
+	\item The maximum degree of $G$ is $\Delta(G) = max\{d(v) :  v \in V(G)\}$
+	\item The average degree of $G$ is $\bar{d}(G) = \frac{1}{v(G)} \sum_{v \in V} d(v)$
+\end{itemize}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+
+\section{February 27th, 2025}
+
+
+\begin{itemize}
+	\item  Entregar lista no overleaf
+	\item Monitoria as quintas (13h)
+\end{itemize}
+
+- $E \subseteq \binom{V}{2}$
+
+
+\begin{proposition}[Lema do Aperto de Mao]
+	\label{def:lema_aperto_de_mao}
+	For  every graph $G$, the sum of the degrees of its vertices is equal to twice its number of vertices:
+	
+	\begin{align}
+		\sum_{v \in V(G)} d_{G}(v) = 2e(G) = 2|E(G)|
+	\end{align}
+	
+	\textbf{Proof: Contagem Dupla}
+	\begin{align}
+	 	S &= \{ (e, u) \in E \times V :  u \in e  \}
+	\end{align}
+	
+	As every edge is at precisely two elements of $S$, then $|S| = 2e(G)$. Furthermore, if $u \in V$, then $u$ is at $d(v)$ elements of $S$ . Then $S = $ 
+	
+\end{proposition}
+
+\begin{corolary}
+	Every graph has an even number of odd degreed vertices
+	
+	\textbf{Proof}
+	
+	Using the handshake lemma, we can do induction in $e(G)$
+\end{corolary}
+
+
+\begin{definition}
+		If $d_G(u) = 0$, we say that $u$ is an isolated vertex
+\end{definition}
+
+\begin{proposition}
+	If $G$ does not have any isolated vertex and $e(G) <  v(G)$ , then $G$ has at least two vertices with degree $1$.
+	
+	\textbf{Proof}
+	We know $e(G) \leq v(G) - 1$. Using the handshake lemma, we have:
+	
+	\begin{align}
+		2(v(G) - 1) \geq 2e(G) &=  \sum_{u \in V(G)} d(u) \\
+		&= x + \sum_{u \in V(G), d(u) \geq 2} d(u) \\
+		&\geq  x + \sum_{u \in V(G)} 2 \\
+		&= x +  2(v(G) - x) \\
+		&= 
+	\end{align}
+\end{proposition}
+
+
+\begin{proposition}
+	If  $e(G) \geq  v(G) +  1$ , then $G$ has at least one vertex with degree $\geq 3$.
+	
+	\textbf{Proof}
+	Suppose, by contradiction, that $d(u) \leq 2$ for every $u \in V(G)$.
+	
+	\begin{align}
+		e(G) &= \frac{1}{2} \sum_V d(u) \leq \frac{1}{2} \sum_V 2 = \frac{1}{2} 2V(G) = V(G) \\
+		&\implies e(G) \leq V(G), \text{   which is a contradiction.} \\
+	\end{align}
+\end{proposition}
+
+
+\section{Special Types of Graphs}
+
+\begin{itemize}
+	\item A graph is \textbf{simple} if is does not contain "arestas multiplas nem lacos"
+	\item A graph is \textbf{complete} is a simple graph such that $G=(V,E) : E = \binom{V}{2}$
+	\item A complete graph with $n$ vertices is denoted by $K_n$
+	\item $G$ is \textbf{empty} if $V(G) = E(G) = \emptyset$
+	\item $G$ is \textbf{trivial} if $E(G) = \emptyset$
+	\item We say that $G$ is \textbf{$K-regular$} if $d(u) = k$ for all and every $u \in V(G)$
+	\item $G$ is regular if it is $K-regular$ for some $k \in N$
+	\item Every complete graph is regular
+	\item $K_n$ is $(n-1)-Regular$
+	\item $G$ is \textbf{bipartite} if $V(G)$ can be partitioned into two distinct sets $X$ and $Y$ such that every edge has a vertex in $X$ and another one in $Y$. Such partition is the bipartition of $G$. 
+	\item The bipartite complete graph with a bipartition $(X,Y)$ is the graph $G$ such that $V(G) = X U Y \text{  and  } E(G) = X \times Y$. There is no way for a graph to be complete bipartite, just the other way around. The notation for a bipartite complete graph is $K_{n,m}$, with $|X| = n$ and $|Y| = m$.
+	\item The complement of $G$, denoted by $\bar{G}$, is the graph such that $V(\bar{G}) = V(G)$ and $E(\bar{G}) = \{  xy \in \binom{V}{2} : xy \notin E(G)\}$. $\bar{G}$ is basically the graph that has all the edges that $G$ does not have. 
+\end{itemize}
+
+
+\begin{proposition}
+	Every graph $G$ such that $v(G) \geq 2$ has two vertices with the same degree.
+	
+	\textbf{Proof by induction}
+	
+	Induction hypothesis: every graph with $n-1$ vertices has two vertices with the same degree.
+	
+	Suppose $v(G) \geq 3$, we have two cases:
+	
+	\begin{itemize}
+		\item i. $G$ has a vertex $u$ such that $d(u) = 0$. Hence, by the induction hypothesis, $G'= G - u$ also has two vertices with the same degree.
+		
+		\item $d(u) \geq 1$ for all $u \in V$
+	\end{itemize}
+	
+	
+	
+	
+\end{proposition}
+
+
+It is easy to computationally test whether a graph is bipartite. (Exercise)
+\left( \left( 
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

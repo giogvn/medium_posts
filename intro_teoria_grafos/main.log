@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  18 FEB 2025 19:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  2 MAR 2025 13:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -110,6 +110,8 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 File: lstlang1.sty 2024/02/21 1.10 listings language file
 )
 \c@definition=\count270
+\c@proposition=\count271
+\c@corolary=\count272
 
 (./structure.tex
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty
@@ -132,14 +134,14 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count271
+\inf@bad=\count273
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count272
-\leftroot@=\count273
+\uproot@=\count274
+\leftroot@=\count275
 LaTeX Info: Redefining \overline on input line 399.
 LaTeX Info: Redefining \colon on input line 410.
-\classnum@=\count274
-\DOTSCASE@=\count275
+\classnum@=\count276
+\DOTSCASE@=\count277
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -152,20 +154,20 @@ LaTeX Info: Redefining \Bigg on input line 725.
 \big@size=\dimen149
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count276
+\macc@depth=\count278
 LaTeX Info: Redefining \bmod on input line 905.
 LaTeX Info: Redefining \pmod on input line 910.
 LaTeX Info: Redefining \smash on input line 940.
 LaTeX Info: Redefining \relbar on input line 970.
 LaTeX Info: Redefining \Relbar on input line 971.
-\c@MaxMatrixCols=\count277
+\c@MaxMatrixCols=\count279
 \dotsspace@=\muskip16
-\c@parentequation=\count278
-\dspbrk@lvl=\count279
+\c@parentequation=\count280
+\dspbrk@lvl=\count281
 \tag@help=\toks26
-\row@=\count280
-\column@=\count281
-\maxfields@=\count282
+\row@=\count282
+\column@=\count283
+\maxfields@=\count284
 \andhelp@=\toks27
 \eqnshift@=\dimen150
 \alignsep@=\dimen151
@@ -204,7 +206,7 @@ Package: enumerate 2023/07/04 v3.00 enumerate extensions (DPC)
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count283
+\c@AlgoLine=\count285
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
@@ -213,7 +215,7 @@ Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count284
+\c@checkoddpage=\count286
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
@@ -251,9 +253,9 @@ Package: relsize 2013/03/29 ver 4.1
 \algoheightrule=\skip72
 \algotitleheightruledefault=\skip73
 \algotitleheightrule=\skip74
-\c@algocfline=\count285
-\c@algocfproc=\count286
-\c@algocf=\count287
+\c@algocfline=\count287
+\c@algocfproc=\count288
+\c@algocf=\count289
 \algocf@algoframe=\box61
 \algocf@algobox=\box62
 )
@@ -275,13 +277,13 @@ Package: expl3 2024-02-20 L3 programming layer (loader)
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count288
+\l__color_backend_stack_int=\count290
 \l__pdf_internal_box=\box63
 ))
 Package: xparse 2024-02-18 L3 Experimental document command parser
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count289
+\etb@tempcnta=\count291
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/zref/zref-abspage.sty
 Package: zref-abspage 2023-09-14 v2.35 Module abspage for zref (HO)
@@ -316,14 +318,14 @@ Package zref Info: New property list: main on input line 767.
 Package zref Info: New property: default on input line 768.
 Package zref Info: New property: page on input line 769.
 )
-\c@abspage=\count290
+\c@abspage=\count292
 Package zref Info: New property: abspage on input line 67.
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/needspace/needspace.sty
 Package: needspace 2010/09/12 v1.3d reserve vertical space
 )
 \mdf@templength=\skip75
-\c@mdf@globalstyle@cnt=\count291
+\c@mdf@globalstyle@cnt=\count293
 \mdf@skipabove@length=\skip76
 \mdf@skipbelow@length=\skip77
 \mdf@leftmargin@length=\skip78
@@ -405,14 +407,14 @@ tered.code.tex
 \pgf@yd=\dimen173
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
-\c@pgf@counta=\count292
-\c@pgf@countb=\count293
-\c@pgf@countc=\count294
-\c@pgf@countd=\count295
+\c@pgf@counta=\count294
+\c@pgf@countb=\count295
+\c@pgf@countc=\count296
+\c@pgf@countd=\count297
 \t@pgf@toka=\toks35
 \t@pgf@tokb=\toks36
 \t@pgf@tokc=\toks37
-\pgf@sys@id@count=\count296
+\pgf@sys@id@count=\count298
 
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
@@ -430,8 +432,8 @@ File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.
 code.tex
 File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfsyssoftpath@smallbuffer@items=\count297
-\pgfsyssoftpath@bigbuffer@items=\count298
+\pgfsyssoftpath@smallbuffer@items=\count299
+\pgfsyssoftpath@bigbuffer@items=\count300
 )
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.
 code.tex
@@ -443,7 +445,7 @@ Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen174
-\pgfmath@count=\count299
+\pgfmath@count=\count301
 \pgfmath@box=\box65
 \pgfmath@toks=\toks38
 \pgfmath@stack@operand=\toks39
@@ -469,7 +471,7 @@ code.tex)
 erarithmetics.code.tex)
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex)
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count300
+\c@pgfmathroundto@lastzeros=\count302
 )) (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.co
 de.tex
@@ -507,7 +509,7 @@ File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgfpic=\box66
 \pgf@hbox=\box67
 \pgf@layerbox@main=\box68
-\pgf@picture@serial@count=\count301
+\pgf@picture@serial@count=\count303
 )
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicst
 ate.code.tex
@@ -542,8 +544,8 @@ File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 e.tex
 File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgf@max=\dimen198
-\pgf@sys@shading@range@num=\count302
-\pgf@shadingcount=\count303
+\pgf@sys@shading@range@num=\count304
+\pgf@shadingcount=\count305
 )
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.cod
 e.tex
@@ -608,7 +610,7 @@ Package: tikz 2023-01-15 v3.1.10 (3.1.10)
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothan
 dlers.code.tex
 File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@plot@mark@count=\count304
+\pgf@plot@mark@count=\count306
 \pgfplotmarksize=\dimen259
 )
 \tikz@lastx=\dimen260
@@ -623,19 +625,19 @@ File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \tikz@figbox@bg=\box72
 \tikz@tempbox=\box73
 \tikz@tempbox@bg=\box74
-\tikztreelevel=\count305
-\tikznumberofchildren=\count306
-\tikznumberofcurrentchild=\count307
-\tikz@fig@count=\count308
+\tikztreelevel=\count307
+\tikznumberofchildren=\count308
+\tikznumberofcurrentchild=\count309
+\tikz@fig@count=\count310
 
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.cod
 e.tex
 File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfmatrixcurrentrow=\count309
-\pgfmatrixcurrentcolumn=\count310
-\pgf@matrix@numberofcolumns=\count311
+\pgfmatrixcurrentrow=\count311
+\pgfmatrixcurrentcolumn=\count312
+\pgf@matrix@numberofcolumns=\count313
 )
-\tikz@expandcount=\count312
+\tikz@expandcount=\count314
 
 (/usr/local/texlive/2024/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarytopaths.code.tex
@@ -676,16 +678,16 @@ File: md-frame-1.mdf 2013/07/01\ 1.9b: md-frame-1
 \mdf@horizontalspaceofbox=\skip139
 \mdfsubtitleheight=\skip140
 \mdfsubsubtitleheight=\skip141
-\c@mdfcountframes=\count313
+\c@mdfcountframes=\count315
 
 ****** mdframed patching \endmdf@trivlist
 
 ****** -- success******
 
-\mdf@envdepth=\count314
-\c@mdf@env@i=\count315
-\c@mdf@env@ii=\count316
-\c@mdf@zref@counter=\count317
+\mdf@envdepth=\count316
+\c@mdf@env@i=\count317
+\c@mdf@env@ii=\count318
+\c@mdf@zref@counter=\count319
 Package zref Info: New property: mdf@pagevalue on input line 895.
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/geometry/geometry.sty
@@ -694,9 +696,9 @@ Package: geometry 2020/01/02 v5.9 Page Geometry
 (/usr/local/texlive/2024/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count318
-\Gm@cntv=\count319
-\c@Gm@tempcnt=\count320
+\Gm@cnth=\count320
+\Gm@cntv=\count321
+\c@Gm@tempcnt=\count322
 \Gm@bindingoffset=\dimen268
 \Gm@wd@mp=\dimen269
 \Gm@odd@mp=\dimen270
@@ -727,7 +729,7 @@ Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 \XKV@toks=\toks46
 \XKV@tempa@toks=\toks47
 )
-\XKV@depth=\count321
+\XKV@depth=\count323
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/textcomp.sty
@@ -735,8 +737,8 @@ Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 )
 (/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.sty
 (/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.tex
-\xs_counta=\count322
-\xs_countb=\count323
+\xs_counta=\count324
+\xs_countb=\count325
 )
 Package: xstring 2023/08/22 v1.86 String manipulations (CT)
 )
@@ -752,7 +754,7 @@ LaTeX Font Info:    Setting XCharter-OsF sub-encoding to TS1/0 on input line 37
 .
 LaTeX Font Info:    Changing XCharter-TOsF sub-encoding to TS1/0 on input line 
 37.
-\xch@cnt=\count324
+\xch@cnt=\count326
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/fontaxes/fontaxes.sty
 Package: fontaxes 2020/07/21 v1.0e Font selection axes
@@ -771,50 +773,50 @@ LaTeX Info: Redefining \textsu on input line 737.
 LaTeX Info: Redefining \textde on input line 740.
 LaTeX Info: Redefining \textinf on input line 742.
 )
-\c@Question=\count325
+\c@Question=\count327
 )
-LaTeX Info: Redefining \oldstylenums on input line 58.
+LaTeX Info: Redefining \oldstylenums on input line 60.
 LaTeX Font Info:    Trying to load font information for T1+XCharter-TLF on inpu
-t line 58.
+t line 60.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/xcharter/T1XCharter-TLF.fd
 File: T1XCharter-TLF.fd 2017/06/25 (autoinst) Font definitions for T1/XCharter-
 TLF.
 )
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 58.
+(Font)              scaled to size 10.0pt on input line 60.
 
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-\c@lstlisting=\count326
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+\c@lstlisting=\count328
 
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count327
+\scratchcounter=\count329
 \scratchdimen=\dimen276
 \scratchbox=\box80
-\nofMPsegments=\count328
-\nofMParguments=\count329
+\nofMPsegments=\count330
+\nofMParguments=\count331
 \everyMPshowfont=\toks48
-\MPscratchCnt=\count330
+\MPscratchCnt=\count332
 \MPscratchDim=\dimen277
-\MPnumerator=\count331
-\makeMPintoPDFobject=\count332
+\MPnumerator=\count333
+\makeMPintoPDFobject=\count334
 \everyMPtoPDFconversion=\toks49
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -859,181 +861,110 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@mv@tabular=\count333
-\c@mv@boldtabular=\count334
+\c@mv@tabular=\count335
+\c@mv@boldtabular=\count336
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 60.
+(Font)              scaled to size 17.28pt on input line 62.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 60.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
+(Font)              scaled to size 12.0pt on input line 62.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 62.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 62.
 
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+stmry on input line 6
-0.
+2.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
-0.
+2.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 66.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 66.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 88.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 90.
+(Font)              scaled to size 14.4pt on input line 68.
 LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on inp
-ut line 95.
+ut line 72.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/xcharter/TS1XCharter-TLF.fd
 File: TS1XCharter-TLF.fd 2020/05/25 (msharpe) Font definitions for TS1/XCharter
 -TLF.
 )
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 95.
+(Font)              scaled to size 10.0pt on input line 72.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 104.
+(Font)              scaled to size 12.0pt on input line 78.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
+(Font)              scaled to size 10.0pt on input line 80.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 80.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
+(Font)              scaled to size 7.0pt on input line 85.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
+(Font)              scaled to size 5.0pt on input line 85.
 
 [1
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2024/texmf-dist/fonts/enc/dvips/xcharter/xch_rydp4l.enc}{/usr/local/
 texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/local/te
-xlive/2024/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc}] [2]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 180.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 181.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 181.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 5.0pt on input line 192.
- [3]
-Overfull \hbox (118.02316pt too wide) detected at line 244
-[]
- []
-
-[4]
+xlive/2024/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc}]
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/it' will be
-(Font)              scaled to size 14.4pt on input line 289.
+(Font)              scaled to size 10.0pt on input line 171.
+ [2]
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 7.0pt on input line 235.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 5.0pt on input line 235.
 
-Overfull \hbox (15.08994pt too wide) in paragraph at lines 295--296
-\T1/XCharter-TLF/m/n/10 The si-nu-soidal em-bed-dings mod-ule will store a mult
-i-embedding ten-sor with $\OML/cmm/m/it/10 shape \OT1/cmr/m/n/10 = (\OML/cmm/m/
-it/10 max[]pos; embed[]dim\OT1/cmr/m/n/10 )$\T1/XCharter-TLF/m/n/10 ,
+Overfull \hbox (21.62238pt too wide) in paragraph at lines 235--236
+[]\T1/XCharter-TLF/m/n/10 The bi-par-tite com-plete graph with a bi-par-ti-tion
+ $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X; Y\OT1/cmr/m/n/10 )$ \T1/XCharter-TLF/m/n
+/10 is the graph $\OML/cmm/m/it/10 G$ \T1/XCharter-TLF/m/n/10 such that $\OML/c
+mm/m/it/10 V\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 G\OT1/cmr/m/n/10 ) = \OML/cmm/m/i
+t/10 XUY[]E\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 G\OT1/cmr/m/n/10 ) =
  []
 
-[5]
-<images/sin_embeds_periodicity.png, id=40, 962.6364pt x 506.6127pt>
-File: images/sin_embeds_periodicity.png Graphic file (type png)
-<use images/sin_embeds_periodicity.png>
-Package pdftex.def Info: images/sin_embeds_periodicity.png  used on input line 
-365.
-(pdftex.def)             Requested size: 455.24411pt x 239.58447pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 5.0pt on input line 370.
-[6]
-<images/sin_embeds_freq_decay.png, id=45, 864.3492pt x 395.3169pt>
-File: images/sin_embeds_freq_decay.png Graphic file (type png)
-<use images/sin_embeds_freq_decay.png>
-Package pdftex.def Info: images/sin_embeds_freq_decay.png  used on input line 4
-04.
-(pdftex.def)             Requested size: 455.24411pt x 208.208pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[7 <./images/sin_embeds_periodicity.png>] [8 <./images/sin_embeds_freq_decay.pn
-g>]
-<images/sin_embeds_scale_invariance.png, id=56, 578.16pt x 433.62pt>
-File: images/sin_embeds_scale_invariance.png Graphic file (type png)
-<use images/sin_embeds_scale_invariance.png>
-Package pdftex.def Info: images/sin_embeds_scale_invariance.png  used on input 
-line 463.
-(pdftex.def)             Requested size: 455.24411pt x 341.43124pt.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 471.
- [9 <./images/sin_embeds_scale_invariance.png>]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 509.
- [10]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 526.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 538.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 545.
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 5
-45.
-
-(/usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmss.fd
-File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 550.
- [11] [12]
-(./main.aux)
+[3] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20201 strings out of 474116
- 382339 string characters out of 5743681
- 2170187 words of memory out of 5000000
- 42148 multiletter control sequences out of 15000+600000
- 653698 words of font info for 103 fonts, out of 8000000 for 9000
+ 19454 strings out of 474116
+ 370300 string characters out of 5743681
+ 1943187 words of memory out of 5000000
+ 41414 multiletter control sequences out of 15000+600000
+ 649824 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 109i,16n,112p,880b,1809s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 109i,10n,112p,541b,308s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold
 .pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/XCharter-B
 oldItalic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/X
 Charter-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xchar
 ter/XCharter-Roman.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.
-pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
-b></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm1
-0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfss1000.
-pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.pf
-b></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-
-Output written on main.pdf (12 pages, 1271621 bytes).
+msfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt
+1200.pfb>
+Output written on main.pdf (3 pages, 317451 bytes).
 PDF statistics:
- 159 PDF objects out of 1000 (max. 8388607)
- 97 compressed objects within 1 object stream
+ 83 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
