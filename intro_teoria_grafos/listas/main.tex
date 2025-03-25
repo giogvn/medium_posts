@@ -1,0 +1,274 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}
+\newtheorem{corolary}{Corolary}
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{LISTA 1 DE MAC0320/MAC5770 - CONCEITOS BÁSICOS} % Title of the assignment
+
+\author{Giovani Tavares (10788620)\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{University of Sao Paulo --- 2025.1} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\section{March 23rd, 2025} % Unnumbered section
+
+\subsection{Exercício 2: Se G é um grafo simples, é possível que ambos G e G sejam desconexos? Justifique.}
+
+
+Assumamos que todo grafo tenha um número de vértices maior ou igual a $2$. 
+
+Seja $G$ um grafo simples desconexo com $k$ componentes desconexas e com número total de vértices $n \geq 3$.  
+
+Sejam $D_1 ..., D_i, ..., D_k$ os conjuntos disjuntos de vértices de cada componente desconexa $D_i , i = 1, ..., k$.
+
+Sejam $u_1, u_2 \in G$ dois vértices quaisquer pertencentes à mesma componente $D_u$.
+
+Seja $v \in G$ um vértice qualquer tal que $v \neq u_1, u_2$ e $v \in D_v \neq D_u$. Ou seja, $v$, $u_1$ e $u_2$ pertencem a componentes distintas.
+
+Como $v$, $u_1$ e $u_2$ pertencem a componentes distintas, por definição os passeios $P_1 = (u_1, ..., v)$ e $P_2 = (u_2, ..., v)$ \textbf{não} existem em $G$,
+
+Seja $\bar{G}$ o grafo complementar de $G$, pela definição de complementariedade os passeios $P_1 = (u_1, ..., v)$ e $P_2 = (v, ..., u_2)$ \textbf{existem} em $\bar{G}$, estando provado \textbf{I: } \textit{para quaisquer pares de vértices $(u, v)$ pertencentes a componentes \textbf{desconexas} de um grafo $G$, existe um passeio $P$ entre eles em $\bar{G}$.}
+
+Para quaisquer pares de vértices $(u_1, u_2)$ pertencentes à mesma componente $D_u$ de um grafo $G$, existe um $P_3$ entre eles em $\bar{G}$, basta definir $P_3 = Concat(P_1, P2) = (u_1, ..., v, ..., u_2)$, em que $Concat$ representa a operação de concatenação de passeios. Isso prova \textbf{II: } \textit{para quaisquer pares de vértices $(u_1, u_2)$ pertencentes à mesma componente $D_u$ de um grafo $G$, existe um passeio $P_3$ entre eles em $\bar{G}$.}
+
+Seja $H$ um grafo simples conexo com um número de vértices $n = 2$. Seja $e = (h_1, h_2)$ a única aresta de $H$ formada pelos dois únicos vértices de $H$. Por definição, a aresta $e$ não existe em $\bar{H}$. Assim, está provado \textbf{III}: \textit{não é possível um grafo simples e seu complementar com um número de vértices $n = 2$ serem simultaneamente desconexos.}
+
+\textbf{I, II e III} permitem concluir que não é possível que um grafo desconexo $G$ e seu complementar $\bar{G}$ sejam simultaneamente desconexos. Ao mesmo tempo, é possível afirmar que não é possível que um grafo conexo $G'$ e seu complementar $\bar{G'}$ sejam simultaneamente desconexos, já que ambas afirmações são equivalentes.
+ 
+ \clearpage
+ 
+ 
+ \subsection{Exercício 4:Caracterize grafos bipartidos. Em outras palavras, complete a afirmação tipo “Um grafo G é bipartido se, e somente se, ...” e a prove.}
+ 
+\subsubsection{$G$ e bipartido $\implies$ nao possui ciclos impares}
+ 
+ 
+ Suponhamos, por contradicao, que $G$ possui ao menos um ciclo $C = (c_1, ..., c_m)$ de comprimento $m$ ímpar.
+ 
+ Seja $(X,Y)$ uma biparticao de $G$. $C$ e um ciclo com arestas definidas por $E(C) = \{(c_i, c_{(i+1)mod(m)}), i \in [m]\}$.
+ 
+Pela definicao de biparticao, para toda aresta $e_i = (c_i, c_{(i+1)mod(m)})$ de $E(C)$:
+\begin{align}
+	c_i \in 
+	\begin{cases} 
+		X, \text{se     } i \text{     e impar}, \\
+		Y, \text{se     } i \text{     e par}, \\
+	\end{cases}
+\end{align},
+
+pois $C$ e um ciclo e cada par de vertices nele deve pertencer a particoes distintas.
+
+$m$ e impar, entao $m = 2k + 1$ para $k \in \mathbb{Z}$ e $c_m \in X$. 
+
+$c_{m+1} = c_{(2k + 1 + 1)mod(2k+1) } = c_1 \implies c_{m+1} = c_1 \in X$. Ou seja, os vertices $c_m$ e $c_{m+1}$ sao vizinhos e pertences a mesma particao $X$, o que e uma contradicao. Assim, a hipotese de que $G$ possui ao menos um ciclo $C = (c_1, ..., c_m)$ de comprimento $m$ ímpar, sengo $G$ um grafo bipartido, e falsa.
+
+\subsubsection{$G$ nao possui ciclos impares $\impliedby$ $G$ e bipartido}
+
+Seja $v \in V(G)$  um vertice qualquer de $G$ e os conjuntos de vertices de $G$ cuja distancia ate $v$ e par e ímpar, respectivamente:
+
+ \begin{align}
+	A &= \{a : dist(v,a) \text{   e par}\} \\
+	B&= \{a : dist(v,a) \text{   e impar}\} \\
+\end{align}
+
+
+$v \in A$, pois $dist(v,v) = 0$ e um numero par.
+$A \cap B = \emptyset$
+
+Suponhamos a existencia $a_1, a_2 \in A$ dois vertices adjascentes por aburdo. Entao $G$ tem o ciclo com distancia minima $C = (v, ..., a_1, ... ,a_2, a_2,...,v)$, pois $G$ e conexo. O comprimento de $C$ e impar, pois $dist(v, a_1)$ e $dist(v,a_2)$ sao pares e $dist(a1,a2) = 1$ é ímpar, e tal comprimento e igual a soma dessas distancias.
+
+Assim, encontramos um ciclo $C$ em $G$ de comprimento impar, o que é uma contradicao. Logo, $a_1$ e $a_2$ nao podem ser adjascentes.
+Pelo mesmo argumento, $B$ tambem nao pode ter vértices adjascentes.
+
+Assim, como $A \cap B = \emptyset$ e nao possuem vertices adjascentes, $(A, B)$ e uma biparticao de $G$.
+
+\textbf{Um grafo G é bipartido se, e somente se, nao possui ciclos impares.}
+
+\clearpage
+
+\subsection{Exercício 7: Prove que se $G$ é um grafo simples tal que todo vértice tem grau pelo menos $3$, então $G$ contém um circuito de comprimento par.}
+
+
+Suponhamos sem perda de generalidade, que $G$ é conexo. Se $G$ nao o fosse, a prova poderia ser extendida analogamente para cada uma de suas componentes conexas.
+
+Suponhamos por absurdo que $G$ nao tem nenhum circuito de comprimento par.
+
+Tomemos dois vértices $u, v \in V(G)$ pertencentes a um circuito $C_1$. $G$ é conexo e tem pelo menos um circuito, entao existem caminhos $P_1 = (v, ..., u)$  e $P_2 = (u, ...,v)$ distintos em $G$. Seja $C_1 = (v, ..., u, ...,v)$ o entre $v$ e $u$ em $G$ que seja a concatenacao  dos caminhos $P_1$ e $P_2$.
+
+Como $\forall x \in V(G), d_G(x) \geq 3 $. Entao $\exists w \notin C_1$ tal que $v$ e $w$ sao adjascentes. Como $G$ é conexo, existem os caminhos $P_3 = (u,w)$ e $P_4 = (w,v)$ em $G$.
+
+Por suposicao, o circuito $C_1 = (v,...,u,...,v)$ formado pela concatenacao dos caminhos$P_1$ e $P_2$ tem comprimento impar igual a soma dos comprimentos desses caminhos. Da mesma forma, o circuito $C_2 = (v,w,...,u,...,v)$ formado pela concatenacao dos caminhos $P_2$, $P_3$ e $P_4$ tem comprimento impar igual a soma dos comprimentos desses caminhos. Por fim, o circuito $C_3 = (v,...,u,...,v,w,...,u)$ formado pela concatenacao dos caminhos $P_1$, $P_2$, $P_3$ e $P_4$ tem comprimento impar igual a soma dos comprimentos desses caminhos
+
+\begin{align}
+    ||C_1|| &= ||P_1|| + ||P_2|| \\
+                &= ||P_1|| + ||P_2|| \\
+    ||C_2|| &= ||P_2|| + ||P_3|| + ||P_4|| \\
+                &= ||P_2|| + ||P_3||  + 1 \\
+  	||C_3|| &= ||P_1|| + ||P_2|| + ||P_3||  + ||P_4|| \\  
+  	           &= ||P_1|| + ||P_2|| + ||P_3||  + 1  \\  
+\end{align}
+
+Se $P_1$ for ímpar:
+
+\begin{align}
+	||C_1|| &= \text{ímpar} + ||P_2|| \\
+	&\implies ||P_2|| \text{  é par} \\
+	||C_2|| &= ||P_2|| + ||P_3|| + ||P_4|| \\
+	&= par + ||P_3||  + 1 \\
+	&\implies ||P_3|| \text{   é par} \\
+	||C_3|| &= ||P_1|| + ||P_2|| + ||P_3||  +1 \\  
+               &= \text{ímpar} + par + par  +1 \\  
+               &= \text{ímpar} + \text{ímpar}  \\  
+                &\implies 	||C_3|| \text{   é par, o que contradiz a suposicao inicial} \\  
+\end{align}
+
+
+Se $P_1$ for par:
+
+\begin{align}
+	||C_1|| &= \text{par} + ||P_2|| \\
+	&\implies ||P_2|| \text{  é ímpar} \\
+	||C_2|| &= ||P_2|| + ||P_3|| + ||P_4|| \\
+	&= \text{ímpar} + ||P_3||  + 1 \\
+	&\implies ||P_3|| \text{   é ímpar} \\
+	||C_3|| &= ||P_1|| + ||P_2|| + ||P_3||  +1 \\  
+	&= \text{par} + \text{ímpar} + \text{ímpar}  +1 \\  
+	&= \text{ímpar} + \text{ímpar} + \text{par}  \\  
+	&= \text{par} + \text{par}  \\  
+	&\implies 	||C_3|| \text{   é par, o que contradiz a suposicao inicial} \\  
+\end{align}
+
+Assim, independentemente da paridade de $P_1$, chegamos a uma contradicao. Ou seja, a hipótese de que $G$ nao tem nenhum circuito de comprimento par é falsa.
+
+Portanto, se $G$ é um grafo simples tal que todo vértice tem grau pelo menos $3$, então $G$ contém um circuito de comprimento par.
+
+
+\clearpage
+
+ \subsection{Exercício 8: Prove por indução em $k$ que o conjunto das arestas de um grafo conexo simples com $2k$ arestas, com $k \geq 1$, pode ser particionado em caminhos de comprimento $2$. A afirmação continuaria válida sem a hipótese de conexidade? Justifique}
+
+
+ \subsubsection{Caso Base: $k = 1$}
+ 
+ \begin{align}
+ 	k = 1 &\implies ||E(G)|| = 2k \\
+ \end{align}
+\begin{align}
+	G : 
+	\begin{cases} 
+		V = [3], \\
+	    E = \{ (v_i, v_{i+1}) | i \in \mathbb{Z}, i \leq 2\} \\
+	\end{cases}
+\end{align}
+
+Uma particao de $E(G)$ que é um caminho de comprimento $2$ é:
+
+\begin{align}
+	(X,Y) : 
+	\begin{cases} 
+		X = (v_1, v_2) \\
+		Y = (v_2, v_3) \\
+	\end{cases}
+\end{align}
+ 
+ 
+  \subsubsection{Supunhamos que afirmacao e verdadeira para um grafo $G$ com $k = n \geq 2$ vértices} 
+  
+  Seja $G'$ um grafo conexo tal que $||E(G')|| = 2(n+1) = 2n + 2$.
+  
+  Como $G$ é conexo e tem $||E(G)|| \geq 1$, pelo menos um de seus vértices $v$ é tal que $d_G(v) \geq 2$.
+  
+  Sejam $x$ e $y$ vértices de $G'$ adjascentes a $v$. Esses vértices formam um passeio $P = (x,v,y)$ de tamanho $2$.
+  
+  Se removermos as arestam que formam $P$ de $G'$ restam $2n$ arestas em um grafo $G''$. Assim, $||E(G'')|| = 2n$ e pela hipótese de inducao, $G''$ pode ser particionado em caminhos de comprimento $2$.
+  
+  Assim, todo grafo simples conexo com  número par de arestas pode ser particionado em caminhos de comprimento $2$. 
+  
+  Sem a hipótese de conexidade a afirmacao nao continuaria valida, já que é possível definir o seguinte grafo desconexo $F$ que tem um número par de arestas em que nenhum caminho tem comprimento $2$.
+ 
+  \begin{align}
+  	F : 
+  	\begin{cases} 
+  		V = [m] \text{   m é par} \\
+  		E = {(u_i, u_j) | u_i, u_j \in V, i , j\text{   sao pares} }\\
+  	\end{cases}
+  \end{align}
+  
+  
+  \clearpage
+  
+   \subsection{Exercício 9: Prove que todo grafo simples $G$ pode ser representado como a união de dois grafos disjuntos nas arestas $G_1$ e $G_2$, tais que $G_1$ é acíclico (sem circuitos) e $G_2$ é um grafo par (todos os graus são par).}
+  
+  Para provar que \textit{todo grafo simples $G$ pode ser representado como a união de dois grafos disjuntos nas arestas $G_1$ e $G_2$, tais que $G_1$ é acíclico (sem circuitos) e $G_2$ é um grafo par (todos os graus são par)}, basta mostrar que se uma aresta de $G$ nao pertence ao subgrafo $G_1$, entao ela pertence as arestas de um subgrafo $G_2$ cujos graus de todos os vertices $d_{G_2}$ sao números pares.
+  
+ Seja $e_1 = (u_i, u_j) $ uma aresta tal que $ e_1 \notin G_1$, entao $e_1$ está em um circuito. Isso significa que existe um passeio $P = (u_1,u_2, ..., u_k, ..., u_1)$ em $G_1 '$. Como em um circuito cada aresta só pode ser visitada uma única vez, para todo e qualquer par de vértices adjascentes $u_i, uj$ em $P$, deve existir um terceiro vértice $u_k$ adjascente a $u_i$ tal que $u_k \neq u_j$. Ou seja, a existencia de  um vizinho  $u_j$ de um vértice $u_i$ em $G_1'$ implica na existencia de outro vértice vizinho distinto para o mesmo $u_i$. Assim, mostra-se que o número de vizinhos de todo vértice de $G_1'$ é par. Em outras palavras, o grau de todo vértice de $G_1'$ é par.
+ 
+ Mostrou-se que  $ (u_1,u_2) \notin G_1 \implies, (u_1,u_2) \in G_1' \implies d_{G_1'}(u_1,u_2) = m, \text{   m é par}$. 
+ 
+  Ou seja, se uma aresta nao pertence a um subgrafo $G_1$ aciclico ela pertence a um subgrafo par $G_1'= G_2$. 
+ 
+Restra mostrar uma aresta nao pode pertencer a $G_1$ e $G_2$ simultaneamente. 
+
+Suponhamos por absurdo que todas as arestas $(x,y) \in G$ tal que $(x,y) \notin G_2$, $(x,y) \in G_2'$  estao em circuitos de $G$. Por definicao, todo circuito que contenha $(x,y)$ sao circuitos com vértices de grau ímpar, suponhamos que $x$ seja esse vértice. Assim, seja o circuito ímpar $C = (u,..., x,y,...,v)$ em $G$. Cada aresta em um circuito implica na existencia de uma aresta distinta, ja que um circuito nao pode conter arestas repetidas. Em outras palavras, a existencia de um par de vizinhos $(x,y)$ em um circuito implica na existencia de outro par de vizinhos  $(x,z)$, $z \neq y$ no mesmo circuito.  Assim,  $x$ tem que ter grau par para estar em $C$, o que é uma contradicao.  
+
+Ou seja, se uma aresta está em um subgrafo $G_2'$ tal que $G_2'$ tem grau par, $G_2$ nao contem vértices pertences a circuitos.
+
+Dessa forma, $G_2'= G_1$. Assim, demonstrou-se que $G_1$ e $G_2$ sao disjuntos tais que todas as arestas $e$ de qualquer grafo $G$ é tal que $e \in G_1$ ou $e \in G_2$. 
+
+
+\end{document}
