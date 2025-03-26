@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  25 MAR 2025 20:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  25 MAR 2025 21:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -917,14 +917,14 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on inp
-ut line 261.
+ut line 279.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/xcharter/TS1XCharter-TLF.fd
 File: TS1XCharter-TLF.fd 2020/05/25 (msharpe) Font definitions for TS1/XCharter
 -TLF.
 )
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 261.
+(Font)              scaled to size 10.0pt on input line 279.
 
 [6
 
@@ -936,13 +936,13 @@ L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19427 strings out of 474116
- 369736 string characters out of 5743681
- 1948187 words of memory out of 5000000
- 41387 multiletter control sequences out of 15000+600000
+ 19538 strings out of 474116
+ 372180 string characters out of 5743681
+ 1951187 words of memory out of 5000000
+ 41498 multiletter control sequences out of 15000+600000
  637942 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 109i,17n,112p,633b,308s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 109i,17n,112p,633b,668s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold
 .pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/XCharter-B
 oldItalic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/X
@@ -961,7 +961,7 @@ pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
 b></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm1
 0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.
 pfb>
-Output written on main.pdf (6 pages, 368518 bytes).
+Output written on main.pdf (6 pages, 369287 bytes).
 PDF statistics:
  117 PDF objects out of 1000 (max. 8388607)
  73 compressed objects within 1 object stream

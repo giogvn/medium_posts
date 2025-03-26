@@ -148,9 +148,27 @@ Suponhamos sem perda de generalidade, que $G$ é conexo. Se $G$ nao o fosse, a p
 
 Suponhamos por absurdo que $G$ nao tem nenhum circuito de comprimento par.
 
+
+
 Tomemos dois vértices $u, v \in V(G)$ pertencentes a um circuito $C_1$. $G$ é conexo e tem pelo menos um circuito, entao existem caminhos $P_1 = (v, ..., u)$  e $P_2 = (u, ...,v)$ distintos em $G$. Seja $C_1 = (v, ..., u, ...,v)$ o entre $v$ e $u$ em $G$ que seja a concatenacao  dos caminhos $P_1$ e $P_2$.
 
 Como $\forall x \in V(G), d_G(x) \geq 3 $. Entao $\exists w \notin C_1$ tal que $v$ e $w$ sao adjascentes. Como $G$ é conexo, existem os caminhos $P_3 = (u,w)$ e $P_4 = (w,v)$ em $G$.
+
+
+\begin{tikzpicture}
+	% Nodes
+	\node[circle, draw, fill=white] (u) at (0,0) {u};
+	\node[circle, draw, fill=white] (v) at (2,0) {v};
+	\node[circle, draw, fill=white] (w) at (1,1.73) {w}; % 1.73 is approximately sqrt(3)
+	
+	% Edges
+	\draw (u) -- (v) node[midway, above] {$P_1$};
+	\draw (v) -- (w) node[midway, right] {$P_4$};
+	\draw (w) -- (u) node[midway, left] {$P_3$};
+	\draw[bend right] (u) to node[midway, below] {$P_2$} (v);
+	
+\end{tikzpicture}
+
 
 Por suposicao, o circuito $C_1 = (v,...,u,...,v)$ formado pela concatenacao dos caminhos$P_1$ e $P_2$ tem comprimento impar igual a soma dos comprimentos desses caminhos. Da mesma forma, o circuito $C_2 = (v,w,...,u,...,v)$ formado pela concatenacao dos caminhos $P_2$, $P_3$ e $P_4$ tem comprimento impar igual a soma dos comprimentos desses caminhos. Por fim, o circuito $C_3 = (v,...,u,...,v,w,...,u)$ formado pela concatenacao dos caminhos $P_1$, $P_2$, $P_3$ e $P_4$ tem comprimento impar igual a soma dos comprimentos desses caminhos
 
