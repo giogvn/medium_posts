@@ -49,7 +49,7 @@
 %	ASSIGNMENT INFORMATION
 %----------------------------------------------------------------------------------------
 
-\title{LISTA 2 DE MAC5770 - ÁRVORES E GRAFOS EULERIANOS} % Title of the assignment
+\title{LISTA 2 DE MAC5770 - EMPARELHAMENTOS EM GRAFOS} % Title of the assignment
 
 \author{Giovani Tavares (10788620)\\ \texttt{giovanitavares@usp.br}} % Author name and email address
 
@@ -65,7 +65,7 @@
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
 
-\section{12 de Maio, 2025} % Unnumbered section
+\section{20 de Maio, 2025} % Unnumbered section
 
 
  \subsection{Exercício 1:  Seja $G$ um grafo simples de ordem $n$, $n$ par. Prove que se $d(v) > n/2$ para todo $v \in V (G)$, então $G$ contém $3$ emparelhamentos perfeitos dois a dois disjuntos.}
@@ -276,8 +276,72 @@ Além disso, $M$ é emparelhamento perfeito de $X$, entao $M$ nao possui pares d
 
 \clearpage
 
+\subsection{Exercício 4:  Seja $k$ um inteiro positivo e suponha que $G$ é um grafo $(X,Y)$-bipartido tal que $d(x) \geq k \geq d(y)$ para todo $x \in X$ e $y \in Y$. Use o Teorema de Hall para mostrar que $G$ possui um emparelhamento que cobre $X$.}
 
 
+Seja $S \subset X$ um subconjunto de vértices de $X$. Devemos mostrar que $|N(S)| \geq |S|$ para concluir, invocando o Teorema de Hall, que $G$ possui um emparelhamento que cobre todos os vértices de $X$.
 
+
+Sabe-se que $\forall x \in S, d(x) \geq k$, pois $S \subset X$. Assim, a soma dos graus dos vértices de $S$ é tal que:
+
+\begin{align}
+ \sum_{x \in S} d(x) \geq |S|k \tag*{I} 
+\end{align}
+
+
+Consideramos as arestas entre os vértices de $S$ e seus vizinhos, $N(S)$.  Como $G$ é $(X,Y)$-bipartido, pode-se afirmar que $N(S) \subset Y$ e, assim, o grau de todo vértice em $N(S)$ é menor ou igual a $k$. Assim, a soma dos graus dos vértices em $N(S)$ é tal que:
+
+\begin{align}
+	\sum_{y \in N(S)} d(y) \leq |N(S)|k \tag*{II} 
+\end{align}
+
+A soma dos graus dos vértices de $S$ é igual ao número de arestas entre $S$ e $N(S)$, assim como é igual a soma dos graus dos vértices em $N(S)$. Assim, pode-se afirmar:
+
+
+\begin{align}
+ 	\sum_{x \in S} d(x) &= \sum_{y \in N(S)} d(y) \\
+ 	&\implies |S|k \leq  |N(S)|k, \quad \text{usando I e II} \\
+ 	&\implies |S| \leq |N(S)| \quad \text{pois} \quad k > 0
+\end{align}
+
+Portanto, a condição de Hall é satisfeita, e existe um emparelhamento que cobre todos os vértices de  $X$.
+
+\clearpage
+
+
+\subsection{Exercício 5:  Se  $m < n$, então todo retângulo latino $m \times n$ sobre $n$ símbolos pode ser estendido a um quadrado latino de ordem $n$.}
+
+
+Vamos construir um grafo $G$ com bipartição $(X, Y)$, tal que:
+\begin{itemize}
+	\item $X$ é o conjunto de colunas do retângulo latino $X = \{x_1, x_2, \dots, x_n\}$
+	\item $Y$ é o conjunto de $n$ símbolos distintos $Y = \{y_1, y_2, \dots, y_n\}$
+\end{itemize}
+
+As arestas de $E(G)$ são formadas por todos os pares $ \{x_i, y_j\}$, com $x_i \in X$, $y_j \in Y$, tal que o símbolo $ y_j$ não aparece na coluna $x_i$ em nenhuma das $m$ linhas do retângulo latino.
+
+Seja  $x_i \in X$. Verifiquemos o grau de  $x_i$.
+
+$x_i$ está conectado a $n - m$ símbolos, pois cada coluna $x_i$ tem $m$ linhas preenchidas e as arestas são definidas por pares de colunas e símbolos não conectados no retângulo. Ou seja, $d(x_i) = n - m$, para todo  $x_i \in X$.
+
+Seja $y_j \in Y$ um símbolo. $y_j$ está conectado a toda coluna em que não aparece em nenhuma das $m$ linhas preenchidas do retangulo latino $n \times m$. Como cada linha não possui pares de símbolos iguais e há  $n$ colunas, cada linha tem $n$ símbolos distintos. Ou seja, todo símbolo aparece uma única vez em cada linha e, portanto, $y_j$ não está conectado a pelo menos  $m$ colunas e, está, entao, conectado a $n - m$ colunas. Portanto $d(y_j) = n - m$.
+
+Assim, $d(x_i) = n - m = d(y_j)$, e, portanto:
+
+
+$$
+d(x_i) \leq k \leq d(y_j), \quad x_i \in X, \; y_j \in Y, \quad \text{e } k = n - m
+$$
+
+Do exercício 4, pode-se afirmar que $G$ tem um emparelhamento que cobre $X$.
+
+Isso significa que se pode atribuir a cada coluna $x_i \in X$  um símbolo $y_j \in Y$ tal que:
+
+\begin{enumerate}
+	\item O símbolo $y_j$ não aparece na coluna $x_i$ nas linhas preenchidas.
+	\item Cada símbolo é usado em apenas uma coluna na nova linha, o que é possível, pois há $n$ colunas.
+\end{enumerate}
+
+Executando $2.$ para todos os $n$ símbolos, chega-se num triangulo latino $(m+1) \times n$, no qual $2.$ pode ser aplicado novamente. Assim, pode-se aplicar $2.$ recursivamente até formar um quadrado latino de ordem $n \times n$.
 
 \end{document}

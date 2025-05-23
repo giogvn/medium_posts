@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  19 MAY 2025 20:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  23 MAY 2025 19:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -913,18 +913,34 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
 (Font)              scaled to size 6.0pt on input line 232.
  [5
 
-] (./main.aux)
+] [6
+
+]
+LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on inp
+ut line 317.
+
+(/usr/local/texlive/2024/texmf-dist/tex/latex/xcharter/TS1XCharter-TLF.fd
+File: TS1XCharter-TLF.fd 2020/05/25 (msharpe) Font definitions for TS1/XCharter
+-TLF.
+)
+LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 317.
+
+[7
+
+{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc}] 
+(./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19469 strings out of 474116
- 370500 string characters out of 5743681
+ 19504 strings out of 474116
+ 371419 string characters out of 5743681
  1943187 words of memory out of 5000000
- 41438 multiletter control sequences out of 15000+600000
- 636962 words of font info for 88 fonts, out of 8000000 for 9000
+ 41467 multiletter control sequences out of 15000+600000
+ 637685 words of font info for 90 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  109i,10n,112p,611b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold
@@ -942,10 +958,10 @@ ocal/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/loc
 al/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local
 /texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/l
 ocal/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (5 pages, 273338 bytes).
+Output written on main.pdf (7 pages, 283352 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
