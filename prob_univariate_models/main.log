@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  14 JUL 2025 22:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  15 JUL 2025 19:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -954,65 +954,65 @@ Package mdframed Info: mdframed detected package amsthm
  [4] [5]
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 (Font)              scaled to size 5.0pt on input line 318.
- [6] [7]
+ [6] [7] [8] [9]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 451.
- [8]
-Overfull \hbox (118.02316pt too wide) detected at line 515
+(mdframed)              on input line 565.
+ [10]
+Overfull \hbox (118.02316pt too wide) detected at line 629
 []
  []
 
-[9]
+[11]
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/it' will be
-(Font)              scaled to size 14.4pt on input line 560.
+(Font)              scaled to size 14.4pt on input line 674.
 
-Overfull \hbox (15.08994pt too wide) in paragraph at lines 566--567
+Overfull \hbox (15.08994pt too wide) in paragraph at lines 680--681
 \T1/XCharter-TLF/m/n/10 The si-nu-soidal em-bed-dings mod-ule will store a mult
 i-embedding ten-sor with $\OML/cmm/m/it/10 shape \OT1/cmr/m/n/10 = (\OML/cmm/m/
 it/10 max[]pos; embed[]dim\OT1/cmr/m/n/10 )$\T1/XCharter-TLF/m/n/10 ,
  []
 
-[10] [11]
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 5.0pt on input line 635.
-
-
-LaTeX Warning: Reference `fig:sin_embeds_freq_decay' on page 12 undefined on in
-put line 671.
-
 [12]
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 5.0pt on input line 749.
+ [13]
 
-LaTeX Warning: Reference `fig:sin_embeds_scale_invariance' on page 13 undefined
- on input line 718.
+LaTeX Warning: Reference `fig:sin_embeds_freq_decay' on page 14 undefined on in
+put line 785.
 
-[13]
+[14]
+
+LaTeX Warning: Reference `fig:sin_embeds_scale_invariance' on page 15 undefined
+ on input line 832.
+
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 721.
+(mdframed)              on input line 835.
+[15]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 759.
- [14]
+(mdframed)              on input line 873.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 776.
+(mdframed)              on input line 890.
+ [16]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 788.
+(mdframed)              on input line 902.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 795.
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 7
-95.
+(mdframed)              on input line 909.
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 9
+09.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 800.
+(mdframed)              on input line 914.
 
-[15] [16] (./main.aux)
+[17] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1025,11 +1025,11 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  20272 strings out of 474116
  383091 string characters out of 5743681
- 2223187 words of memory out of 5000000
+ 2173187 words of memory out of 5000000
  42214 multiletter control sequences out of 15000+600000
  671905 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 109i,16n,112p,889b,1805s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 109i,16n,112p,889b,1809s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold
 .pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/XCharter-B
 oldItalic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/X
@@ -1037,24 +1037,25 @@ Charter-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xchar
 ter/XCharter-Roman.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
-fb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
-10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfss1000
-.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.p
-fb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb
->
-Output written on main.pdf (16 pages, 605184 bytes).
+fonts/cm/cmbx5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5
+.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
+b></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
+/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.p
+fb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb
+></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb><
+/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on main.pdf (17 pages, 641075 bytes).
 PDF statistics:
- 169 PDF objects out of 1000 (max. 8388607)
- 106 compressed objects within 2 object streams
+ 182 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
