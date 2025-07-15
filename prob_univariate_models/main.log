@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  9 JAN 2025 18:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.22)  14 JUL 2025 22:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -911,6 +911,8 @@ LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 80.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 80.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 12.0pt on input line 85.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
 (Font)              scaled to size 7.0pt on input line 96.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
@@ -922,16 +924,14 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
 al/texlive/2024/texmf-dist/fonts/enc/dvips/xcharter/xch_rydp4l.enc}{/usr/local/
 texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/local/te
 xlive/2024/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc}]
-<images/standard_normal_pdf.png, id=21, 462.528pt x 346.896pt>
+<images/standard_normal_pdf.png, id=23, 462.528pt x 346.896pt>
 File: images/standard_normal_pdf.png Graphic file (type png)
 <use images/standard_normal_pdf.png>
-Package pdftex.def Info: images/standard_normal_pdf.png  used on input line 124
+Package pdftex.def Info: images/standard_normal_pdf.png  used on input line 123
 .
 (pdftex.def)             Requested size: 455.24411pt x 341.44843pt.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 129.
  [2 <./images/standard_normal_pdf.png>]
-Overfull \hbox (2.10703pt too wide) in paragraph at lines 149--150
+Overfull \hbox (2.10703pt too wide) in paragraph at lines 148--149
 []\T1/XCharter-TLF/b/n/10 Definition 1.2 \T1/XCharter-TLF/m/n/10 (Sum Rule/ Rul
 e of To-tal Prob-a-bil-ity)\T1/XCharter-TLF/b/n/10 . []\T1/XCharter-TLF/m/it/10
  Given a joint dis-tri-bu-tion func-tion $\OML/cmm/m/it/10 p\OT1/cmr/m/n/10 (\O
@@ -939,80 +939,80 @@ ML/cmm/m/it/10 x; y\OT1/cmr/m/n/10 )$\T1/XCharter-TLF/m/it/10 , the marginal
  []
 
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/it' will be
-(Font)              scaled to size 10.0pt on input line 221.
+(Font)              scaled to size 10.0pt on input line 220.
 [3]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 257.
+(mdframed)              on input line 256.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 258.
+(Font)              scaled to size 7.0pt on input line 257.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 258.
+(Font)              scaled to size 7.0pt on input line 257.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 267.
+(mdframed)              on input line 266.
  [4] [5]
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 5.0pt on input line 318.
+ [6] [7]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 346.
- [6]
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 5.0pt on input line 358.
-
-Overfull \hbox (118.02316pt too wide) detected at line 410
+(mdframed)              on input line 451.
+ [8]
+Overfull \hbox (118.02316pt too wide) detected at line 515
 []
  []
 
-[7]
+[9]
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/it' will be
-(Font)              scaled to size 14.4pt on input line 455.
+(Font)              scaled to size 14.4pt on input line 560.
 
-Overfull \hbox (15.08994pt too wide) in paragraph at lines 461--462
+Overfull \hbox (15.08994pt too wide) in paragraph at lines 566--567
 \T1/XCharter-TLF/m/n/10 The si-nu-soidal em-bed-dings mod-ule will store a mult
 i-embedding ten-sor with $\OML/cmm/m/it/10 shape \OT1/cmr/m/n/10 = (\OML/cmm/m/
 it/10 max[]pos; embed[]dim\OT1/cmr/m/n/10 )$\T1/XCharter-TLF/m/n/10 ,
  []
 
-[8] [9]
+[10] [11]
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 5.0pt on input line 530.
+(Font)              scaled to size 5.0pt on input line 635.
 
 
-LaTeX Warning: Reference `fig:sin_embeds_freq_decay' on page 10 undefined on in
-put line 566.
+LaTeX Warning: Reference `fig:sin_embeds_freq_decay' on page 12 undefined on in
+put line 671.
 
-[10]
+[12]
 
-LaTeX Warning: Reference `fig:sin_embeds_scale_invariance' on page 11 undefined
- on input line 613.
+LaTeX Warning: Reference `fig:sin_embeds_scale_invariance' on page 13 undefined
+ on input line 718.
 
-[11]
+[13]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 616.
+(mdframed)              on input line 721.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 654.
- [12]
+(mdframed)              on input line 759.
+ [14]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 671.
+(mdframed)              on input line 776.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 683.
+(mdframed)              on input line 788.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 690.
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 6
-90.
+(mdframed)              on input line 795.
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 7
+95.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 695.
+(mdframed)              on input line 800.
 
-[13] [14] (./main.aux)
+[15] [16] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1023,10 +1023,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20270 strings out of 474116
- 383037 string characters out of 5743681
+ 20272 strings out of 474116
+ 383091 string characters out of 5743681
  2223187 words of memory out of 5000000
- 42212 multiletter control sequences out of 15000+600000
+ 42214 multiletter control sequences out of 15000+600000
  671905 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  109i,16n,112p,889b,1805s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1036,24 +1036,25 @@ oldItalic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xcharter/X
 Charter-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/xchar
 ter/XCharter-Roman.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.
-pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfss100
-0.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.
-pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.pf
-b>
-Output written on main.pdf (14 pages, 585919 bytes).
+sfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
+fb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
+10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfss1000
+.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.p
+fb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb
+>
+Output written on main.pdf (16 pages, 605184 bytes).
 PDF statistics:
- 157 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
+ 169 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

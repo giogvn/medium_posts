@@ -82,7 +82,7 @@ When modeling a random variable (rv) $X$, there are some functions and notations
 	\item \textbf{Probability Density Function (pdf):} it is defined for  \textbf{continuous} rvs and corresponds to the derivative of its cdf.	
 \end{itemize}
 
-\subsubsection{Probability Density Function}
+\subsection{Probability Density Function ($\mathbf{pdf}$)}
 
 \begin{definition}[Probability Density Function]
 	\label{def:pdf}
@@ -98,14 +98,13 @@ When modeling a random variable (rv) $X$, there are some functions and notations
 \end{definition}
 
 
-Two major remarks must be notice regarding the pdf defined above:
-
+Observations:
 \begin{itemize}
-	\item The pdf is basically the \textbf{derivative} of the cdf
-	\item The pdf is not defined when the cdf does not have a derivative 
+	\item The $\mathbf{pdf}$ is basically the \textbf{derivative} of the $\mathbf{cdf}$
+	\item The $\mathbf{pdf}$ is not defined where the $\mathbf{cdf}$ does not have a derivative 
 \end{itemize}
 
-\subsubsection{Quantiles/ Inverse CDF/  Percent Point Function (ppf)}
+\subsection{Quantiles/ Inverse CDF/  Percent Point Function (ppf)}
 
 The $quantile$ function (also called the Percent Point Function or simply $ppf$) is defined as the inverse function of the $cdf$. This means that given a random variable $X$'s cumulative distibution function $CDF(X \leq x)$, its PPF is given by $PPF(q) = CDF^{-1}(X \leq x_q)$. The output of the $PPF$ function is interpreted as the value $X = x_q$ such that $P(X \leq x_q) = q$.
 
@@ -269,24 +268,128 @@ There are some important names for the terms of the Bayes' Rule formula:
 	To solve this problem, we first need to model it. Let's say the contestant first selects door $1$. Let's define some variables.
 	
 	\begin{itemize}
-		\item  $C_i$ is the event when the contestant selects door $i$ at the end, $i \in \{1,2,3\}$
-		\item  $H_j$ is the event when the TV host selects door $j \in \{2,3\}$
-		\item $Y_i$ is the event when the prize is behind door $i \in \{1,2,3\}$
-		\item $p(Y_i | H_j)$ is the probability we are interested to maximize. This means we want to the contestant to make a final choice for the door $i$ that is the most likely to have the prize given that the host selected door $j$.
+		\item  $C = c $ is the event when the contestant selects door $c$ at the end, $i \in \{1,2,3\}$
+		\item  $H = h$ is the event when the TV host selects door $h \in \{1,2,3\}$
+		\item $Y = y$ is the event when the prize is behind door $y \in \{1,2,3\}$
+		\item $p(Y = y | H = h)$ is the probability we are interested to maximize. This means we want to the contestant to make a final choice for the door $y$ that is the most likely to have the prize given that the host selected door $h$.
 	\end{itemize}
 	
+	Suppose $C = 1$. We can skip the calculation for $p(Y = y | H = c)$ and $p(Y = y | H = y)$, because they are certainly undefined and equal to $0$, respectively. This leaves us with:
+	
 	\begin{align}
-		 p(Y_1 | H_2) &= \frac{p(H_2 | Y_1) p(Y_1)}{p(H_2)} = \frac{(1/2) (1/3)}{p(1/2)} = 1/3 \\
-		 p(Y_1 | H_3) &= \frac{p(H_3 | Y_1) p(Y_1)}{p(H_3)} = \frac{(1/2) (1/3)}{p(1/2)} = 1/3 \\
-		 p(Y_2 | H_3) &= \frac{p(H_3 | Y_2) p(Y_2)}{p(H_3)} = \frac{(1) (1/3)}{p(1/2)} = 2/3 \\
-		 p(Y_3 | H_2) &= \frac{p(H_2 | Y_3) p(Y_3)}{p(H_2)} = \frac{(1) (1/3)}{p(1/2)} = 2/3 \\
+		 p(Y = 1 | H = 2) &= \frac{p(H = 2 | Y = 1) p(Y = 1)}{p(H = 2)} = \frac{(1/2) (1/3)}{(1/2)} = 1/3 \\
+		 p(Y = 1 | H = 3) &= \frac{p(H = 3 | Y = 1) p(Y = 1)}{p(H = 3)} = \frac{(1/2) (1/3)}{(1/2)} = 1/3 \\
+		 p(Y = 2 | H = 3) &= \frac{p(H = 3 | Y = 2) p(Y = 2)}{p(H = 3)} = \frac{(1) (1/3)}{(1/2)} = 2/3 \\
+		 p(Y = 3 | H = 2) &= \frac{p(H = 2 | Y = 3) p(Y = 3)}{p(H = 2)} = \frac{(1) (1/3)}{(1/2)} = 2/3 \\
 	\end{align}
 	
-	Above, we see that $p(Y_2 | H_3)$ and $p(Y_3 | H_2)$ are the posteriors with the largest values. They are modeling the probability that the prize is behind the door that has not been chosen by either the TV host or by the contestant at the begining. \textbf{Hence, the contestant should switch their choice after the host opens a door as it will lead to the event in which the probability of winning is the largest. }
+	Above, we see that $p(Y = 2 | H = 3)$ and $p(Y = 3 | H = 2)$ are the posteriors with the largest values. They are modeling the probability that the prize is behind the door that has not been chosen by either the TV host or by the contestant at the begining, which is $C = 1$. The initial choice of $C=1$ is irrelevant here and what matters is that changing the choice of the door yelds the maximum probability of winning the prize.  \textbf{Hence, the contestant should switch their choice after the host opens a door as it will lead to the event in which the probability of winning is the largest. }
 \end{question}
 
 
-In this section we are going to prove the results that let us define the moments for $E[X^2]$ and $Var[X^2]$
+
+
+\subsection{The Univariate Normal Distribution}
+
+
+\subsubsection{Cumulative Distribution  Function ($\mathbf{cdf}$)}
+
+It is the function that tells the probability of a normally distributed random variable $\mathbf{Y}$ to be observed inside a specific interval.
+
+\begin{definition}[Univariate Gaussian Cumulative Distribution  Function ($\mathbf{cdf}$)]
+	\begin{align}
+		p(y_1 \leq Y  \leq y_2) &=  \int_{y_1}^{y_2}  \mathcal{N}(y; \mu, \sigma^2) \, dy \\
+											   &= p(y_2) - p(y_1)
+	\end{align}
+\end{definition}
+
+
+\begin{definition}[Univariate Gaussian Probability Density  Function ($\mathbf{pdf}$)]
+	\begin{align}
+		p(Y = y) &=  \mathcal{N}(y; \mu, \sigma^2) \\
+					   &= \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2\sigma^2}(y - \mu)^2}
+	\end{align}
+\end{definition}
+
+In the $\mathbf{pdf}$ of the univariate gaussian, $\sqrt{2\pi\sigma^2}$ is the normalization constant that ensures that the $\mathbf{cdf}$ equals to $1$.
+
+\subsubsection{Percent Point Function ($\mathbf{ppf}$)/ Probit  Function/ Inverse of $\mathbf{cdf}$/ The quantile }
+
+The output of this function tells the observation  $y$ for which its cumulative distribution ($\mathbf{cdf}$) is equal to the input $z$. In other words, $\mathbf{ppf(z)} = y \text{  iff  }  \mathbf{cdf(y)} = z$.
+
+For example, if $\mathbf{ppf(0.5)} = y_0$ for a normally distributed rv $Y = y$, then it means that $50\%$ of the observations of $Y$ are less or equal to $y_0$.
+
+
+\subsection{The Binomial Distribution}
+
+It is a distribution that models a sequence of independent binary events. The rv distributed as a $binomial$ basically tells how much of the events in the sequence was a positive.
+
+\begin{definition}[Binomial Distribution]
+	
+	Let $Y  ~ Bin(\theta, N)$ where $N$ is the sequence length, i.e., the number of bianary events. Hence:
+	\begin{align}
+		P(Y = y) &= \binom{N}{s}\theta^s(1 - \theta)^{N-s}\\
+		E(Y) &= N\theta \\
+		Var(Y) &= N\theta(1 - \theta) 
+	\end{align}
+	
+	This is so, because $p(Y = y) = \theta$ and we are dealing with a binary event, so there is a $\theta$ probability that the event is positive among $N$ observations.
+\end{definition}
+
+\subsubsection{The Bernoulli Distribution}
+The Bernoutlli distribution is denoted by $Ber(\theta)$ and it is a special case of the binomial distribution in which the sequence of events hs length $1$. Hence:
+
+\begin{definition}[Bernoulli Distribution]
+	
+	Let $Y  ~ Ber(\theta)$.
+	\begin{align}
+		p(Y = y) = 
+		\begin{cases} 
+			\theta & y =  1 \\
+			1 -  \theta & y = 0 \\
+		\end{cases}
+		&= Bin(1, \theta)
+	\end{align}
+\end{definition}
+This is so, because $p(Y = y) = \theta$ and we are dealing with a binary event, so there is a $\theta$ probability that the event is positive among $N$ observations.
+
+
+\subsection{The Poisson Distribution}
+
+It is a distribution for discrete rv's that account the number of binary events in a fixed period of time under the following assumptions:
+
+\begin{itemize}
+	\item The events in a given period of time are independent of each other
+	\item The average number of positive events in a given period of time is fixed regardless of the beginning of the period
+\end{itemize}
+
+\begin{definition}[Poisson Distribution]
+	Let $ Y ~ Poisson(\lambda)$, where $\lambda$ is the average number of positive events in a given period of time. Hence:
+	
+	\begin{align}
+		p(Y = y) & = \frac{\lambda^ye^{-\lambda}}{y!} \\
+		E(Y) &= Var(Y) = \lambda
+	\end{align}
+\end{definition}
+
+The expected value and the variance of a poisson distributed rv are equal to the mean number of positive events in a given period of time, i.e., $\lambda$.
+
+The Poisson Distribution closely approximates the Binomial Distributions for large values of $N$ and small values of $\theta$. For example, the distribution of the number of decayed atoms in a set of atoms in a fixed period of time can be assumed to be a Poisson distribution where $\lambda$ is the average number of atoms that decay in the same period of time. On the other hand, such number $N$ of atoms is very large and the probability of a single one to decay is small, so one can approximate the  number $s$ of atoms that decay in the same period of time as a Binomial Distribution.
+
+
+\subsection{The Geometric Distribution}
+
+It is a distribution for discrevete rv's that counts the number of Bernoulli trials until the first positive event happens.
+
+\begin{definition}[Geometric Distribution]
+	Let $ Y ~ Geo(\theta)$, where $\theta$ is the probability of sucess.
+	\begin{align}
+		p(Y = y) & = \theta^{y -1}(1 - \theta) \\
+		E(Y) &= \frac{1}{\theta} \\
+		Var(Y) &= \frac{1 - p}{p ^2}
+	\end{align}
+\end{definition}
+
 \subsection{What Properties Should Sinusoidal Embeddings (SE) Should Apply?}
 
 \begin{enumerate}
