@@ -110,13 +110,13 @@ The $quantile$ function (also called the Percent Point Function or simply $ppf$)
 
 Let's consider the standard normal random variable $X \sim \mathcal{N}(0, 1)$. Suppose we want to calculate $PPF(0.025) = x_q$, i.e., we want to find $x_q$ such that $CDF(X \leq x_q) = 0.025$. We know that $CDF$ is the integral of the $PDF$, i.e., the area under the curve representing the probability density of $X$. Hence, we're looking for find $x_q$ such that $CDF(X \leq x_q) = \int_{-\inf}^{x_q} p(x) \, dx = 0.025$. This means that we're looking for the value in the x-axis for which the integral of the plot adds up to $0.05$, which represents $2.5\%$ of the total area under the curve. We usually call the $PPF$ input $\frac{\alpha}{2}$ (\textit{alpha} over two).
 
-For $X \sim \mathcal{N}(0, 1)$, $CDF(X \leq x_q) = \int_{-\inf}^{x_q} p(x) \, dx = 0.025 \implies x_q = -1.96 $, i.e., $PPF(0.025) = -1.96$, the red value in the plot below. The blue value is inferred because of the normal distribution symmetry. Hence, if we are interpreting the plot from a Baysian perspective, for a standard normal distributed rv, there is a $2.5\%$ chance that the observed value of it will be less than $-1.96$. On the other hand, the frequentist approach would say that in a long run, $2.5\%$ of the total observations will be of values less or equal to $-1.96$.
+For $X \sim \mathcal{N}(0, 1)$, $CDF(X \leq x_q) = \int_{-\inf}^{x_q} p(x) \, dx = 0.025 \implies x_q = -1.96 $, i.e., $PPF(0.025) = -1.96$, the red value in the plot below. The blue value is inferred because of the normal distribution symmetry. Hence, if we are interpreting the plot from a Bayesian perspective, for a standard normal distributed rv, there is a $2.5\%$ chance that the observed value of it will be less than $-1.96$. On the other hand, the frequentist approach would say that in a long run, $2.5\%$ of the total observations will be of values less or equal to $-1.96$.
 
 \textbf{The Normal Distribution's $PDF$ is an even function.} This means that $PDF(x) = PDF(-x)$. Hence, $PPF(\frac{\alpha}{2})  = x_q \implies PPF(1 - \frac{\alpha}{2}) = -x_q$.
 
 It is easy to  see that the interval $(-1.96, 1.96)$ contains $95\%$ of the standard normal's cumulative probability, which means that $95\%$ of $X \sim \mathcal{N}(0, 1)$ will fall within this interval.
 
-We can generalize this result for non-standard normally distributed rvs. If  $X \sim \mathcal{N}(\mu, \sigma^2)$, then the $95\%$ interval becomes $(\mu - 1.96\sigma, \mu + 1.96\sigma)$, which is generally rounded to $\mu \pm\sigma$.
+We can generalize this result for non-standard normally distributed rvs. If  $X \sim \mathcal{N}(\mu, \sigma^2)$, then the $95\%$ interval becomes $(\mu - 1.96\sigma, \mu + 1.96\sigma)$, which is generally rounded to $\mu \pm2\sigma$.
 
 \begin{figure}[h] 
 	\centering
@@ -505,6 +505,67 @@ Such that  $ \mathbf{proj(x_i, v_j)}=  \frac{\mathbf{x_i \cdot v_j}}{||\mathbf{v
 
 \subsection{Eigenvalues and Eigenvectors}
 
+\begin{definition}[Eigenvalue and Eigenvector]
+	
+	Let $\mathbf{A}$ be a square matrix in $\mathbb{R}^{n \times n}$. The \textbf{eigenvalue} of $\mathbf{A}$ is an scalar $\lambda$ such that $\mathbf{Au} = \lambda \mathbf{u}$, with $\mathbf{u}$ being the \textbf{eigenvector} correspondent to the eigenvalue $\lambda$. Intuitively, an eigenvector of a matrix is a vector that when the matrix is multiplied by it, it is simply scaled by a factor equal to its corresponding eigenvalue. 
+	
+	For example, if $\mathbf{A}$ is a rotation matrix, the axis of rotation is an eigenvector with corresponding eigenvalue equal to $1$.
+	
+	Another way to define a pair of an eigenvalue $\lambda$ and an eigenvector $\mathbf{u}$ is to say that if they are a pair of an eigenvalue and eigenvector of a square matrix $\mathbf{A}$, then:
+	
+	\begin{align*}
+		\mathbf{Au} &= \lambda \mathbf{u} \\
+		\implies \mathbf{Au} - \lambda \mathbf{u} &= \mathbf{0} \\
+		\implies (\mathbf{A} - \lambda \mathbf{I})\mathbf{u} &= \mathbf{0} \\
+		\implies \mathbf{u}  \text{   is in the nullspace of    }\mathbf{A} &- \lambda \mathbf{I}
+	\end{align*}
+	
+	Therefore, if $\mathbf{A}$ has a non-zero eigenvector, it is nullspace is not empty. Therefore, for $\mathbf{A}$ to have a non-null eigenvector, $\mathbf{A}$ must be singular, i.e.,  $\mathbf{det}((\mathbf{A} - \lambda \mathbf{I})) = \mathbf{0}$.
+\end{definition}
+
+\begin{definition}[Characteristic Equation of a Square Matrix]
+	
+	Let $\mathbf{A}$ be a square matrix in $\mathbb{R}^{n \times n}$. The \textbf{characteristic equation} of $\mathbf{A}$ is the equation:
+	
+	\begin{align}
+		\mathbf{det}((\mathbf{A} - \lambda \mathbf{I})) = \mathbf{0}
+	\end{align}
+\end{definition}
+	The $n$ solutions for this equations are the $n$ eigenvalues of $\mathbf{A}$ with their corresponding eigenvectors $\mathbf{u}$ obtained by plugging the eigenvalues in the equation from the previous definition.
+	
+	
+\subsubsection{Properties of Eigenvectors and Eigenvalues}
+\begin{itemize}
+	\item The trace of a matrix is equal to the sum of its eigenvalues.
+	$$
+		\mathbf{tr(A)} = \sum_{i = 1}^{n}{\lambda_i}
+	$$
+	\item The determinant of a matrix is equal to the product of its eigenvalues.
+	$$
+	\mathbf{det(A)} = \prod_{i = 1}^{n}{\lambda_i}
+	$$
+	\item The rank of a matrix is equal to the number of its non-zero eigenvalues
+	\item If $\mathbf{A}$ is non-singular with eigenvalue $\lambda_i$, then $\frac{1}{\lambda_i}$ is an eigenvalue of $\mathbf{A}^{-1}$ with $\mathbf{u_i}$ as eigenvector.
+	\item The eigenvalues of a diagonal or triangular matrix are just its diagonal elements.
+\end{itemize}
+
+\subsubsection{Matrix Diagonalization}
+
+All the eigenvalues $\mathbf{\Lambda}$ and all the eigenvectors $\mathbf{U}$ of a square matrix $\mathbf{A}$ can be written simultaneously as:
+
+$$
+	\mathbf{AU} = \mathbf{U\Lambda}
+$$
+
+Where the columns of $\mathbf{U}$ are the eigenvectors of $\mathbf{A}$ and $\mathbf{\Lambda}$ is a diagonal matrix in which the diagonal contains the eigenvalues of $\mathbf{A}$.
+
+If the eigenvectors of $\mathbf{A}$ are linearly independent, then $\mathbf{U}$ is invertible and hence, $\mathbf{A}$ can be written as:
+
+$$
+	\mathbf{A}=  \mathbf{U\Lambda U^{-1}}
+$$
+
+Any matrix $\mathbf{A}$  that can be written in this form is said to be \textbf{diagonalizable}.
 
 \subsection{What Properties Should Sinusoidal Embeddings (SE) Should Apply?}
 
@@ -846,7 +907,7 @@ Figure \ref{fig:sin_embeds_scale_invariance} above shows us how the distance bet
 
 \subsection{Algorithmic issues}
 
-In malesuada ullamcorper urna, sed dapibus diam sollicitudin non. Donec elit odio, accumsan ac nisl a, tempor imperdiet eros. Donec porta tortor eu risus consequat, a pharetra tortor tristique. Morbi sit amet laoreet erat. Morbi et luctus diam, quis porta ipsum. Quisque libero dolor, suscipit id facilisis eget, sodales volutpat dolor. Nullam vulputate interdum aliquam. Mauris id convallis erat, ut vehicula neque. Sed auctor nibh et elit fringilla, nec ultricies dui sollicitudin. Vestibulum vestibulum luctus metus venenatis facilisis. Suspendisse iaculis augue at vehicula ornare. Sed vel eros ut velit fermentum porttitor sed sed massa. Fusce venenatis, metus a rutrum sagittis, enim ex maximus velit, id semper nisi velit eu purus.
+am vulputate interdum aliquam. Mauris id convallis erat, ut vehicula neque. Sed auctor nibh et elit fringilla, nec ultricies dui sollicitudin. Vestibulum vestibulum luctus metus venenatis facilisis. Suspendisse iaculis augue at vehicula ornare. Sed vel eros ut velit fermentum porttitor sed sed massa. Fusce venenatis, metus a rutrum sagittis, enim ex maximus velit, id semper nisi velit eu purus.
 
 \begin{center}
 	\begin{minipage}{0.5\linewidth} % Adjust the minipage width to accomodate for the length of algorithm lines
