@@ -1,0 +1,61 @@
+\section{What are DDPMs} % Seções são adicionadas para organizar sua apresentação em blocos discretos, todas as seções e subseções são automaticamente exibidas no índice como uma visão geral da apresentação, mas NÃO são exibidas como slides separados.
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{Overview}
+	\begin{itemize}
+		\item Denoising Diffusion Probabilistic Models (DDPMs) are  models capable of predicting \textit{noise} from a noisy input.
+	 \end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{Overview}
+\begin{itemize}
+	\item Denoising Diffusion Probabilistic Models (DDPMs) are  models capable of predicting \textit{noise} from a noisy input.
+	\item By using such prediction, a sampling algorithm can be used to remove the noise from the input which results in a denoised output. 
+\end{itemize}
+
+\end{frame}
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{DDPMs Building Blocks}
+    DDPMs are made of two processes: a \textbf{forward} and a \textbf{reversion} process.
+    \begin{enumerate}
+        \item\textbf{ Forward Process}: gradually adds noise to a  image by sampling from a normal distribution according to a Markov Chain
+        \item \textbf{Reverse Process}: removes  added noise by sampling from another normal distribution according to another Markov Chain
+    \end{enumerate}
+	The core idea of the training of DDPMs involve learning the reversion process' distribution's parameters.
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{DDPMs Building Blocks}
+	DDPMs are made of two processes: a \textbf{forward} and a \textbf{reversion} process.
+	\begin{enumerate}
+		\item\textbf{ Forward Process' Distribution}
+			\begin{align}
+				q(x_t|x_{t-1}) := \mathcal{N}(x_{t}; \sqrt{1-\beta_t} \times x_{t-1}; \beta_tI)
+			\end{align}
+		\item\textbf{ Reverse Process' Distribution}
+			\begin{align}
+				p(x_T) &= \mathcal{N}(x_T; 0; 1)\\
+				p_{\theta}(x_{0:T}) &:= p(x_T) \prod_{t=1}^{T} p_{\theta}(x_{t-1} | x_t) \\
+				p_{\theta}(x_{t-1} | x_t) & := \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t); 	\Sigma_\theta(x_t, t))
+			\end{align}
+	   \end{enumerate}
+	\begin{figure}[H]
+		\includegraphics[width=0.65\linewidth]{img/ddpm_forward_and_reverse.png}
+	\end{figure}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
