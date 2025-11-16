@@ -1,0 +1,187 @@
+\section{Reverse Process} % Seções são adicionadas para organizar sua apresentação em blocos discretos, todas as seções e subseções são automaticamente exibidas no índice como uma visão geral da apresentação, mas NÃO são exibidas como slides separados.
+
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Reverse Process' Transitions Distribution}
+	
+	\begin{itemize}
+		\item
+		\begin{align}
+			p(x_T) &= \mathcal{N}(x_T; 0; 1)\\
+			p_{\theta}(x_{0:T}) &:= p(x_T) \prod_{t=1}^{T} p_{\theta}(x_{t-1} | x_t) \\
+			p_{\theta}(x_{t-1} | x_t) & := \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t); \Sigma_\theta(x_t, t))
+		\end{align}
+		\item What we ultimately want is to have a $\mathbf{x}_0$ that is as likely as possible. We can marginalize $\mathbf{x}_0$ using the latent variables $\mathbf{x_{1:T}}$, i.e., by using the noisy images.
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Reverse Process' Prior}
+	\begin{itemize}
+		\item Ideally, the Reverse Process would enable us to sample from:
+			\begin{align}
+				p(\mathbf{x}_0) &=  \int p(\mathbf{x_0}, \mathbf{x_{1:T}})\mathbf{d_{1:T}} \\
+			\end{align}
+		\item \textbf{From the defition above, we see that $p(\mathbf{x}_0)$ is very complex due to its \textbf{multidimensionality}, which makes it intractable. That is why in DDPMs, $p(\mathbf{x}_0)$ is never computed directly, but instead its lower bound.}
+	 \end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Evidence Lower Bound (ELBO)}
+	
+	\begin{itemize}
+		\item	DDPMs are not trained to sample from $p(\mathbf{x}_0)$, but instead to maximize its lower bound ELBO ($L$)
+		\item
+			\tiny
+			\begin{align}
+				log [p_\theta(\mathbf{x_0})] &=  log \int_\mathbf{x_{1:T}} p(\mathbf{x_0}, \mathbf{x_{1:T}})d\mathbf{x_{1:T}} \\
+				log [p_\theta(\mathbf{x_0})] &=  log \int_\mathbf{x_{1:T}} p(\mathbf{x_0}, \mathbf{x_{1:T}}) \frac{q(\mathbf{x_{1:T}| x_0})}{q(\mathbf{x_{1:T}| x_0})}d\mathbf{x_{1:T}} 	\\
+				\text{by definition, }& \\
+				\mathbb{E}_q[f(\mathbf{x}_{1:T})] &= \int q(\mathbf{x}_{1:T}|\mathbf{x}_0)\, f(\mathbf{x}_{1:T})\, d\mathbf{x}_{1:T}\\
+				\implies log [p_\theta(\mathbf{x_0})] &= log (\mathbb{E}_q\bigg[\frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg]) \\
+				\text{the Jensen's inequality tells us}& \\
+				f(\mathbb{E}(\mathbf{X})) &\geq \mathbb{E}(f(\mathbf{X})))\\
+				\text{   for any concave function f. log is concave, hence:} &  \\
+				log [p_\theta(\mathbf{x_0})] &\geq \mathbb{E}_q\bigg[log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
+				\text{We define the Evidence Lower Bound L as:}  &\\
+				L &:=   \mathbb{E}_q\bigg[ - log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
+				\implies - log [p_\theta(\mathbf{x_0})] &\leq  L
+			\end{align}
+			\normalsize
+		\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Evidence Lower Bound (ELBO)}
+	
+	\begin{itemize}
+		\item	DDPMs are not trained to sample from $p(\mathbf{x}_0)$, but instead to maximize its lower bound ELBO ($L$)
+		\item With more algebraic manipulation and using the fact that both the forward and reverse processes are Markov Chains, one can derive the following equation:
+		\tiny
+		\begin{align}
+			L &:=   \mathbb{E}_q\bigg[ - log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
+			L &= \mathbb{E}_q\bigg[ - log \frac{p(\mathbf{x_{T}})}{q(\mathbf{x_T| x_0})} \bigg] - log p_\theta(\mathbf{x_0 | x_1}) - \mathbb{E}_q\bigg[ \sum_{t=2}^T 	\mathbf{D_{KL}}\big[ q(\mathbf{x_{t-1} | x_t, x_0}) || p_\theta (\mathbf{x_{t-1} | x_t}))\big] \bigg]
+		\end{align}
+		\normalsize
+		\item  \textbf{We can conclude that maximizing ELBO (L) is equivalent to minimizing the KL-Divergence between $q(\mathbf{x_{t-1} | x_t, x_0})$ and $p_\theta (\mathbf{x_{t-1} | x_t})$, i.e., minimizing the divergence between the forward and reverse processes' distributions.}
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Defining $q(\mathbf{x_{t-1} | x_t,  x_0})$}
+	\scriptsize
+	\begin{align}
+		q(\mathbf{x_{t-1} | x_t,  x_0}) &= \frac{q(\mathbf{x_t | x_{t-1}, x_0}) q(\mathbf{x_{t-1}|x_0})}{q(\mathbf{x_t | x_0})} \\
+		& \text{we know the q distribution from Definition, hence } \\ 
+		q(\mathbf{x_{t-1} | x_t,  x_0}) &\text{    is a product of known Gaussians over another known Gaussian} \\
+		\mu_q(\mathbf{x_t, x_0}) &= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_0}}{(1-\bar{\alpha_t})} \\
+		\Sigma_q(t) &= \frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1 - \bar{\alpha}_t}  \mathbf{I} \\
+		& \implies  q(\mathbf{x_{t-1} | x_t,  x_0}) =   \mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t))
+	\end{align}
+	\normalsize
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Defining $p_\theta(\mathbf{x_{t-1} | x_t})$}
+	\scriptsize
+	\begin{align}
+		p_\theta(\mathbf{x_{t-1} | x_t}) &=   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_\theta(t)) \\
+		& \text{from DDPM's paper: } \\
+		\Sigma_\theta(t) &= \Sigma_q(t) \\
+		& \text{    we are only left with the distribution's mean   } \mu_\theta \\
+		\implies & p_\theta(\mathbf{x_{t-1} | x_t}) =  \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t))
+	\end{align}
+	\normalsize
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Computing the KL Divergence Between $q$ and $p_\theta$}
+	
+	\begin{itemize}
+		\item Now we know we are trying to compute the KL Divergence between two Gaussians with the exact same variance.
+		
+		\item For that,  there is the following result that arives from the definition of such divergence
+		\tiny
+		\begin{align}
+			d_1(x) &= \mathcal{N}(\mu_1, \sigma^2)  \\
+			d_2(x) &= \mathcal{N}(\mu_2, \sigma^2) \\
+			\text{The KL divergence   } & D_{KL}(d_1 | d_2)  \text{   is given by:} \\
+			D_{KL}(d_1 | d_2) &= \frac{(\mu_1 - \mu_2)^2}{2\sigma^2}\\
+			&\text{Hence,  }\\
+			\mathbf{D_{KL}}\big[ q(\mathbf{x_{t-1} | x_t, x_0}) || p_\theta (\mathbf{x_{t-1} | x_t})\big] &=  \mathbf{D_{KL}}\big(\mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t)), \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t)) \big) \\
+			&=  \frac{1- \bar{\alpha}_t }{2(1-\alpha_t)(1- \bar\alpha_{t-1})} \big|\big| (\mu_q - \mu_\theta)^2_2\big|\big|
+		\end{align}
+		\normalsize
+		
+		\item \textbf{We just need to minimize the difference between the means of the reverse and forward processes' distributions, i.,e., minimize $\big|\big| (\mu_q - \mu_\theta)^2_2\big|\big|$}.
+		
+	\end{itemize}
+	
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Defining The Model's Prediction}
+	
+	\begin{itemize}
+		\item We can use the prediction of our model as the forward process' mean
+		\item 
+		\scriptsize
+		\begin{align}
+			\mu_q(\mathbf{x_t, x_0}) &= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_0}}{(1-\bar{\alpha_t})} \\
+			& \text{we can define the prediction }\\
+			\mu_\theta(\mathbf{x_t}) \ & := \hat\mu_q(\mathbf{x_t, x_0}) \\
+			&= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_\theta}}{(1-\bar{\alpha_t})} \\
+			\implies &\mathbf{D_{KL}}\big( \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t)), \mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t)) \big) \\
+			&= \frac{(1- \bar{\alpha}_t)(\bar\alpha_{t-1}) }{2(1-\alpha_t)(1- \bar\alpha_{t-1})} \big|\big| (\mathbf{x_\theta - x_0})^2_2 \big|\big|
+		\end{align}
+		\normalsize
+		\item \textbf{Theoretically, this equation could be used as the loss function directly, but we can rewrite the images $\mathbf{x_\theta }$ and $\mathbf{x_0}$ in function of the Gaussian noises.}
+	\end{itemize}
+\end{frame}
+
+
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Defining The Model's Prediction}
+	
+	\begin{itemize}
+		\item We can rewrite $\mathbf{x_t}$ and $\mathbf{x_0}$ as functions of the added gaussian noises
+		\item
+		\tiny
+		\begin{align}
+			q(\mathbf{x_t|x_0}) &:= \mathcal{N}(x_{t}; \sqrt{\bar{\alpha_t}} \times x_0; (1 - \bar{\alpha_t})\mathbb{I}) \\
+			&\text{which  let's us write } \\
+			\mathbf{x_t} &= \sqrt{\bar{\alpha_t}}  x_0 +  \sqrt{1 - \bar{\alpha_t}}\epsilon \\
+			\implies \mathbf{x_0} &= \frac{\mathbf{x_t} -  \sqrt{1-\bar{\alpha_t}}\epsilon}{\sqrt{\bar\alpha_t}}\\
+			\text{for a Standard Gaussian Noise  } &\epsilon. \\
+			\text{We can now define our prediction   } \hat\epsilon& = \epsilon_\theta\\
+			\mathbf{x_\theta}  &= \frac{\mathbf{x_t} -  \sqrt{1-\bar{\alpha_t}}\epsilon_\theta}{\sqrt{\bar\alpha_t}} \\
+			\implies 
+			\frac{(1- \bar{\alpha}_t)(\bar\alpha_{t-1}) }{2(1-\alpha_t)(1- \bar\alpha_{t-1})}\big|\big| (\mathbf{x_\theta - x_0})^2_2 \big|\big| &= 	\frac{(1- \bar{\alpha}_t)(\bar\alpha_{t-1}) }{2(1-\alpha_t)(1- \bar\alpha_{t-1})} \frac{(1-\alpha_t)^2}{(1-\bar\alpha_t)\alpha_t}\big|\big| (\mathbf{\epsilon_\theta- \epsilon})^2_2 \big|\big|
+		\end{align}
+		\normalsize
+		\item\textbf{ The DDPM paper authors mention that optimizing $\big|\big| (\mathbf{\epsilon_\theta- \epsilon})^2_2 \big|\big|$ without the scaling factor with the cumulative noise $\alpha_t$ is enough.}
+	\end{itemize}
+\end{frame}

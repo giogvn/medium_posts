@@ -1,25 +1,19 @@
 \section{What are DDPMs} % Seções são adicionadas para organizar sua apresentação em blocos discretos, todas as seções e subseções são automaticamente exibidas no índice como uma visão geral da apresentação, mas NÃO são exibidas como slides separados.
 
-%----------------------------------------------------------------------------------------
-
-\begin{frame}
-	\frametitle{Overview}
-	\begin{itemize}
-		\item Denoising Diffusion Probabilistic Models (DDPMs) are  models capable of predicting \textit{noise} from a noisy input.
-	 \end{itemize}
-\end{frame}
-
-%----------------------------------------------------------------------------------------
-
 
 %----------------------------------------------------------------------------------------
 
 \begin{frame}
 	\frametitle{Overview}
 \begin{itemize}
-	\item Denoising Diffusion Probabilistic Models (DDPMs) are  models capable of predicting \textit{noise} from a noisy input.
-	\item By using such prediction, a sampling algorithm can be used to remove the noise from the input which results in a denoised output. 
+	\item In simple terms, Denoising Diffusion Probabilistic Models (DDPMs) learn what part of a signal is noise — image generation is just what happens when you keep removing it.
+
+	\item By using DDPM's output, a sampling algorithm can be used to remove the noise from a noisy input which results in a denoised output. 
 \end{itemize}
+
+\begin{figure}[H]
+	\includegraphics[width=0.65\linewidth]{img/ddpm_forward_and_reverse.png}
+\end{figure}
 
 \end{frame}
 %----------------------------------------------------------------------------------------
@@ -28,10 +22,10 @@
 	\frametitle{DDPMs Building Blocks}
     DDPMs are made of two processes: a \textbf{forward} and a \textbf{reversion} process.
     \begin{enumerate}
-        \item\textbf{ Forward Process}: gradually adds noise to a  image by sampling from a normal distribution according to a Markov Chain
+        \item\textbf{Forward Process}: gradually adds noise to a  image by sampling from a normal distribution according to a Markov Chain
         \item \textbf{Reverse Process}: removes  added noise by sampling from another normal distribution according to another Markov Chain
     \end{enumerate}
-	The core idea of the training of DDPMs involve learning the reversion process' distribution's parameters.
+	The core idea of the training of DDPMs involve learning the reversion process' Gaussian Noises to be removed. The transitions distributions from the reversion process chain have parameters are functions of the noise predicted by the DDPM. Hence, \textbf{DDPMs make it possible to sample from such distributions}.
 \end{frame}
 
 %----------------------------------------------------------------------------------------
@@ -40,7 +34,6 @@
 
 \begin{frame}
 	\frametitle{DDPMs Building Blocks}
-	DDPMs are made of two processes: a \textbf{forward} and a \textbf{reversion} process.
 	\begin{enumerate}
 		\item\textbf{ Forward Process' Distribution}
 			\begin{align}

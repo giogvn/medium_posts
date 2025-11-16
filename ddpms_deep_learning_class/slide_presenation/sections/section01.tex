@@ -1,0 +1,34 @@
+\section{Forward Process} % Seções são adicionadas para organizar sua apresentação em blocos discretos, todas as seções e subseções são automaticamente exibidas no índice como uma visão geral da apresentação, mas NÃO são exibidas como slides separados.
+
+
+\begin{frame}
+	\frametitle{Forward Process' Transitions Distribution}
+	
+	\begin{itemize}
+		\item
+		\begin{align}
+			q(x_t|x_{t-1}) := \mathcal{N}(x_{t}; \sqrt{1-\beta_t} \times x_{t-1}; \beta_tI)
+		\end{align}
+		\item According to the original DDPM paper, the \textbf{Variance Schedule} $\beta_1, ..., \beta_T$ sequence that defines the noisy images distribution are held constant
+		\item Ideally, one would need a single transition from $x_0$  to get to $x_t$, with $t>0$.
+	\textbf{\item The authors of the paper achieve such ideal scenario by defining a cumulative noise $\alpha_t$ presented in the following slide.}
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}{Cumulative Noise}
+	The cumulative noise parameter ($\bar{\alpha}_t$) up to the $t$-th step is defined as:
+	\begin{align}
+		\alpha_t &:= 1 - \beta_t \\
+		\bar{\alpha}_t &:= \prod_{i=1}^{t} \alpha_i \\
+		\text{which leads to:}\\
+		q(x_t|x_0) &= \mathcal{N}\big(x_t; \sqrt{\bar{\alpha}_t}\, x_0, (1 - \bar{\alpha}_t)I\big)
+	\end{align}
+	
+	This follows from the Markov property of the forward diffusion process.
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------
+
