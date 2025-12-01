@@ -1,0 +1,33 @@
+\section{Sampling Algorithm} % Seções são adicionadas para organizar sua apresentação em blocos discretos, todas as seções e subseções são automaticamente exibidas no índice como uma visão geral da apresentação, mas NÃO são exibidas como slides separados.
+
+\begin{frame}{Sampling Algorithm Derivation}
+	\begin{itemize}
+		\item
+		\scriptsize
+		\begin{align}
+			p_\theta(\mathbf{x_{t-1} | x_t}) &=   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t)) \\
+			\mu_\theta(\mathbf{x_t}) 	 &= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_\theta}}{(1-\bar{\alpha_t})}\\
+			\mathbf{x_\theta}  &= \frac{\mathbf{x_t} -  \sqrt{1-\bar{\alpha_t}}\epsilon_\theta}{\sqrt{\bar\alpha_t}} \\
+			\implies  \mu_\theta(\mathbf{x_t}) &= \frac{\mathbf{x_t}}{\sqrt{\alpha_t}} - \frac{(1-\alpha_t)(\sqrt{1-\bar\alpha_t})}{(1-\bar\alpha_t)(\sqrt{\alpha_t})} \epsilon_\theta  = \frac{1}{\sqrt{\alpha_t}}\bigg( \mathbf{x_t} - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha_t}}}\epsilon_\theta\bigg) \\
+			\Sigma_\theta (t) = \Sigma_q(t) &= \frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1 - \bar{\alpha}_t}  \mathbf{I} \\
+			\text{We now have defined   } \mathbf{x_{t-1}} &\text{'s mean and variance given   } \mathbf{x_t} \text{  which let's us write it as } \\
+			\mathbf{x_{t-1}} &= \mu_\theta(\mathbf{x_t}) + \sqrt{\Sigma_\theta(t)} \mathbf{z} \\
+			&\mathbf{z \sim \mathcal{N}(0, I)}	 
+		\end{align}
+		\normalsize
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Sampling Algorithm}
+		\scriptsize
+		\begin{algorithmic}[1]
+			\State \textbf{repeat}
+			\State $\mathbf{x_T \sim \mathcal{N}(0, I)}$ \Comment{Sample random noisy image}
+			\State $\mathbf{T \sim Uniform(\{1, \hdots, 1000\})}$ \Comment{Sample random length of the Denoising Chain}
+			\State \textbf{for} $\mathbf{t =T, \hdots, 1}$ \textbf{do}
+			\State $\mathbf{z \sim \mathcal{N}(0, I)}$ if $t > 1$ else $\mathbf{z = 0}$
+			\State $\mathbf{x_{t-1}} =  \frac{1}{\sqrt{\alpha_t}}\bigg( \mathbf{x_t} - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha_t}}}\epsilon_\theta(\mathbf{x_t,t})\bigg) + \sqrt{\Sigma_\theta(t)} \mathbf{z} $  \Comment{Sampling  } $\mathbf{x_{t-1}}$ from $p_\theta (\mathbf{x_{t-1} | x_t})$
+			\State \textbf{end for}
+			\State \textbf{return} $\mathbf{x_0}$
+		\end{algorithmic} 
+\end{frame}

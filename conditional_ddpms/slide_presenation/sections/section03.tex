@@ -1,0 +1,17 @@
+\section{Training Algorithm} % Seções são adicionadas para organizar sua apresentação em blocos discretos, todas as seções e subseções são automaticamente exibidas no índice como uma visão geral da apresentação, mas NÃO são exibidas como slides separados.
+
+\begin{frame}{Noise Predictor Training}
+		
+		\scriptsize
+    	\begin{algorithmic}[1]
+    		\State \textbf{repeat}
+    		\State $\mathbf{x_0 \sim q(x_0)}$ \Comment{Sample image from training set}
+    		\State $\mathbf{t \sim Uniform(\{1, \hdots, T\})}$ \Comment{Sample the step of the Forward Process Markov Chain}
+    		\State $\mathbf{\epsilon \sim \mathcal{N}(0, I)}$ \Comment{Sample standard gaussian noise to be added to the input}
+    		\State $\mathbf{x_t = \sqrt{\bar{\alpha_t}}  x_0 +  \sqrt{1 - \bar{\alpha_t}}\epsilon }$ \Comment{Forward Process/ Generating Noisy Image}
+    		\State Take Gradient Descent Step on  $\nabla_\theta(\mathbf{|| \epsilon - \epsilon_\theta(x_t, t)|| })$
+    		\State \textbf{until} converged
+    	\end{algorithmic} 
+    \normalsize
+
+\end{frame}
