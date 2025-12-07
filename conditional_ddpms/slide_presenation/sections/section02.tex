@@ -5,6 +5,38 @@
 	\frametitle{Reverse Process' Transitions Distribution}
 	
 	\begin{itemize}
+		\item The reverse distribution is a Normal Distribution with mean and variance as functions of the noisy signal $\mathbf{x_t}$ and the amount of noise that has been added to it $\mathbf{t}$.
+		\item
+		\begin{align}
+			p_{\theta}(x_{t-1} | x_t) & := \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t); \Sigma_\theta(x_t, t))
+		\end{align}
+		\item What we want is to have a model that is capable of sampling from $\mathbf{p}$ so that $\mathbf{x_{t-1}}$ is indeed a less noisy version of $\mathbf{x_t}$, i.e., a model that can reverse what was done in the forward process.
+		\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Reverse Process' Prior}
+	\begin{itemize}
+		\item Ideally, the Reverse Process would enable us to sample from $\mathbf{x_0}$ directly:
+		\begin{align}
+			p(\mathbf{x}_0) &=  \int p(\mathbf{x_0}, \mathbf{x_{1:T}})\mathbf{d_{1:T}} \\
+		\end{align}
+		\item Unfortunately, $p(\mathbf{x}_0)$ is very complex due to its multidimensionality. It is \textbf{intractable}.
+		\item That is why the training of DDPMs never optmizes  $p(\mathbf{x}_0)$ directly. Instead, what is optmized is its lower bound.
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+\begin{frame}
+	\frametitle{Reverse Process' Transitions Distribution}
+	
+	\begin{itemize}
 		\item
 		\begin{align}
 			p(x_T) &= \mathcal{N}(x_T; 0; 1)\\
@@ -16,19 +48,7 @@
 \end{frame}
 
 %----------------------------------------------------------------------------------------
-%----------------------------------------------------------------------------------------
-\begin{frame}
-	\frametitle{Reverse Process' Prior}
-	\begin{itemize}
-		\item Ideally, the Reverse Process would enable us to sample from:
-			\begin{align}
-				p(\mathbf{x}_0) &=  \int p(\mathbf{x_0}, \mathbf{x_{1:T}})\mathbf{d_{1:T}} \\
-			\end{align}
-		\item \textbf{From the defition above, we see that $p(\mathbf{x}_0)$ is very complex due to its \textbf{multidimensionality}, which makes it intractable. That is why in DDPMs, $p(\mathbf{x}_0)$ is never computed directly, but instead its lower bound.}
-	 \end{itemize}
-\end{frame}
 
-%----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 \begin{frame}
 	\frametitle{Evidence Lower Bound (ELBO)}

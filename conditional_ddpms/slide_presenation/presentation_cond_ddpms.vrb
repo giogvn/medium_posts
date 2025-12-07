@@ -1,29 +1,20 @@
-\frametitle{Forward $\mathbf{q}$'s Parameters}
-		\begin{python}[basicstyle=\ttfamily\tiny]
-		class DDPMScheduler(nn.Module):
-			def __init__(self, num_time_steps: int=1000):
+\frametitle{Forward Process Sampling in PyTorch}
+		Given an input tensor $\mathbf{x_0}$ one can sample from $\mathbf{q(x_t|x_0)}$ by making the attribution:
+	\begin{python}[basicstyle=\ttfamily\tiny]
+		
+		# Random sample from dataset
+		idx = random.randint(0, len(dataset) - 1)
+		x0, y0 = dataset[idx]
+		
+		# Sampling 10 signal with increasing noise levels
+		for t in range(1, 10):
+			scheduler = DDPMScheduler(num_time_steps=t + 1)
 			
-				super().__init__()
-				self.beta = torch.linspace(1e-4, 0.02, num_time_steps, requires_grad=False)
-				
-				# Alpha is defined as 1 - beta, i.e., 1 - Variance at step t
-				alpha = 1 - self.beta
-				
-				# The variances are held constant during training, requires_grad = False
-				self.alpha = torch.cumprod(alpha, dim=0).requires_grad_(False)
-		
-			def forward(self, t):
-				return self.beta[t], self.alpha[t]
-		\end{python}
+			# Cumulative noise up until step t
+			beta, alpha = scheduler(t)
+			
+			e = torch.randn_like(x0, requires_grad=False)
+			x_t = (torch.sqrt(alpha)*x0) + (torch.sqrt(1-alpha)*e)
+			
 
-
-	Given an input tensor $\mathbf{x_0}$ one can sample from $\mathbf{q(x_t|x_0)}$ by making the attribution:
-		\begin{python}[basicstyle=\ttfamily\tiny]
-		
-		scheduler = DDPMScheduler()
-		a = scheduler.alpha[t].view(batch_size,1,1,1)
-		#Adds the gaussian noise to the input according to the variance schedule,
-		# which is the actual forward pass
-		x = (torch.sqrt(a)*x) + (torch.sqrt(1-a)*e)
 	\end{python}
-	

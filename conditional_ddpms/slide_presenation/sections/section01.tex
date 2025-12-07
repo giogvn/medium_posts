@@ -1,32 +1,34 @@
 \section{Forward Process} % Seções são adicionadas para organizar sua apresentação em blocos discretos, todas as seções e subseções são automaticamente exibidas no índice como uma visão geral da apresentação, mas NÃO são exibidas como slides separados.
 
-
+%----------------------------------------------------------------------------------------
 \begin{frame}
-	\frametitle{Forward Process' Distribution}
-	In order to produce signals that are pure Gaussian Noise, we need to sample from the following Normal Distribution which we will simply call forward ($\mathbf{q}$):
+	\frametitle{Forward Process Distribution} 
+	
+	\begin{itemize}
+		\item The forward distribution ($\mathbf{q}$) is a Normal Distribution with mean as a function of $\mathbf{x_0}$:
+	 \end{itemize}
+
 	\begin{align}
-		\mathbf{x_t} &\sim  \mathcal{N}\big(\mathbf{\sqrt{\bar{\alpha}_t}\, x_0, (1 - \bar{\alpha}_t)I}\big) \\
-		\mathbf{x_t} &\sim \mathbf{q(x_t|x_0)}
+		q(x_t|x_{t-1}) &:= \mathcal{N}(x_{t}; \sqrt{1-\beta_t} \times x_{t-1}; \beta_tI) \\
 	\end{align}
 	
-
-	\begin{itemize}
-		\item The forward process produces a noisy image $\mathbf{x_t}$by sampling from a normal distribution from which the mean is a function of the noisy-free image $\mathbf{x_0}$
-	\end{itemize}
 	
 	\begin{figure}[H]
 		\includegraphics[width=0.5\linewidth]{img/ddpm_forward.png}
 	\end{figure}
 	
-	%----------------------------------------------------------------------------------------
+	
+	\begin{itemize}
+		\item $\bar{\mathbf{\alpha_t}}$ is called the cumulative noise and is proportional to the product of the transitions distributions that gradually turns $\mathbf{x_0}$ into $\mathbf{x_t}$.
+		\item The forward distribution let's us produce a noisy signal $\mathbf{x_t}$ from the original $\mathbf{x_0}$ in a single step.
+	\end{itemize}
+
 \end{frame}
-
-
 %----------------------------------------------------------------------------------------
 
-
+%----------------------------------------------------------------------------------------
 \begin{frame}[fragile]
-	\frametitle{Forward $\mathbf{q}$'s Parameters}
+	\frametitle{Forward Process in PyTorch}
 		\begin{python}[basicstyle=\ttfamily\tiny]
 		class DDPMScheduler(nn.Module):
 			def __init__(self, num_time_steps: int=1000):
@@ -43,15 +45,30 @@
 			def forward(self, t):
 				return self.beta[t], self.alpha[t]
 		\end{python}
-
-
-	Given an input tensor $\mathbf{x_0}$ one can sample from $\mathbf{q(x_t|x_0)}$ by making the attribution:
-		\begin{python}[basicstyle=\ttfamily\tiny]
-		
-		scheduler = DDPMScheduler()
-		a = scheduler.alpha[t].view(batch_size,1,1,1)
-		# Samples from forward q
-		x = (torch.sqrt(a)*x) + (torch.sqrt(1-a)*e)
-	\end{python}
-	
 \end{frame}
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\begin{frame}[fragile]
+		\frametitle{Forward Process Sampling in PyTorch}
+		Given an input tensor $\mathbf{x_0}$ one can sample from $\mathbf{q(x_t|x_0)}$ by making the attribution:
+	\begin{python}[basicstyle=\ttfamily\tiny]
+		
+		# Random sample from dataset
+		idx = random.randint(0, len(dataset) - 1)
+		x0, y0 = dataset[idx]
+		
+		# Sampling 10 signal with increasing noise levels
+		for t in range(1, 10):
+			scheduler = DDPMScheduler(num_time_steps=t + 1)
+			
+			# Cumulative noise up until step t
+			beta, alpha = scheduler(t)
+			
+			e = torch.randn_like(x0, requires_grad=False)
+			x_t = (torch.sqrt(alpha)*x0) + (torch.sqrt(1-alpha)*e)
+			
+
+	\end{python}
+\end{frame}
+%----------------------------------------------------------------------------------------

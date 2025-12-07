@@ -5,10 +5,14 @@ Jonathan Ho, Ajay Jain, and Pieter Abbeel.
 \newblock Denoising diffusion probabilistic models.
 \newblock {\em CoRR}, abs/2006.11239, 2020.
 
-\bibitem{DBLP:journals/corr/Sohl-DicksteinW15}
-Jascha Sohl{-}Dickstein, Eric~A. Weiss, Niru Maheswaranathan, and Surya
-  Ganguli.
-\newblock Deep unsupervised learning using nonequilibrium thermodynamics.
-\newblock {\em CoRR}, abs/1503.03585, 2015.
+\bibitem{ho2022classifierfreediffusionguidance}
+Jonathan Ho and Tim Salimans.
+\newblock Classifier-free diffusion guidance, 2022.
+
+\bibitem{DBLP:journals/corr/abs-1708-07747}
+Han Xiao, Kashif Rasul, and Roland Vollgraf.
+\newblock Fashion-mnist: a novel image dataset for benchmarking machine
+  learning algorithms.
+\newblock {\em CoRR}, abs/1708.07747, 2017.
 
 \end{thebibliography}

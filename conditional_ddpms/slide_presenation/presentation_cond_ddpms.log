@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.6)  30 NOV 2025 21:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.6)  7 DEC 2025 19:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1281,7 +1281,7 @@ Package biblatex Info: Reference segment=0 on input line 84.
  (./presentation_cond_ddpms.nav)
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
 (Font)              scaled to size 6.0pt on input line 84.
-<img/logo_IME.png, id=91, 1780.6525pt x 791.95876pt>
+<img/logo_IME.png, id=95, 1780.6525pt x 791.95876pt>
 File: img/logo_IME.png Graphic file (type png)
 <use img/logo_IME.png>
 Package pdftex.def Info: img/logo_IME.png  used on input line 92.
@@ -1333,17 +1333,17 @@ LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 18.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <6> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 18.
-<img/boot.png, id=251, 573.8238pt x 61.4295pt>
+<img/boot.png, id=265, 573.8238pt x 61.4295pt>
 File: img/boot.png Graphic file (type png)
 <use img/boot.png>
 Package pdftex.def Info: img/boot.png  used on input line 18.
 (pdftex.def)             Requested size: 222.48985pt x 23.81773pt.
-<img/t-shirt.png, id=252, 573.8238pt x 61.4295pt>
+<img/t-shirt.png, id=266, 573.8238pt x 61.4295pt>
 File: img/t-shirt.png Graphic file (type png)
 <use img/t-shirt.png>
 Package pdftex.def Info: img/t-shirt.png  used on input line 18.
 (pdftex.def)             Requested size: 222.48985pt x 23.81773pt.
-<img/pant.png, id=253, 573.8238pt x 61.4295pt>
+<img/pant.png, id=267, 573.8238pt x 61.4295pt>
 File: img/pant.png Graphic file (type png)
 <use img/pant.png>
 Package pdftex.def Info: img/pant.png  used on input line 18.
@@ -1356,7 +1356,7 @@ Package pdftex.def Info: img/pant.png  used on input line 18.
  <./img/boot.png> <./img/t-shirt.png> <./img/pant.png>]
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/b/n' will be
 (Font)              scaled to size 10.95pt on input line 35.
-<img/heel_forward.png, id=317, 573.8238pt x 61.4295pt>
+<img/heel_forward.png, id=335, 573.8238pt x 61.4295pt>
 File: img/heel_forward.png Graphic file (type png)
 <use img/heel_forward.png>
 Package pdftex.def Info: img/heel_forward.png  used on input line 35.
@@ -1370,11 +1370,11 @@ Package pdftex.def Info: img/boot.png  used on input line 35.
 [4
 
  <./img/heel_forward.png>]
-<img/ddpm_forward_and_reverse.png, id=378, 524.96124pt x 104.39pt>
+<img/ddpm_forward_and_reverse.png, id=400, 524.96124pt x 104.39pt>
 File: img/ddpm_forward_and_reverse.png Graphic file (type png)
 <use img/ddpm_forward_and_reverse.png>
 Package pdftex.def Info: img/ddpm_forward_and_reverse.png  used on input line 5
-9.
+6.
 (pdftex.def)             Requested size: 222.48985pt x 44.2417pt.
 
 
@@ -1385,10 +1385,10 @@ rward_and_reverse.png>])
 \openout2 = `sections/section01.aux'.
 
  (./sections/section01.tex
-<img/ddpm_forward.png, id=446, 1180.41pt x 153.57375pt>
+<img/ddpm_forward.png, id=472, 1180.41pt x 153.57375pt>
 File: img/ddpm_forward.png Graphic file (type png)
 <use img/ddpm_forward.png>
-Package pdftex.def Info: img/ddpm_forward.png  used on input line 22.
+Package pdftex.def Info: img/ddpm_forward.png  used on input line 26.
 (pdftex.def)             Requested size: 171.14764pt x 22.26645pt.
 
 
@@ -1413,44 +1413,27 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <6> not available
 (Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 9.
 )
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <14.4> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 58.
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 58.
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 58.
-
-Overfull \vbox (1.03015pt too high) detected at line 58
- []
-
-
 
 [7
+
+]
+\openout4 = `presentation_cond_ddpms.vrb'.
+
+ (./presentation_cond_ddpms.vrb)
+
+[8
 
 ])
 \openout2 = `sections/section02.aux'.
 
  (./sections/section02.tex
 
-[8
-
-
-
-
-]
-
 [9
 
+
+
+
 ]
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <5> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 56.
-LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 5.0pt on input line 56.
-
-Overfull \vbox (16.39563pt too high) detected at line 56
- []
-
-
 
 [10
 
@@ -1459,6 +1442,15 @@ Overfull \vbox (16.39563pt too high) detected at line 56
 [11
 
 ]
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <5> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 76.
+LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
+(Font)              scaled to size 5.0pt on input line 76.
+
+Overfull \vbox (16.39563pt too high) detected at line 76
+ []
+
+
 
 [12
 
@@ -1467,6 +1459,13 @@ Overfull \vbox (16.39563pt too high) detected at line 56
 [13
 
 ]
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <14.4> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 111.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 111.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 111.
+
 
 [14
 
@@ -1478,6 +1477,14 @@ Overfull \vbox (16.39563pt too high) detected at line 56
 
 [16
 
+]
+
+[17
+
+]
+
+[18
+
 ])
 \openout2 = `sections/section03.aux'.
 
@@ -1488,7 +1495,7 @@ LaTeX Font Info:    Font shape `OT1/opensans-TLF/b/n' will be
 (Font)              scaled to size 8.0pt on input line 17.
 
 
-[17
+[19
 
 
 
@@ -1498,14 +1505,14 @@ LaTeX Font Info:    Font shape `OT1/opensans-TLF/b/n' will be
 
  (./sections/section04.tex
 
-[18
+[20
 
 
 
 
 ]
 
-[19
+[21
 
 ])
 \openout2 = `sections/section05.aux'.
@@ -1517,14 +1524,14 @@ LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 45.
 
 
-[20
+[22
 
 
 
 
 {/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/opensans/a_iz27ck.enc}]
 
-[21
+[23
 
 
 ])
@@ -1532,7 +1539,7 @@ LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
 (Font)              scaled to size 24.88pt on input line 113.
 
 
-[22
+[24
 
 
 
@@ -1561,10 +1568,10 @@ Package logreq Info: Writing requests to 'presentation_cond_ddpms.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 33779 strings out of 473190
- 653301 string characters out of 5715801
- 1754653 words of memory out of 5000000
- 56304 multiletter control sequences out of 15000+600000
+ 33792 strings out of 473190
+ 653461 string characters out of 5715801
+ 1657654 words of memory out of 5000000
+ 56311 multiletter control sequences out of 15000+600000
  606393 words of font info for 137 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,19n,123p,712b,1559s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1592,10 +1599,10 @@ fb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></us
 r/local/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local
 /texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texliv
 e/2025/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on presentation_cond_ddpms.pdf (22 pages, 1161053 bytes).
+Output written on presentation_cond_ddpms.pdf (24 pages, 1166786 bytes).
 PDF statistics:
- 1563 PDF objects out of 1728 (max. 8388607)
- 835 compressed objects within 9 object streams
- 58 named destinations out of 1000 (max. 500000)
+ 1810 PDF objects out of 2073 (max. 8388607)
+ 946 compressed objects within 10 object streams
+ 62 named destinations out of 1000 (max. 500000)
  162 words of extra memory for PDF output out of 10000 (max. 10000000)
 
