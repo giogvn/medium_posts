@@ -1,0 +1,133 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{MAC05921 – Deep Learning –  Relatório Tarefa 2} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br (10788620)}} % Author name and email address
+
+\date{University of Sao Paulo --- \today} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+Este relatório contem a descrição do experimento realizado na \textbf{Tarefa 2}. Foram realizados os passos \textit{a, b, c} e \textit{f} da seção \textbf{Sugestão de explorações adicionais}.
+\section{Etapa 1: Rede Neural Convencional (NN)}
+
+\subsection{Preparação dos Dados}
+Foi utilizado o conjunto de dados \textbf{FashionMNIST} (80\% para treinamento e 20\% para validação, sendo o conjunto de testes carregado separadamente). Para cada amostra de imagem, duas transformações foram aplicadas: as imagens foram transformadas em tensores e normalizadas para o intervalo $[-1, 1]$.
+
+\subsection{Definição do Modelo}
+Uma rede neural totalmente conectada (MLP) foi definida com a seguinte arquitetura:
+\begin{itemize}
+	\item \textbf{Camada de Entrada}: Achatamento (\texttt{nn.Flatten}) da imagem $28 \times 28$.
+	\item \textbf{Camada Oculta}: Uma camada densa (\texttt{nn.Linear}) seguida por uma função de ativação \texttt{ReLU}.
+	\item \textbf{Regularização}: \texttt{Dropout} é aplicado para mitigar o overfitting.
+	\item \textbf{Camada de Saída}: Uma camada densa final que produz as 10 pontuações de classe.
+\end{itemize}
+
+\subsection{Otimização de Hiperparâmetros}
+Uma busca aleatória (\textbf{Random Search}) foi realizada em 10 tentativas para encontrar a melhor combinação de hiperparâmetros que maximiza a acurácia no conjunto de validação. Os hiperparâmetros ajustados foram os seguintes:
+\begin{itemize}
+	\item \texttt{hidden\_size}: tamanho da camada oculta.
+	\item \texttt{dropout}: porcentagem de dropout.
+	\item \texttt{weight\_decay}: regularização L2.
+	\item \texttt{batch\_size}: tamanho do lote de dados.
+	\item \texttt{lr}: taxa de aprendizado.
+	\item \texttt{optimizer}: otimizador (AdamW ou SGD).
+\end{itemize}
+Cada combinação foi limitada por uma estratégia de \textbf{early stopping} em ele foi interrompido quando a acurácia no conjunto de validação não melhorou significativamente por 5 épocas seguidas ou mais.
+
+\subsection{Treinamento com Conjuntos Desbalanceados}
+O modelo com a melhor combinação de hiperparâmetros foi então treinado em cinco conjuntos de dados de treinamento com diferentes níveis de desbalanceamento de classe. A classe 0 foi definida como a classe minoritária, e sua representação no conjunto de treinamento foi reduzida para frações de 1.0 (balanceado), 0.7, 0.5, 0.3 e 0.1.
+
+\section{Etapa 2: Rede Neural Convolucional (CNN)}
+
+\subsection{Arquitetura da CNN}
+Uma \textbf{Rede Neural Convolucional} foi definida para comparação. A arquitetura foi composta por:
+\begin{enumerate}
+	\item Uma primeira camada convolucional (\texttt{nn.Conv2d}).
+	\item Uma função de ativação \texttt{ReLU}.
+	\item Uma segunda camada convolucional.
+	\item Uma função de ativação \texttt{ReLU}.
+	\item \textbf{Adaptive Average Pooling} para redimensionar a saída para $1 \times 1$.
+	\item Achatamento.
+	\item Uma camada linear final (\texttt{nn.Linear}) para a classificação.
+\end{enumerate}
+
+O treinamento foi feito utilizando-se a mesma taxa de aprendizagem, \textit{batch size}, \textit{weight decay} e otimizador da \textit{NN} para garantir melhor comparabilidade.
+
+\subsection{Otimização dos Parâmetros de Treinamento}
+
+O número de parâmetros treináveis da NN com a melhor configuração foi calculado como 407.050. O objetivo foi encontrar combinações de canais de convolução ($C$) e tamanho do kernel ($K$) para a CNN de modo que o número de parâmetros treináveis foi aproximadamente o mesmo da NN. A equação para o número de parâmetros da CNN é:
+$$ \text{NumberOfTrainableParameters(CNN)} = (K^2)C^2 + (K^2 + 12)C + 10 $$
+Essa equação foi resolvida para $C$ para diferentes valores de $K$ (de 3 a 11 com passo de 2) para encontrar as combinações ideais, sendo a melhor encontrada equivalente a um \textit{kernel} de tamanho $11$ e $C = 64$.
+
+
+\section{Resultados}
+
+Observou-se que a \textbf{CNN} teve melhores resultados de acurácia no conjuntos de testes do que a \textbf{NN} para todos os níveis de desbalanceamento, apesar de a diferença de acurácia ter sido de apenas \textit{2\%} em todos os níveis com exceção do caso em que a classe minoritária foi reduzida para apenas \textit{10\%} da quantidade no conjunto original, quando a \textbf{CNN} foi \textit{6\%} mais acurada.
+
+A \textbf{CNN} manteve acurácia constante para conjuntos de treinamento balanceados e desbalanceados (\textit{91\%}), enquanto a \textbf{NN} só viu sua acurácia cair a partir de quando a classe minoritária foi reduzida para apenas \textit{30\%} da quantidade no conjunto original.
+
+Ambos modelos demonstraram queda na \textit{performance} com a adição do ruído do tipo sal e pimenta no conjunto de testes, sendo que a acurácia da \textbf{NN} treinada no conjunto balanceado caiu  de \textit{89\%} para \textit{83\%}. Já para a  \textbf{CNN}, a queda também foi de \textit{6\%}: foi de  \textit{91\%} para \textit{85\%}.
+
+\section{Implementação}
+
+A implementação das classes \textbf{NeuralNet} (\textbf{NN}) e \textbf{ConvNeuralNet} (\textbf{CNN}) foram feitas consultando-se a documentação oficial do \textbf{PyTorch}, tal quel a implentação da função \textbf{train\_model} que contém o \textit{loop} de treinamento. Códigos fora de funções foram implementados sem consultas externas, enquando as outras funções (\textit{plot} de gráficos, criação dos conjuntos de treinamento desbalanceados e adição de ruído nas imagens) foram implementadas utilizando-se uma ferramenta de IA generativa.
+Todas as células do \textit{notebook} contendo explicações também foram criadas sem consultas externas.
+
+\end{document}

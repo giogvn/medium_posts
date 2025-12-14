@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{What are DDPMs}{3}{0}{1}
+\beamer@sectionintoc {2}{Forward Process}{6}{0}{2}
+\beamer@sectionintoc {3}{Reverse Process}{9}{0}{3}
+\beamer@sectionintoc {4}{Training Algorithm}{19}{0}{4}
+\beamer@sectionintoc {5}{Sampling Algorithm}{20}{0}{5}
+\beamer@sectionintoc {6}{Bibliography}{22}{0}{6}

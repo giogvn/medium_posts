@@ -1,0 +1,58 @@
+\section{What are DDPMs} % Seções são adicionadas para organizar sua apresentação em blocos discretos, todas as seções e subseções são automaticamente exibidas no índice como uma visão geral da apresentação, mas NÃO são exibidas como slides separados.
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{Overview}
+\begin{itemize}
+	\item Denoising Diffusion Probabilistic Models (DDPMs) generate images by iteratively removing noise from a signal until it looks like a real image.
+\end{itemize}
+
+\begin{figure}[H]
+	\includegraphics[width=0.65\linewidth]{img/boot.png}
+    \includegraphics[width=0.65\linewidth]{img/t-shirt.png}
+    \includegraphics[width=0.65\linewidth]{img/pant.png}
+\end{figure}
+
+\end{frame}
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{DDPMs Building Blocks}
+    DDPMs are made of \textbf{two iterative processes} defined by different Markov Chains: a \textbf{forward} and a \textbf{reversion} process.
+    \begin{enumerate}
+        \item\textbf{Forward Process}: gradually adds noise to a  image by sampling from a normal distribution according to a Markov Chain
+        \begin{figure}[H]
+        	\includegraphics[width=0.65\linewidth]{img/heel_forward.png}
+        \end{figure}
+        \item \textbf{Reverse Process}: removes  noise by sampling from a normal distribution according to another Markov Chain
+        \begin{figure}[H]
+        	\includegraphics[width=0.65\linewidth]{img/boot.png}
+        \end{figure}
+    \end{enumerate}
+   
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\begin{frame}
+	\frametitle{DDPMs Building Blocks}
+	\begin{enumerate}
+		\item\textbf{ Forward Process' Distribution}
+			\begin{align}
+				q(x_t|x_{t-1}) := \mathcal{N}(x_{t}; \sqrt{1-\beta_t} \times x_{t-1}; \beta_tI)
+			\end{align}
+		\item\textbf{ Reverse Process' Distribution}
+			\begin{align}
+				p(x_T) &= \mathcal{N}(x_T; 0; 1)\\
+				p_{\theta}(x_{0:T}) &:= p(x_T) \prod_{t=1}^{T} p_{\theta}(x_{t-1} | x_t) \\
+				p_{\theta}(x_{t-1} | x_t) & := \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t); 	\Sigma_\theta(x_t, t))
+			\end{align}
+	   \end{enumerate}
+	\begin{figure}[H]
+		\includegraphics[width=0.65\linewidth]{img/ddpm_forward_and_reverse.png}
+	\end{figure}
+\end{frame}
+
+%----------------------------------------------------------------------------------------

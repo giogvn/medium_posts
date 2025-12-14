@@ -66,58 +66,55 @@
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
 
-\section*{Motivation} % Unnumbered section
 
-I've been studying and using generative AI models for a while now. I have always put at least some effort in understanding Large Language Model's (LLMs) architecture and training process, but state-of-the-art (SOTA) image generative models have always been kept as a future topic to be grasped. I say that the personal main reason for this is that I hadn't had the opportunity to use this models professionally until recently, so I had little interest in dedicating some time for them.
-
-By the last months of 2024, I was invited by my boss to give a worshop on Generative Adversarial Networks (GANs) and Denoising Diffusion Probabilistic Models (DDPMs) during the Third School on Data Science and Machine Learning that took place in the International Centre for Theoretical Physics (ICTP) in the São Paulo State University (UNESP, Sao Paulo, Brazil) in December 6th, 2024. The workshop was my greatest academic challenge when it comes to presenting. The public was made of high performing graduate and postgraduate students from the best universities in South America. 
-
-As mentioned, DDPMs was one of the topics I had to give a workshop on. In order to do so, I had to study its architecture and training procedure. The concepts I learned are all presented here.
+\section{Motivation}
 
 
-\section{What are DDPMs?} % Numbered section
+If you read my last post on Denoising Diffusion Probabilistic Models (DDPMs) where we derived the training and sampling algorithms for this type of image generation models, you might have noticed that the original DDPM \cite{DBLP:journals/corr/abs-2006-11239} does not let one generate an image $\mathbf{x}$ from a specific class $\mathbf{y}$.
 
-Denoising Diffusion Probabilistic Models (DDPMs) are  models capable of predicting \textit{noise} from a noisy input. By using such prediction, a sampling algorithm can be used to remove the noise from the input which results in a denoised output. DDPMs were first introduced in 2015 by Sohl-Dickstein and other USA researchers in \cite{DBLP:journals/corr/Sohl-DicksteinW15}, but were made popular by Jonathan Ho and others in \cite{DBLP:journals/corr/abs-2006-11239}. The latter paper used such model to generate images outputs from pure random noise, which is basically an image generation model.
+ Hence, even though that we might have trained a model useful for generating images of clothes from the Fashion MNIST Dataset \cite{DBLP:journals/corr/abs-1708-07747}, the generated samples classes output in the sampling algorithm were random \textit{by design}.
+ 
+ In this post we are interested in deriving the training and sampling algorithm for an implementation of \textbf{Classifier-Free Diffusion Guidance} \cite{ho2022classifierfreediffusionguidance} for DDPMs. This type of guidance lets us use diffusion models to generate images from specific classes, i.e., with them we can parametrize the sampling algorithm to generate images from specific classes.
+ 
+ 
+\section{Recap: What are DDPMs?} % Numbered section
+
+Denoising Diffusion Probabilistic Models (DDPMs) are  models capable of predicting \textit{noise} from a noisy input. By using such prediction, a sampling algorithm can be used to remove the noise from the input which results in a denoised output. 
 
 DDPMs are made of two processes: a \textbf{forward} and a \textbf{reversion} process. The former is responsible for gradually adding noise to a  image by sampling from a normal distribution according to a Markov Chain. The latter removes  added noise by sampling from another normal distribution. In simple terms, the training of DDPMs involve learning the reversion process' distribution's parameters.
 
+\begin{figure}[h] 
+	\centering
+	\includegraphics[width=\linewidth]{images/ddpm_forward_and_reverse.png}
+	\caption{Image extracted from the original DDPM paperl: \textit{"Denoising Diffusion Probabilistic Models"}\cite{DBLP:journals/corr/RonnebergerFB15}}
+	\label{fig:unet_arch}
+\end{figure}
 
-\subsection{Forward Process}
 
-The process of adding noise to an input image ($x_0$) is a Markov Chain that generates a noisier image $x_t$ from a less noisy image $x_{t-1}$. In \cite{DBLP:journals/corr/abs-2006-11239} and here, an $x$'s  subscript represents its position in the Markov Chain so that the greater an $x$'s  subscript the noisier it is. Hence, $x_t$ represents the result of adding noise to $x_{t-1}$ by transitioning it once in the Markov Chain.
+\section{What is \textbf{Classifier-Free Diffusion Guidance}}
+
+\textbf{Classifier-Free Diffusion Guidance}\cite{ho2022classifierfreediffusionguidance} was introduced in 2022 by Google Research. 
+
+\subsection{Forward Process $q$}
+
+The process of adding noise to an input image ($\mathbf{x_0}$) is a Markov Chain that generates a noisier image $x_t$ from a less noisy image $\mathbf{x_{t-1}}$.  Hence, $\mathbf{x_t}$ represents the result of adding noise to $\mathbf{x_{t-1}}$ by transitioning it \textbf{once} in the Markov Chain.
 
 
-From the original DDPM paper, we know that in the forward process, a sample $x_t$ is produced by adding noise to a sample $x_{t-1}$ according to a normal distribution defined below:
+From the original DDPM paper, we know that in the forward process, a noisy version $\mathbf{x_t}$ of an image $\mathbf{x_0}$ is produced by sampling from the following distribution with $\mathbf{t > 0}$.
 
 \begin{align}
-	q(x_t|x_{t-1}) := \mathcal{N}(x_{t}; \sqrt{1-\beta_t} \times x_{t-1}; \beta_tI)
+	\alpha_t &:= 1 - \beta_t \\
+	\bar{\alpha_t} &:= \prod_{s=1}^{t} a_s \\
+	q(\mathbf{x_t|x_0}) &:= \mathcal{N}(\mathbf{x_{t}; \sqrt{\bar{\alpha_t}} \times x_0; (1 - \bar{\alpha_t})I)}
 \end{align}
 
 
-Using $q(x_t|x_{t-1})$  is not very feasible from an implementation point of view, because it makes the production of each noisy sample $x_{t}$ dependent on $x_{t-1}$, which makes it necessary to make $t$ transitions starting from $x_0$ in order to get to the $x_t$ sample. \textbf{Ideally, one would need a single transition from $x_0$  to get to $x_t$, with $t>0$.}
+As
+According to the original DDPM paper, the \textbf{Variance Schedule} $\beta_1, ..., \beta_T$ sequence that defines the noisy images distribution are held constant.
 
-The authors of \cite{DBLP:journals/corr/abs-2006-11239} achieves such ideal scenario by defining a cumulative noise $\alpha_t$ presented below:
+\subsection{Reverse  Process $p_\theta$}
 
-\begin{definition}[Cumulative Noise]
-	The Cumulative Noise ($\alpha_t$) added to an input  $x_0$ up to the t-th step is defined as:
-		\label{def:cum_noise}
-	\begin{align}
-		\alpha_t &:= 1 - \beta_t \\
-		\bar{\alpha_t} &:= \prod_{s=1}^{t} a_s \\
-		\text{which leads to}\\
-		q(x_t|x_0) &:= \mathcal{N}(x_{t}; \sqrt{\bar{\alpha_t}} \times x_0; (1 - \bar{\alpha_t})I)
-	\end{align}
-\end{definition}
-
-
-Definition \ref{def:cum_noise} permits the sampling of $x_t$ to be done in a single transition from $x_0$.
-
-According to the original DDPM paper, the \textbf{Variance Schedule} $\beta_1, ..., \beta_T$ sequence that defines the noisy images distribution can be learned or held constant as hyperparameters. The authors uses the latter approach, which makes the forward process' variances constant.
-
-\subsection{Reverse  Process}
-
-As previously mentioned, the reverse process is responsible for removing the noise from an input. Hence, this process is responsible for generating $\mathbf{x_0}$ given a noisy input $\mathbf{x_t}$. It is a \textit{Markov Chain} with learned Gaussian transitions defined below:
-
+The Reverse Process is a Markov Chain with a Standard Gaussian initial state and Gaussian transition distribution $p_\theta$ parametrized by mean $\mu_\theta$ and variance $\Sigma_\theta$. \textbf{The core idea of the chain is that the transitions remove each a little bit of the noise from the initial state up until the noise-free state $\mathbf{x_0}$.}
 
 \begin{definition}[Reverse Process Transitions]
 	The Reverse Process is a Markov Chain with the following transitions:
@@ -129,43 +126,45 @@ As previously mentioned, the reverse process is responsible for removing the noi
 	\end{align}
 \end{definition}
 
-Notice that the definition above is simply a Markov Chain with a Standard Gaussian initial state and Gaussian transition distributions parametrized by $\mu_\theta$ and $\Sigma_\theta$. We want to create a model that is capable of recovering the best $x_0$ possible given a set of observed variables $Z := \mathbf{x_{1:T}}$. Theoretically, this can be achieved if we have a process to sample from the following distribution.
+
+What we ultimately want is to have a $\mathbf{x}_0$ that is as likely as possible. We can use the standard rule of probability to obtain a marginalization of $p(\mathbf{x}_0)$ using the latent variables $\mathbf{x_{1:T}}$
 
 \begin{definition}[Reverse Process Prior]
-	Ideally, the Reverse Process will let us sample from:
+	Ideally, the Reverse Process would let us sample from:
 	\label{def:rev_process_post}
 	\begin{align}
 		p(\mathbf{x}_0) &=  \int p(\mathbf{x_0}, \mathbf{x_{1:T}})\mathbf{d_{1:T}} \\
 	\end{align}
 \end{definition}
 
-We see that the computation of $p(\mathbf{x_0})$ is highly complex and intractable due to its multidimensionality, which makes the training based on optimizating $p(\mathbf{x_{0}})$ directly infeasible. To solve this problem, the author's of the DDPM paper used the \textit{Variational Lower Bound} of the expectation log-likelihood function, also called evidence lower bound (ELBO).
+\fbox{
+	\parbox{0.9\linewidth}{From the defition above, we see that $p(\mathbf{x}_0)$ is very complex due to its \textbf{multidimensionality}, which makes it intractable. That is why in DDPMs, $p(\mathbf{x}_0)$ is never computed directly, but instead its lower bound.}
+}
 
-\subsubsection{Variational Lower Bound / Evidence Lower Bound / ELBO}
 
- The Variational Lower Bound is a tight lower bound that limits $log(p(\mathbf{x_0}))$ from below. Hence, when $p(\mathbf{x_0})$ is intractable as in the case of DDPMs, one can always maximize such lower bound as a means to ensure that $log(p(\mathbf{x_0}))$ is as large as possible. Such lower bound is often called \textbf{ELBO} or simply \textbf{$L$} and will be demonstrated using two different approaches: the \textbf{Jensen's Inequality} and the \textbf{KL Divergence}.
- The Variational Lower Bound is a tight lower bound that limits $log(p(\mathbf{x_0}))$ from below. Hence, when $p(\mathbf{x_0})$ is intractable as in the case of DDPMs, one can always maximize such lower bound as a means to ensure that $log(p(\mathbf{x_0}))$ is as large as possible. Such lower bound is often called \textbf{ELBO} or simply \textbf{$L$} and will be demonstrated using two different approaches: the \textbf{Jensen's Inequality} and the \textbf{KL Divergence}.
+\subsubsection{Evidence Lower Bound / ELBO}
+
+ The Evidence Lower Bound is a tight lower bound that limits $log(p(\mathbf{x_0}))$ from below. Hence, when $p(\mathbf{x_0})$ is intractable as in the case of DDPMs, one can always maximize such lower bound as a means to ensure that $log(p(\mathbf{x_0}))$ is as large as possible. Such lower bound is often called \textbf{ELBO} and will be demonstrated using two different approaches: the \textbf{Jensen's Inequality} and the \textbf{KL Divergence}.
  
-
-\begin{definition}[Variational Lower Bound - Jensen's Inequality]
-	Let's use the Rule Of Total Probability to find an upper bound for the log-likelihood function.
+\begin{definition}[Evidence Lower Bound - Jensen's Inequality]
+	Let's use the Rule Of Total Probability to find a lower  bound for the log-likelihood function.
 	\label{def:var_low_bound_jensen}
 	\begin{align}
 		log [p_\theta(\mathbf{x_0})] &=  log \int_\mathbf{x_{1:T}} p(\mathbf{x_0}, \mathbf{x_{1:T}})d\mathbf{x_{1:T}} \\
 		log [p_\theta(\mathbf{x_0})] &=  log \int_\mathbf{x_{1:T}} p(\mathbf{x_0}, \mathbf{x_{1:T}}) \frac{q(\mathbf{x_{1:T}| x_0})}{q(\mathbf{x_{1:T}| x_0})}d\mathbf{x_{1:T}} 	\\
 		log [p_\theta(\mathbf{x_0})] &= log (\mathbb{E}_q\bigg[\frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg]) \\
 		\text{the Jensen's inequality tells us}& \\
-		f(\mathbf{E}(\mathbf{X})) &\geq \mathbf{E}(f(\mathbf{X})))\\
+		f(\mathbb{E}(\mathbf{X})) &\geq \mathbb{E}(f(\mathbf{X})))\\
 		\text{   for any concave function f.} &\\
 		\text{ log is concave, hence:} &  \\
 		log [p_\theta(\mathbf{x_0})] &\geq \mathbb{E}_q\bigg[log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
-		\text{If we define the Variational Lower Bound L as:}  &\\
-		L &:=   \mathbb{E}_q\bigg[log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
-		\implies - log [p_\theta(\mathbf{x_0})] &\leq - L
+		\text{If we define the Evidence Lower Bound L as:}  &\\
+		L &:=   \mathbb{E}_q\bigg[ - log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
+		\implies - log [p_\theta(\mathbf{x_0})] &\leq  L
 	\end{align}
 \end{definition}
 
-\begin{definition}[Variational Lower Bound - KL Divergence]	
+\begin{definition}[Evidence Lower Bound - KL Divergence]	
 	In order to reverse the forward process, we need that the forward process' distribution $q(\mathbf{x_{1:T}}|\mathbf{x_0})$ is as close to $p(\mathbf{x_{1:T}}|\mathbf{x_0})$ as possible. We can use the Kullback-Leibler (KL) divergence between $q$ and $p$ ($\mathbf{D_{KL}}$) to evaluate their difference as find a bound to $log [p_\theta(\mathbf{x}_0)]$. 
 	\label{def:var_low_bound_kl_divergence}
 	\begin{align}
@@ -179,17 +178,22 @@ We see that the computation of $p(\mathbf{x_0})$ is highly complex and intractab
 		log(p(\mathbf{x_0})) = 	\mathbf{D_{KL}}\big[ q(\mathbf{x_{1:T} | x_0})  ||  p(\mathbf{x_{1:T} | x_0}) \big] & +   \mathbb{E}_q\big[  log(p(\mathbf{x_{1:T}, x_0}) - log(q(\mathbf{x_{1:T} | x_0})) \big] \\
 		\text{but   }	\mathbf{D_{KL}}\big[ q(\mathbf{x_{1:T} | x_0})  ||  p(\mathbf{x_{1:T} | x_0}) \big] & \geq 0 \\
 		\implies  - log(p(\mathbf{x_0})) &\leq  \mathbb{E}_q\big[  - log\frac{p(\mathbf{x_{0:T})}}{q(\mathbf{x_{1:T} | x_0})} \big] \\
-		\text{If we define the Variational Lower Bound L as:}  &\\
-		L &:=   \mathbb{E}_q\bigg[log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
-		\implies - log [p(\mathbf{x_0})] &\leq - L
+		\text{If we define the Evidence Lower Bound L as:}  &\\
+		L &:=   \mathbb{E}_q\bigg[ - log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
+		\implies - log [p(\mathbf{x_0})] &\leq L
 	\end{align}
 \end{definition}
 
-We have found lower bound $L$ for the log-likelihood function that is tractable if rewritten properly. Our goal is to have a process to sample from $p$ such that $log p(\mathbf{x_0})$ is as large as possible. This means that our process will output very likely outputs $\mathbf{x_0}$. In order to do so, DDPMs work in two steps: \textbf{noise prediction} and \textbf{sampling}. The former is the one responsible for predicting the a noise $\epsilon_\theta$ of an input $\mathbf{x_t}$ which has has been sampled from the forward process' distribution $q$. The latter uses such prediction to sample $\mathbf{x_0}$ from $p$.
 
-\subsubsection{Noise Predictor Training Derivation}
+\fbox{
+	\parbox{0.9\linewidth}{
+We have found upper bound $L$ for the negative log-likelihood function that can be maximided in the forward process' training.}
+}
 
-Having ELBO ($L$) as a lower bound for the log likelihood function means we can train our noise predictor model to maximize $L$, i.e., $L$ is a candidate for our model's loss function. In order to do so, further algebraic manipulation must be performed with it in order to make it tractable in a way that the noise that has been added to the input appears somewhere. We demonstrate such manipulations here and will begin by showing that maximing $L$ basically means approximating the distributions $p(\mathbf{x_{t-1} | x_t}) $ and $q(\mathbf{x_{t-1} | x_t,  x_0})$.
+\subsubsection{Noise Predictor Training}
+
+
+ In order to use $L$ as the loss function in our training, further algebraic manipulation must be performed
 
 
 
@@ -197,19 +201,26 @@ Having ELBO ($L$) as a lower bound for the log likelihood function means we can 
 \begin{definition}[Noise Predictor's Loss Derivation]
 	In order to build the Noise Predictor's loss function, we need to remember that both forward and reverse processes are Markov Chains and use this fact to manipulate $L$.
 	\begin{align}
-		L & =   \mathbb{E}_q\bigg[log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
+		L & =   \mathbb{E}_q\bigg[ - log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})}\bigg] \\
 		& \text{The forward and reverse processes are Markov Chains, so} \\
-		 \mathbb{E}_q\bigg[ log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})} \bigg] &=  \mathbb{E}_q\bigg[ log \frac{p(\mathbf{x_{T}}) \prod_{t=1}^T p_\theta(\mathbf{x_{t-1} | x_t})} {q(\mathbf{x_1| x_0}) \prod_{t=2}^T q(\mathbf{x_{t} | x_{t-1}, x_0})} \bigg] \\
-		&=  \mathbb{E}_q\bigg[ log \frac{p(\mathbf{x_{T}}) \prod_{t=1}^T p_\theta(\mathbf{x_{t-1} | x_t})} {q(\mathbf{x_T| x_0}) \prod_{t=2}^T q(\mathbf{x_{t-1} | x_t, x_0})} \bigg] \\
-		&=  \mathbb{E}_q\bigg[ log \frac{p(\mathbf{x_{T}}) p_\theta(\mathbf{x_0 | x_1})\prod_{t=2}^T p_\theta(\mathbf{x_{t-1} | x_t})} {q(\mathbf{x_T| x_0}) \prod_{t=2}^T q(\mathbf{x_{t-1} | x_t, x_0})} \bigg] \\
-		&=  \mathbb{E}_q\bigg[ log \frac{p(\mathbf{x_{T}})}{q(\mathbf{x_T| x_0})} \bigg] + log p_\theta(\mathbf{x_0 | x_1}) +  \sum_{t=2}^T  \mathbb{E}_q\bigg[ log  \frac{p_\theta(\mathbf{x_{t-1} | x_t})} {q(\mathbf{x_{t-1} | x_t, x_0})} \bigg] \\
-		&=  \mathbb{E}_q\bigg[ log \frac{p(\mathbf{x_{T}})}{q(\mathbf{x_T| x_0})} \bigg] + log p_\theta(\mathbf{x_0 | x_1}) + \sum_{t=2}^T 	\mathbf{D_{KL}}\big[ p_\theta (\mathbf{x_{t-1} | x_t})  || q(\mathbf{x_{t-1} | x_t,  x_0}) \big]
+		 \mathbb{E}_q\bigg[- log \frac{p(\mathbf{x_{0:T}})} {q(\mathbf{x_{1:T}| x_0})} \bigg] &=  \mathbb{E}_q\bigg[ log \frac{p(\mathbf{x_{T}}) \prod_{t=1}^T p_\theta(\mathbf{x_{t-1} | x_t})} {q(\mathbf{x_1| x_0}) \prod_{t=2}^T q(\mathbf{x_{t} | x_{t-1}, x_0})} \bigg] \\
+		&=  \mathbb{E}_q\bigg[ -  log \frac{p(\mathbf{x_{T}}) \prod_{t=1}^T p_\theta(\mathbf{x_{t-1} | x_t})} {q(\mathbf{x_T| x_0}) \prod_{t=2}^T q(\mathbf{x_{t-1} | x_t, x_0})} \bigg] \\
+		&=  \mathbb{E}_q\bigg[ - log \frac{p(\mathbf{x_{T}}) p_\theta(\mathbf{x_0 | x_1})\prod_{t=2}^T p_\theta(\mathbf{x_{t-1} | x_t})} {q(\mathbf{x_T| x_0}) \prod_{t=2}^T q(\mathbf{x_{t-1} | x_t, x_0})} \bigg] \\
+		&=  \mathbb{E}_q\bigg[-  log \frac{p(\mathbf{x_{T}})}{q(\mathbf{x_T| x_0})} \bigg] - log p_\theta(\mathbf{x_0 | x_1}) +  \sum_{t=2}^T  \mathbb{E}_q\bigg[ - log  \frac{p_\theta(\mathbf{x_{t-1} | x_t})} {q(\mathbf{x_{t-1} | x_t, x_0})} \bigg] \\
+		&= \mathbb{E}_q\bigg[ - log \frac{p(\mathbf{x_{T}})}{q(\mathbf{x_T| x_0})} \bigg] - log p_\theta(\mathbf{x_0 | x_1}) - \mathbb{E}_q\bigg[ \sum_{t=2}^T 	\mathbf{D_{KL}}\big[ q(\mathbf{x_{t-1} | x_t, x_0}) || p_\theta (\mathbf{x_{t-1} | x_t}))\big] \bigg]
 	\end{align}
 \end{definition}
 
-If we pay attention to equation $41$'s terms above, we see that the first term is parameter free, because $p(\mathbf(x_T))$ is fixed and defined as a Gaussian, while $q(\mathbf(x_T | x_0))$ is also Gaussian from the definition of the forward process. Hence, we are left with the second and third terms. 
+We see that the first term is parameter free, because $p(\mathbf{x_T})$ is fixed and defined as a Gaussian, while $q(\mathbf{x_T | x_0})$ is also Gaussian from the definition of the forward process. Hence, we are left with the second and third terms from $L$.
 
-As previously mentioned, we are interested in maximizing $L$. Using the equation $41$, we see that doing so is equivalent to minimizing the KL Divergence between $p_\theta (\mathbf{x_{t-1} | x_t})$ and $q(\mathbf{x_{t-1} | x_t,  x_0})$. We know that both distributions are Gaussians, which makes computing the KL Divergence between them easier if we know their mean and variance. We will begin by calculating such moments for $q(\mathbf{x_{t-1} | x_t,  x_0})$.
+
+\fbox{
+	\parbox{0.9\linewidth}{
+More specifically, we can conclude that maximizing ELBO (L) is equivalent to minimizing the KL-Divergence between $q(\mathbf{x_{t-1} | x_t, x_0})$ and $p_\theta (\mathbf{x_{t-1} | x_t})$}
+}
+
+
+We know that both distributions are Gaussians, which makes computing the KL Divergence between them easier if we know their mean and variance. We will begin by calculating such moments for $q(\mathbf{x_{t-1} | x_t,  x_0})$.
 	
 \begin{align}
 	 q(\mathbf{x_{t-1} | x_t,  x_0}) &= \frac{q(\mathbf{x_t | x_{t-1}, x_0}) q(\mathbf{x_{t-1}|x_0})}{q(\mathbf{x_t | x_0})} \\
@@ -219,6 +230,7 @@ As previously mentioned, we are interested in maximizing $L$. Using the equation
 	 \Sigma_q(t) &= \frac{(1-\alpha_t)(1-\bar{\alpha}_{t-1})}{1 - \bar{\alpha}_t}  \mathbf{I} \\
 	 & \implies  q(\mathbf{x_{t-1} | x_t,  x_0}) =   \mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t))
 \end{align}
+
 
 We have just defined the $q(\mathbf{x_{t-1} | x_t,  x_0})$ distribution. Now let's move on to the  $p_\theta (\mathbf{x_{t-1} | x_t})$ distribution.
 	
@@ -230,7 +242,16 @@ We have just defined the $q(\mathbf{x_{t-1} | x_t,  x_0})$ distribution. Now let
 	p_\theta(\mathbf{x_{t-1} | x_t}) &=   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t))
 \end{align}
 
-Equation 50 makes it much easier to calculate $\mathbf{D_{KL}}\big[ p_\theta (\mathbf{x_{t-1} | x_t})  || q(\mathbf{x_{t-1} | x_t,  x_0}) \big]$: now we know we are trying to compute the KL Divergence between two Gaussians with the exact same variance. For that,  there is the following result that arives from the definition of such divergence:
+Equation 50 makes it much easier to calculate $	\mathbf{D_{KL}}\big[ q(\mathbf{x_{t-1} | x_t, x_0}) || p_\theta (\mathbf{x_{t-1} | x_t}))\big]$:
+
+\fbox{
+	\parbox{0.9\linewidth}{
+ \textbf{Now we know we are trying to compute the KL Divergence between two Gaussians with the exact same variance.}}
+}
+ 
+ 
+ 
+ For that,  there is the following result that arives from the definition of such divergence
 
 \begin{align}
 	d_1(x) &= \mathcal{N}(\mu_1, \sigma^2)  \\
@@ -238,12 +259,17 @@ Equation 50 makes it much easier to calculate $\mathbf{D_{KL}}\big[ p_\theta (\m
 	\text{The KL divergence   } & D_{KL}(d_1 | d_2)  \text{   is given by:} \\
 	D_{KL}(d_1 | d_2) &= \frac{(\mu_1 - \mu_2)^2}{2\sigma^2}\\
 	&\text{Hence,  }\\
-\mathbf{D_{KL}}\big[ p_\theta (\mathbf{x_{t-1} | x_t})  || q(\mathbf{x_{t-1} | x_t,  x_0}) \big] &=  \mathbf{D_{KL}}\big(   \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t)), \mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t)) \big) \\
-&=  \frac{1- \bar{\alpha}_t }{2(1-\alpha_t)(1- \bar\alpha_{t-1})} \big|\big| (\mu_\theta - \mu_q)^2_2\big|\big|
+\mathbf{D_{KL}}\big[ q(\mathbf{x_{t-1} | x_t, x_0}) || p_\theta (\mathbf{x_{t-1} | x_t}))\big] &=  \mathbf{D_{KL}}\big(\mathcal{N}(\mathbf{x_{t-1}};  \mu_q(\mathbf{x_t, x_0}); \Sigma_q(t)), \mathcal{N}(\mathbf{x_{t-1}};  \mu_\theta(\mathbf{x_t}); \Sigma_q(t)) \big) \\
+&=  \frac{1- \bar{\alpha}_t }{2(1-\alpha_t)(1- \bar\alpha_{t-1})} \big|\big| (\mu_q - \mu_\theta)^2_2\big|\big|
 \end{align}
 
 As our goal is to minimize the KL Divergence, from equation 59 we see that such goal comes down to basically minimizing the 
-difference $\mu_\theta - \mu_q$, i.e., \textbf{we just need to minimize the difference between the means of the reverse and forward processes' distributions}. We need to define the reverse process' distribution mean prediction by taking a look at the forward process' one. 
+difference $\mu_q - \mu_\theta$, i.e.,
+
+\fbox{
+	\parbox{0.9\linewidth}{
+ \textbf{We just need to minimize the difference between the means of the reverse and forward processes' distributions}. We need to define the reverse process' distribution mean ($\mu_\theta$) prediction by taking a look at the forward process' one ($\mu_q$). }
+}
 \begin{align}
 	 \mu_q(\mathbf{x_t, x_0}) &= \frac{(1-\bar{\alpha}_{t-1})\sqrt{\alpha_t} \mathbf{x_t} + (1- \alpha_t) \sqrt{\bar{\alpha}_{t-1}  } \mathbf{x_0}}{(1-\bar{\alpha_t})} \\
 	 & \text{we can define the prediction }\\
