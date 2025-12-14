@@ -1,27 +1,63 @@
 \relax 
 \providecommand\zref@newlabel[2]{}
-\citation{DBLP:journals/corr/RonnebergerFB15}
+\citation{disalvo2024_diffusion_pytorch}
+\citation{disalvo2024_diffusion_pytorch}
+\citation{perez2017filmvisualreasoninggeneral}
 \citation{DBLP:journals/corr/abs-2006-11239}
 \providecommand \oddpage@label [2]{}
-\@writefile{toc}{\contentsline {section}{\numberline {1}What are DDPMs?}{1}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Image extracted from the original DDPM paperl: \textit  {"Denoising Diffusion Probabilistic Models"}\cite  {DBLP:journals/corr/RonnebergerFB15}}}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Goal}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}What are DDPMs?}{1}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Image extracted from the original DDPM paperl: \textit  {"Denoising Diffusion Probabilistic Models"}\cite  {DBLP:journals/corr/abs-2006-11239}}}{1}{}\protected@file@percent }
 \newlabel{fig:unet_arch}{{1}{1}{}{figure.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Forward Process $q$}{1}{}\protected@file@percent }
-\newlabel{def:cum_noise}{{1.1}{1}{}{definition.1.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Reverse Process $p_\theta $}{2}{}\protected@file@percent }
-\newlabel{def:rev_process_trans}{{1.2}{2}{}{definition.1.2}{}}
-\newlabel{def:rev_process_post}{{1.3}{2}{}{definition.1.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.2.1}Evidence Lower Bound / ELBO}{2}{}\protected@file@percent }
-\newlabel{def:var_low_bound_jensen}{{1.4}{3}{}{definition.1.4}{}}
-\newlabel{def:var_low_bound_kl_divergence}{{1.5}{3}{}{definition.1.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.2.2}Noise Predictor Training}{3}{}\protected@file@percent }
-\bibstyle{plain}
-\bibdata{references}
+\citation{DBLP:journals/corr/abs-2006-11239}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Forward Process $q$}{2}{}\protected@file@percent }
+\newlabel{def:cum_noise}{{2.1}{2}{}{definition.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Reverse Process $p_\theta $}{2}{}\protected@file@percent }
+\newlabel{def:rev_process_trans}{{2.2}{2}{}{definition.2.2}{}}
+\newlabel{def:rev_process_post}{{2.3}{2}{}{definition.2.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Evidence Lower Bound / ELBO}{3}{}\protected@file@percent }
+\newlabel{def:var_low_bound_jensen}{{2.4}{3}{}{definition.2.4}{}}
+\newlabel{def:var_low_bound_kl_divergence}{{2.5}{3}{}{definition.2.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Noise Predictor Training}{4}{}\protected@file@percent }
 \@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Noise Predictor Training}}{6}{}\protected@file@percent }
 \newlabel{alg:algorithm1}{{1}{6}{}{algocf.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {1.2.3}Sampling Algorithm Derivation}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Sampling Algorithm Derivation}{6}{}\protected@file@percent }
 \@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Sampling}}{6}{}\protected@file@percent }
 \newlabel{alg:sampling}{{2}{6}{}{algocf.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Recap}{6}{}\protected@file@percent }
-\bibcite{DBLP:journals/corr/abs-2006-11239}{1}
-\gdef \@abspage@last{7}
+\citation{perez2017filmvisualreasoninggeneral}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Conditional DDPMs - A text-to-image Generative Model}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}FiLM Conditioning}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Effect on Training}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Effect on Sampling}{7}{}\protected@file@percent }
+\citation{disalvo2024_diffusion_pytorch}
+\citation{disalvo2024_diffusion_pytorch}
+\citation{DBLP:journals/corr/abs-2006-11239}
+\citation{disalvo2024_diffusion_pytorch}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Algorithms}{8}{}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces FiLM-Conditional DDPM Training}}{8}{}\protected@file@percent }
+\newlabel{alg:film_training}{{3}{8}{}{algocf.3}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {4}{\ignorespaces FiLM-Conditional DDPM Sampling}}{8}{}\protected@file@percent }
+\newlabel{alg:film_sampling}{{4}{8}{}{algocf.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Results of the PyTorch Implementation of Conditional DDPM}{8}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Heel generated by the text-to-image DDPM}}{8}{}\protected@file@percent }
+\newlabel{fig:heel}{{2}{8}{}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces T-shirt generated by the text-to-image DDPM}}{8}{}\protected@file@percent }
+\newlabel{fig:t-shirt}{{3}{8}{}{figure.3}{}}
+\citation{disalvo2024_diffusion_pytorch}
+\citation{perez2017filmvisualreasoninggeneral}
+\citation{disalvo2024_diffusion_pytorch}
+\citation{*}
+\bibstyle{plain}
+\bibdata{references}
+\bibcite{disalvo2024_diffusion_pytorch}{1}
+\bibcite{DBLP:journals/corr/abs-2006-11239}{2}
+\bibcite{perez2017filmvisualreasoninggeneral}{3}
+\bibcite{DBLP:journals/corr/Sohl-DicksteinW15}{4}
+\bibcite{sohldickstein2015deepunsupervisedlearningusing}{5}
+\bibcite{jaketae_vae_study}{6}
+\bibcite{jaketae_elbo_ddpm}{7}
+\bibcite{deep_learning_variational_bound_video}{8}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Pants generated by the text-to-image DDPM}}{9}{}\protected@file@percent }
+\newlabel{fig:pants}{{4}{9}{}{figure.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Self evaluation}{9}{}\protected@file@percent }
+\gdef \@abspage@last{9}

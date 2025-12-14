@@ -1,8 +1,49 @@
 \begin{thebibliography}{1}
 
+\bibitem{disalvo2024_diffusion_pytorch}
+Nicholas DiSalvo.
+\newblock Diffusion model from scratch in pytorch (ddpm).
+\newblock
+  \url{https://towardsdatascience.com/diffusion-model-from-scratch-in-pytorch-ddpm-9d9760528946/},
+  Jul 2024.
+\newblock Towards Data Science article, accessed 2025-12-11.
+
 \bibitem{DBLP:journals/corr/abs-2006-11239}
 Jonathan Ho, Ajay Jain, and Pieter Abbeel.
 \newblock Denoising diffusion probabilistic models.
 \newblock {\em CoRR}, abs/2006.11239, 2020.
+
+\bibitem{perez2017filmvisualreasoninggeneral}
+Ethan Perez, Florian Strub, Harm de~Vries, Vincent Dumoulin, and Aaron
+  Courville.
+\newblock Film: Visual reasoning with a general conditioning layer, 2017.
+
+\bibitem{DBLP:journals/corr/Sohl-DicksteinW15}
+Jascha Sohl{-}Dickstein, Eric~A. Weiss, Niru Maheswaranathan, and Surya
+  Ganguli.
+\newblock Deep unsupervised learning using nonequilibrium thermodynamics.
+\newblock {\em CoRR}, abs/1503.03585, 2015.
+
+\bibitem{sohldickstein2015deepunsupervisedlearningusing}
+Jascha Sohl-Dickstein, Eric~A. Weiss, Niru Maheswaranathan, and Surya Ganguli.
+\newblock Deep unsupervised learning using nonequilibrium thermodynamics, 2015.
+
+\bibitem{jaketae_vae_study}
+Jake Tae.
+\newblock A step up with variational autoencoders.
+\newblock \url{https://jaketae.github.io/study/vae/}, 2019.
+\newblock Accessed: 2025-12-11.
+
+\bibitem{jaketae_elbo_ddpm}
+Jake Tae.
+\newblock From elbo to ddpm.
+\newblock \url{https://jaketae.github.io/study/elbo/}, 2021.
+\newblock Accessed: 2025-12-11.
+
+\bibitem{deep_learning_variational_bound_video}
+{YouTube}.
+\newblock Neural networks [7.8] : Deep learning – variational bound.
+\newblock \url{https://www.youtube.com/watch?v=pStDscJh2Wo}, n.d.
+\newblock Accessed: 2025-12-11.
 
 \end{thebibliography}
