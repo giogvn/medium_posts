@@ -1,0 +1,262 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+
+\title{IA Neurossimbóolica para RAG sobre Modelos Metabólicos em Escala
+	Genômica: um Estudo Comparativo entre RAG Vetorial, GraphRAG e
+	OG-RAG} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{Universidade de São Paulo --- 4 de Setembro de 2026} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+
+
+
+
+\section{Resumo}
+% =====================================================================
+
+Sistemas de \textit{Retrieval-Augmented Generation} (RAG) combinam grandes modelos de linguagem (LLMs) com mecanismos de recuperação de informação responsáveis por integrar os conhecimentos contidos em documentos acerca de um ou mais domínios à entrada enviada para o modelo gerador. Quando baseados exclusivamente em similaridade vetorial, os mecanismos de recuperação de informação podem apresentar limitações conhecidas na literatura como a recuperação de contextos semanticamente próximos às entradas do sistema, porém nem sempre factualmente pertinentes a ela.  Além  disso, a  busca vetorial frequentemente falha em recuperar todos os documentos pertinentes à entrada. Essas limitações estão relacionadas à piora na qualidade dos textos e respostas gerados por sistemas de RAG, o que pode ser verificado por métricas como \textit{context recall} e \textit{answer correctness}.
+
+Visando minimizar esses problemas, trabalhos recentes relatam ganhos consistentes nessas métricas ao integrar uma camada de representação simbólica do conhecimento no processo de recuperação do RAG, propondo arquiteturas que podem ser incluídas no que se denomina IA Neurossimbólica \cite{shakarian2023neurosymbolic}.
+
+Dentre elas,  o OG RAG \cite{sharma2025ograg} demonstrou tais ganhos nos domínios de agricultura e jornalismo, enquanto o \cite{feng2025ontologyrag} o fez no  contexto da biomedicina. Há ainda aplicações nos contextos jurídico-regulatórias e \textit{compliance} financeiro. O presente projeto investiga se os mesmos efeitos se replicam no domínio de modelos metabólicos em escala genômica (\textit{genome-scale metabolic models}, GEMs), propondo um estudo comparativo controlado entre três arquiteturas: RAG com busca vetorial pura, GraphRAG e OG-RAG. Elas serão instanciadas sobre a ontologia de domínio OntoGEM \cite{souza2025ontogem} e sobre dados do repositório BiGG Models \cite{king2016bigg}. A hipótese central é que a inclusão de uma camada simbólica de representação do conhecimento sobre os GEMs selecionados melhora as métricas derivadas do \textit{framework} RAGAS \cite{es-etal-2024-ragas} neste domínio. 
+
+Para testá-la, será construído um conjunto anotado de perguntas de competência e respostas sobre os GEMs selecionados com o apoio de especialistas do domínio. Essas perguntas serão pré-classificadas por tipo de explicação exigida para respondê-las, com respostas de referência derivadas dos modelos extraídos da própria base BiGG. As três arquiteturas serão avaliadas sob condições controladas (mesmo LLM gerador, mesmo conjuntos de GEMs fonte, variando apenas o mecanismo de recuperação de informação), visando ao isolamento do efeito da estrutura simbólica sobre métricas do RAGAS. Espera-se produzir evidência empírica, ainda que restrita a este domínio e aos modelos selecionados, sobre o papel da representação simbólica do conhecimento na melhoria das métricas citadas, além de fornecer um conjunto de perguntas e respostas anotado e verificado por especialistas sobre o modelos selecionados.
+
+\newpage
+
+% =====================================================================
+\section{Introdução}
+% =====================================================================
+
+Sistemas de \textit{Retrieval-Augmented Generation} \cite{lewis2020retrieval} tornaram-se a abordagem dominante para reduzir alucinações e ancorar respostas de LLMs em fontes de documentos verificados por especialistas em aplicações que visam fornecer ao usuário final uma interface de pergunta (\textit{query}) e resposta acerca de tais documentos. Apesar de apresentar variações, a arquitetura mais difundida do RAG utiliza a similaridade vetorial entre a \textit{query} e os documentos consultados como métrica que define os resultados da busca dos trechos do \textit{corpus} que serão enviados como contexto ao LLM a fim de que ele gere a resposta. Quando a indexação dos documentos é feita sem levar em consideração suas estruturas e o conhecimento representado neles, a busca vetorial pode apresentar limitações quanto às métricas que avaliam a qualidade de sistemas de RAG, dentre as quais as principais encontradas na literatura estão definidas no \textit{framework open-source} RAGAS \cite{es-etal-2024-ragas}.
+
+ Dentre outras causas, o prejuízo a essas métricas se deve sobretudo à recuperação de amostras de documentos semanticamente próximos à \textit{query}, mas irrelevantes a ela ou mesmo contraditórios em relação aos fatos que os especialistas de domínio estabelecem como corretos no tempo de geração da resposta. Por ignorar os metadados dos documentos e a estrutura geral do conhecimento do \textit{corpus}, a busca vetorial pura tende a falhar em perguntas de \textbf{negação/ contrafactuais} que pressupõem raciocínio sobre o que não se aplica fora do escopo; \textit{\textbf{multi-hop}}, as quais exigem raciocínio encadeado sobre fatos; \textbf{proveniência}, que necessitam do carregamentos de metadados.
+ 
+ Sendo assim, implementações de RAG em domínios cujas \textit{queries} são classificadas nas categorias apresentadas tendem a apresentar métricas insatisfatórias que impedem ou diminuem o impacto de sua implementação produtiva para o usuário final.
+ 
+ \subsection{O Domínio de Aplicação: Modelos Metabólicos em Escala Genômica}
+ 
+ Um domínio cujas perguntas acerca de conjuntos de documentos se encaixam nas classificações citadas é o processo de \textbf{reconstrução}. 
+ 
+ A construção de um modelo computacional do metabolismo de um organismo é conhecido como reconstrução, enquanto o modelo resultante é frequentemente denominado modelo metabólico em escala genômica (GEM) \cite{souza2025ontogem}. Durante o processo de reconstrução, fontes diversas e em diferentes formatos como artigos científicos, planilhas e \textit{Systems Biology Markup Language} (SBML) são consultadas pelos especialistas. Essa diversidade de referências e formatos é uma das principais fontes de problemas como inconsistências e retrabalho no processo de reconstrução, no qual os responsáveis devem responder a algumas perguntas de negação, \textit{multi-hop} e de proveniência a fim de minimizar esses problemas.
+ 
+ Abaixo encontram-se algumas dessas perguntas:
+ \begin{itemize}
+ 	\item \textbf{Negação:} \textit{Which reactions in the model do not produce metabolite $M$?}
+ 	\item \textbf{Multi-hop:} \textit{Which genes can be knocked out to block the production of metabolite $M$?}
+ 	\item \textbf{Proveniência:} \textit{From which source (e.g., database or literature) was reaction $R$ derived?}
+ \end{itemize}
+ 
+ 
+  O repositório BiGG Models \cite{king2016bigg} disponibiliza GEMs curados e padronizados adequados à construção de um conjunto controlado de perguntas de domínio/\textit{queries} e respostas, pois ele possui uma cobertura representativa das entidades de um GEM (reações, metabólitos, genes, compartimentos) e é amplamente utilizado nessa área do conhecimento.
+   
+ A ontologia OntoGEM, desenvolvida em \cite{souza2025ontogem}, formaliza as entidades e relações de um GEM e as fontes utilizadas em sua reconstrução. Dentre elas  são exemplos as reações, metabólitos, genes, complexos enzimáticos, compartimentos celulares e as relações estequiométricas entre eles, além dos artigos científicos que contêm as evidências que sustentam as informações contidas no modelo. 
+
+\section{Bibliografia}
+
+ \subsection{\textit{OG-RAG: OG-RAG: Ontology-Grounded Retrieval-Augmented Generation For Large Language Models}}
+ 
+O OG-RAG \cite{sharma2025ograg} é uma arquitetura desenvolvida pela \textit{Microsoft Research} que adiciona uma ontologia curada por humanos ao processo de indexação e busca dos documentos de domínio a serem buscados no processo de recuperação de informação do RAG.
+
+A ontologia, enquanto representação formal do conhecimento do domínio, é utilizada pelo OG-RAG na etapa de indexação para estruturar os documentos em blocos factuais ontologicamente fundamentados. Esses blocos são convertidos em um hipergrafo, no qual cada hiperaresta encapsula um conjunto de fatos inter-relacionados. Durante a recuperação, a similaridade vetorial é aplicada sobre os hipernós do hipergrafo para identificar os mais relevantes à \textit{query}; em seguida, um algoritmo
+de otimização seleciona o conjunto mínimo de hiperarestas que cobre esses nós, compondo o contexto fornecido ao LLM.
+
+O OG-RAG pode ser classificado no que denomina Inteligência Artifical Neurossimbólica \cite{shakarian2023neurosymbolic}, uma vez que integra a capacidade de aprendizado e percepção das redes neurais (LLMs, nesse caso) à capacidade de raciocínio lógico e interpretável da representação simbólica do conhecimento (ontologia, nesse caso). Além das melhorias em métricas como \textit{context recall}, \textit{answer similarity} e \textit{answer correctness} \cite{es-etal-2024-ragas}, sistemas neurossimbólicos como este são dotados de maior explicabilidade e rastreabilidade quando comparados ao RAG puramente vetorial. Isso se justifica pela integração de ontologias ao processo de recuperação de informação do RAG, o que permite que cada fato recuperado carregue a relação semântica que o liga à pergunta/\textit{query}. A busca vetorial pura, por sua vez, relaciona o fato à pergunta com métricas de similaridade vetorial de pouca ou baixa interpretabilidade por seres humanos.
+
+
+\subsection{\textit{From Local to Global: A GraphRAG Approach to Query-Focused Summarization}}
+
+O GraphRAG \cite{edge2024graphrag} é uma arquitetura desenvolvida pela
+\textit{Microsoft Research} que estende o RAG com um índice baseado em grafo de conhecimento, construído automaticamente por um LLM a partir dos documentos do \textit{corpus}, com o objetivo de responder perguntas globais que exigem síntese de informações distribuídas ao longo de toda a coleção de
+documentos.
+
+Na etapa de indexação, o GraphRAG utiliza um LLM para extrair entidades e relações dos documentos, construindo um grafo de conhecimento. Sobre esse grafo, algoritmos de detecção de comunidades são aplicados para agrupar entidades semanticamente relacionadas; em seguida, o LLM gera sumários
+para cada comunidade detectada. Durante a recuperação, cada sumário de comunidade é utilizado para produzir uma resposta parcial à \textit{query}, e todas as respostas parciais são então consolidadas em uma resposta final por meio de uma abordagem \textit{map-reduce}.
+
+Ao contrário do OG-RAG, cujo grafo é fundamentado em uma ontologia curada por especialistas do domínio, o grafo do GraphRAG é construído de forma totalmente automática por um LLM, sem ancoragem em conhecimento formal prévio. Essa diferença implica que, enquanto o GraphRAG é mais
+adequado para perguntas globais sobre grandes corpora, o OG-RAG é mais preciso em perguntas locais que exigem raciocínio factual fundamentado em conhecimento de domínio estruturado. Além disso, a ausência de uma
+representação simbólica explícita no GraphRAG limita sua rastreabilidade e explicabilidade em comparação a abordagens neurossimbólicas como OG-RAG.
+
+\subsection{\textit{Ragas: Automated Evaluation of Retrieval Augmented Generation}}
+
+O \textit{framework} RAGAS \cite{es-etal-2024-ragas} formalizou a avaliação de arquiteturas de RAG por meio de métricas derivadas automaticamente da tripla pergunta-resposta-contexto, entre as quais se destacam \textit{faithfulness} (grau em que a resposta é sustentada pelo contexto recuperado), \textit{context precision} e \textit{context recall} (adequação e completude do contexto recuperado em relação à resposta de referência) e \textit{answer relevancy}. Por não depender de anotação humana exaustiva a cada execução, o RAGAS tornou-se referência para comparação de arquiteturas de RAG e é adotado no artigo original do OG-RAG \cite{sharma2025ograg} nos domínios da agricultura e jornalismo.
+
+Abaixo estão definidas algumas métricas a serem utilizadas para os RAGs construídos para o domínio de reconstrução de GEMs.
+
+\begin{enumerate}
+	\item \textbf{Context Recall (C-Rec):} Proporção de afirmações da resposta de referência que podem ser atribuídas às informações presentes no contexto recuperado.
+	\item \textbf{Context Entity Recall (C-ERec):} Proporção de entidades da resposta de referência que estão presentes no contexto recuperado.
+	\item \textbf{Answer Similarity (A-Sim):} Similaridade entre a resposta gerada e a resposta de referência no espaço de \textit{embeddings}.
+	\item \textbf{Answer Correctness (A-Corr):} Combinação da \textit{answer similarity} (definida acima) com a similaridade factual, que corresponde ao \textit{F1-score} entre as afirmações da resposta de referência e as da resposta gerada.
+	\item \textbf{Answer Relevance (A-Rel):} Mede a facilidade com que a pergunta original pode ser inferida a partir da resposta gerada.
+\end{enumerate}
+
+\section{Motivação}
+
+Não há evidência de que os ganhos reportados para o OG-RAG e o GraphRAG em diferentes domínios também se aplicam ao domínio de perguntas e respostas relacionados a GEMs. Além disso, os trabalhos revisados comparam arquiteturas neurossimbólicas a baselines puramente vetoriais, mas raramente isolam o efeito específico da camada simbólica de outras variáveis do pipeline (modelo gerador, corpus, estratégia de \textit{chunking}), o que limita a atribuição causal dos ganhos observados. Este projeto propõe um desenho experimental controlado que mantém fixos o LLM gerador e o corpus-fonte, variando apenas o mecanismo de recuperação (vetorial puro, GraphRAG, OG-RAG), de modo a isolar o efeito da representação simbólica do conhecimento sobre as métricas do RAGAS.
+
+% =====================================================================
+\section{Objetivos}
+% =====================================================================
+
+\subsection{Objetivo Geral}
+
+Demonstrar o efeito positivo da inclusão da representação simbólica do conhecimento em diferentes arquiteturas de RAG sobre as métricas do RAGAS \cite{es-etal-2024-ragas}, no domínio de modelos metabólicos em escala genômica.
+
+\subsection{Objetivos Específicos}
+
+\begin{enumerate}
+	\item Construir, com apoio de especialistas de domínio, um conjunto anotado de perguntas de competência sobre diferentes modelos metabólicos. Esse conjuntos será pré-classificado de acordo com as categorias citadas(negação, \textit{multi-hop} e procedência), e suas respostas de referência serão derivadas de forma reprodutível a partir do repositório BiGG Models e artigos científicos.
+	\item Adaptar a ontologia OntoGEM como esquema de extração e recuperação (Modo A \cite{sharma2025ograg}) para uso na arquitetura OG-RAG.
+	\item Implementar três arquiteruras de RAG comparáveis --- vetorial puro (\textit{baseline}), GraphRAG e OG-RAG --- operando sobre o mesmo corpus-fonte e o mesmo modelo/LLM gerador, variando apenas o mecanismo de recuperação.
+	\item Avaliar as três arquiteturas segundo as métricas do RAGAS citadas sobre o conjunto de perguntas construído.
+	\item Analisar estatisticamente se as diferenças observadas entre arquiteturas com e sem camada simbólica são significativas, e se o padrão de ganhos reportado na literatura de outros domínios se replica no domínio de GEMs.
+	\item Discutir, a partir dos resultados, os limites de generalização das evidências obtidas para modelos e domínios distintos dos estudados.
+\end{enumerate}
+
+
+% =====================================================================
+\section{Plano de Trabalho e Cronograma de Execução}
+% =====================================================================
+
+O projeto está organizado em seis fases, detalhadas a seguir, executadas ao longo de X meses.
+
+\begin{enumerate}
+	\item \textbf{Revisão bibliográfica.} Consolidação da revisão sistemática sobre RAG neurossimbólico, arquiteturas de recuperação estruturada (OG-RAG, GraphRAG) e literatura de avaliação (RAGAS).
+	\item \textbf{Refinamento da OntoGEM para os frameworks de RAG e exame de qualificação.} Adaptação técnica da ontologia OntoGEM \cite{souza2025ontogem} --- cuja formalização conceitual é resultado do trabalho de Souza \cite{souza2025ontogem} --- para os formatos e esquemas exigidos pelos \textit{frameworks} de RAG utilizados (por exemplo, conversão da OWL para o esquema de extração/recuperação do OG-RAG Modo A), sem alterar sua estrutura conceitual original. Em paralelo, realização do exame de qualificação.
+	\item \textbf{Construção do dataset anotado de perguntas de domínio e implementação das arquiteturas de RAG.} Elaboração, em conjunto com especialistas em biologia de sistemas/metabolismo, de um conjunto de perguntas de competência sobre um ou mais modelos metabólicos em escala genômica. Em paralelo, implementação das três aqrquiteturas de RAG (vetorial puro, GraphRAG, OG-RAG Modo A) sobre corpus comum derivado do BiGG, artigos científocos e da OntoGEM adaptada.
+	\item \textbf{Execução dos experimentos e coleta de métricas.} Execução das três arquiteturas sobre o conjunto de perguntas, coleta das métricas RAGAS e dos artefatos intermediários (contextos recuperados, respostas geradas).
+	\item \textbf{Análise dos resultados, redação e defesa.} Análise estatística comparativa entre arquiteturas, análise por tipo de pergunta, redação da dissertação e defesa final.
+\end{enumerate}
+
+% =====================================================================
+\section{Material e Métodos}
+% =====================================================================
+
+\subsection{Desenho Experimental}
+
+O projeto adota um desenho experimental de três fases, no qual a variável manipulada é exclusivamente o mecanismo de recuperação, mantendo-se fixos o LLM gerador, o corpus-fonte e o conjunto de perguntas de avaliação, de modo a isolar o efeito da representação simbólica do conhecimento sobre as métricas do RAGAS:
+
+\begin{itemize}
+	\item \textbf{Fase A --- RAG vetorial (baseline).} Indexação do corpus textual derivado do BiGG Models e dos artigos por \textit{embeddings} densos, com recuperação por similaridade de cosseno, sem qualquer estrutura simbólica intermediária. Representa o estado da arte sem integração de conhecimento estruturado.
+	\item \textbf{Fase B --- GraphRAG \cite{edge2024graphrag}.} Extração automática, via LLM, de um grafo de entidades e relações a partir do mesmo corpus, com sumarização hierárquica de comunidades e recuperação orientada pelo grafo. A estrutura simbólica não é curada por especialistas, mas induzida a partir dos dados.
+	\item \textbf{Fase C --- OG-RAG, Modo A \cite{sharma2025ograg}.} Uso da ontologia OntoGEM \cite{souza2025ontogem} como esquema de extração e recuperação: o corpus é estruturado em fatos compatíveis com as classes e relações da ontologia antes da indexação, e a recuperação é guiada pela ontologia. Essa será a única fase com estrutura simbólica curada e validada por especialistas de domínio (Modo A, conforme \cite{sharma2025ograg}; os Modos B --- vocabulário de \textit{prompt} --- e C --- validador \textit{a posteriori} --- não são objetos deste estudo).
+\end{itemize}
+
+As três fases utilizarão o mesmo modelo gerador (LLM), a mesma estratégia de \textit{prompt} de geração de resposta final (variando apenas o contexto recuperado) e o mesmo corpus-fonte.
+
+\subsection{Construção do Dataset Anotado de Perguntas de Domínio}
+
+Um dos objetivos do projeto é a construção, junto a especialistas de domínio (pesquisadores da área de biologia de sistemas/modelagem metabólica), de um conjunto anotado de perguntas de competência sobre um ou mais modelos. Essa etapa seguirá o seguinte protocolo:
+
+\begin{enumerate}
+	\item \textbf{Reaproveitamento das perguntas de competência.} As perguntas de competência utilizadas neste projeto são as já  formuladas no trabalho de Souza \cite{souza2025ontogem}, que cobrem consultas sobre metabólitos, reações e proveniência. Não há, portanto, uma etapa de criação das perguntas/\textit{queries} junto a especialistas neste projeto, mas apenas de instanciação delas e definição de suas respostas.
+	\item \textbf{Seleção das reações para instanciação das perguntas.} Diversas perguntas de competência são parametrizadas em termos de uma reação genérica $R$ (ou de outras entidades genéricas do modelo), exigindo a seleção de instâncias concretas do modelo em questão para gerar as perguntas efetivamente utilizadas na avaliação. Essa seleção considerará (i) a dificuldade esperada da pergunta em função da reação escolhida e (ii) a quantidade de instanciações necessária para garantir cobertura representativa das entidades e relações do modelo em cada categoria de pergunta de modo que o \textit{dataset} final possa ser usado como \textit{benchmark}.
+	\item \textbf{Construção de respostas de referência (\textit{gold answers}).} As respostas de referência serão construídas em duas etapas: (i) busca e extração dos dados correspondentes diretamente na API do BiGG Models para cada instância selecionada e/ou artigos científicos, garantindo rastreabilidade entre cada resposta de referência e o dado-fonte correspondente; (ii) sessões de validação com especialistas de domínio para conferência e, quando necessário, correção das respostas obtidas.
+\end{enumerate}
+
+O conjunto resultante constitui o instrumento de avaliação/\textit{benchmark} comum às três fases experimentais.
+
+\subsection{Implementação}
+
+As três arquiteturas serão implementadas com bibliotecas de código aberto de referência para cada abordagem (RAG vetorial, GraphRAG e OG-RAG), com o mesmo modelo de linguagem utilizado como gerador em todas as fases, de modo a evitar que diferenças de capacidade do LLM confundam o efeito da variável de interesse. Parâmetros comuns entre arquiteturas (tamanho de \textit{chunk}, número de documentos recuperados \textit{top-k}, temperatura de geração) serão mantidos constantes sempre que a arquitetura permitir.
+
+% =====================================================================
+\section{Forma de Análise dos Resultados}
+% =====================================================================
+
+\subsection{Métricas}
+
+Para cada par (pergunta, arquitetura), serão calculadas as métricas do RAGAS \cite{es-etal-2024-ragas} na seção 3.3. 
+
+\subsection{Testes Estatísticos}
+
+Como cada pergunta do conjunto de avaliação criado será respondida pelas três arquiteturas, a comparação entre elas será feita a partir da diferença de cada métrica, pergunta a pergunta, entre uma arquitetura com camada simbólica (GraphRAG ou OG-RAG) e o baseline vetorial. Para testar se essas diferenças são estatisticamente significativas, será utilizado o teste de Wilcoxon signed-rank, uma alternativa não paramétrica ao teste t pareado. A escolha por um teste não paramétrico se justifica porque as métricas do RAGAS são limitadas ao intervalo $[0,1]$, o que tende a produzir distribuições assimétricas ou concentradas nas extremidades, violando a suposição de normalidade exigida pelos testes paramétricos. Como o p-valor depende fortemente do tamanho da amostra e não indica, por si só, a magnitude da diferença observada, os resultados dos testes serão complementados por uma medida de tamanho de efeito (a correlação \textit{rank-biserial} pareada), permitindo distinguir diferenças estatisticamente significativas mas pouco relevantes na prática de diferenças de fato substanciais entre arquiteturas. Essa distinção é fundamental neste trabalho dado o tamanho moderado do conjunto de perguntas de avaliação que será criado.
+
+\subsection{Análise Estratificada por Tipo de Pergunta}
+
+[COMPLETAR]
+
+\subsection{Análise Qualitativa}
+
+[COMPLETAR]
+
+\subsection{Critérios de Confirmação/Refutação da Hipótese}
+
+[COMPLETAR]
+
+\subsection{Resultados Esperados}
+
+Espera-se demonstrar que a representação simbólica do conhecimento é responsável pela melhoria de métricas relacionadas a sistemas de perguntas e respostas baseados em RAG, fornecendo evidência sobre a importância de integrar camadas de conhecimento validadas, compreensíveis, auditáveis e editáveis por especialistas de domínio em arquiteturas até então baseadas exclusivamente em aprendizado de máquina --- das quais o RAG por busca vetorial pura é o principal exemplo.
+
+\subsection{Limitações}
+
+As evidências de melhoria, quando e se coletadas, estarão restritas às perguntas de domínio relacionadas ao modelos metabólicos representados no \textit{dataset} construíodo, selecionadas com apoio de especialistas de domínio. Melhorias observadas para estes modelos e domínio específicos não devem ser generalizadas, sem validação adicional, a outros modelos metabólicos em escala genômica ou a outros domínios de aplicação, os quais estão fora do escopo desta pesquisa.
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

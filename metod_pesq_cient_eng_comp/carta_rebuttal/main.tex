@@ -1,0 +1,247 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+% --- Ambiente para citar o parecer (definição local; não faz parte do template) ---
+\newenvironment{parecer}
+{\begin{quote}\itshape\color{gray!70!black}\small}
+	{\end{quote}}
+
+% --- Rótulo de identificação do revisor (definição local; não faz parte do template) ---
+\newcommand{\revisor}[1]{\textbf{[Revisor #1]}}
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+
+\title{IA Neurossimbólica para Perguntas e Respostas sobre Modelos Metabólicos em Escala Genômica: um Estudo Comparativo entre RAG Vetorial, GraphRAG e OG-RAG \\ \large Carta de Resposta aos Pareceres (Rebuttal)} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{Universidade de São Paulo --- \today} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	
+	\maketitle % Print the title
+	
+	%----------------------------------------------------------------------------------------
+	%	INTRODUÇÃO
+	%----------------------------------------------------------------------------------------
+	
+	\section{Introdução}
+	
+	Agradeço aos revisores pela avaliação criteriosa e pelos comentários
+	construtivos. Respondo abaixo, ponto a ponto, apenas aos critérios que
+	receberam classificação \emph{Razoavelmente} ou inferior, indicando as
+	revisões incorporadas à versão final da proposta. As demais observações
+	positivas foram registradas com apreço e não requerem réplica.
+	
+	% =====================================================================
+	\section{Critério 3 --- Metodologia: baselines e métricas}
+	% =====================================================================
+	
+	\subsection{Resumo das objeções}
+	\begin{parecer}
+		\revisor{2} ``Diferencial não tem métricas bem definidas'';
+		``Ausência de baselines e métricas''.
+	\end{parecer}
+	
+	\subsection{Resposta}
+	
+	O conjunto de métricas RAGAS (\textit{faithfulness}, \textit{answer relevance},
+	\textit{context precision} e \textit{context recall}) citadas na Seção~2.2 serão
+	utilizadas como instrumento de avaliação. Elas serão calculadas sobre as três
+	arquiteturas apresentadas, entre as quais o RAG Vetorial será o \textit{baseline}.
+	Dessa forma, a proposta será alterada de modo a deixar as métricas descritas em
+	uma subseção específica, ao invés de no meio da bibliografia, e o RAG Vetorial
+	será explicitado como o \textit{baseline}.
+	
+	Cabe ainda esclarecer que o desenho experimental já contempla, por construção,
+	o isolamento do efeito da camada simbólica: as três arquiteturas (RAG Vetorial,
+	GraphRAG e OG-RAG) compartilham o mesmo LLM gerador, o mesmo corpus-fonte e o
+	mesmo conjunto de perguntas de avaliação, variando exclusivamente o mecanismo
+	de recuperação. Assim, o RAG Vetorial (sem qualquer estrutura simbólica, isto
+	é, sem ontologia) funciona como \textit{baseline} contra o qual GraphRAG e OG-RAG
+	são comparados, e as diferenças observadas nas métricas do RAGAS podem ser
+	atribuídas à presença da camada simbólica.
+	
+	\subsection{Alterações na proposta}
+	
+	As definições formais das métricas foram movidas da Seção~2.2 (Bibliografia)
+	para uma subseção exclusiva dentro da metodologia --- ``Definição das Métricas
+	de Avaliação'' ---, permanecendo na Bibliografia apenas a citação ao RAGAS com
+	remissão à nova subseção. Adicionalmente, o papel do RAG Vetorial como
+	\textit{baseline} sem camada simbólica foi explicitado no objetivo específico
+	correspondente e na descrição da Fase~A do desenho experimental.
+	
+	% =====================================================================
+	\section{Critério 6 --- Plano de Gestão de Dados}
+	% =====================================================================
+	
+	\subsection{Resumo das objeções}
+	\begin{parecer}
+		\revisor{1} ``Não deixou muito explícito os tipos de dados e nem as
+		formas de armazenamento''.\\
+		\revisor{2} ``É necessário reformular com plano de gestão de dados''.\\
+		\revisor{3} ``Descreve os tipos de dados, mas deve se atentar às formas de
+		armazenamento, preservação e compartilhamento''.
+	\end{parecer}
+	
+	\subsection{Resposta}
+	
+	Este foi o ponto convergente dos três pareceres e recebeu atenção prioritária
+	na revisão. A proposta passou a contar com uma seção dedicada de Plano de Gestão
+	de Dados, organizada em três eixos:
+	
+	\begin{description}
+		\item[Tipos de dados.] O projeto produz e manipula: (i) dados-fonte de domínio
+		do modelo \textit{E. coli core} do repositório BiGG Models, em formatos SBML e
+		JSON; (ii) a ontologia OntoGEM adaptada, em formato OWL; (iii) o corpus textual
+		comum em \textit{markdown}, gerado deterministicamente a partir dos dados
+		estruturados; (iv) o conjunto anotado de perguntas de competência, respostas de
+		referência e classificações por tipo de explicação, em formato tabular
+		(CSV/JSON); (v) os artefatos intermediários das execuções (contextos recuperados
+		e respostas geradas por cada arquitetura); e (vi) as métricas RAGAS calculadas e
+		os resultados das análises estatísticas.
+		
+		\item[Armazenamento e preservação.] Durante a execução, dados e código serão
+		versionados em repositório públicos do Github. Para preservação de longo
+		prazo, os artefatos publicamente compartilháveis serão depositados em repositório
+		público com atribuição de DOI (por exemplo, Zenodo), priorizando-se formatos
+		abertos e não proprietários (SBML, OWL, JSON, CSV, \textit{markdown}).
+		
+		\item[Compartilhamento e licenciamento.] O conjunto de perguntas e respostas
+		anotado, o código dos três \textit{pipelines} e os \textit{scripts} de análise
+		serão disponibilizados publicamente sob licença de código aberto (por exemplo,
+		MIT para código e CC-BY para dados), seguindo os princípios FAIR. O reuso de
+		dados de terceiros (BiGG Models e OntoGEM) respeitará as licenças originais, com
+		a devida atribuição. Não há manipulação de dados sensíveis ou pessoais, pois todo
+		o material é de natureza técnico-científica e derivado de fontes públicas.
+	\end{description}
+	
+	\subsection{Alterações na proposta}
+	
+	Foi inserida a seção ``Plano de Gestão de Dados'', contendo as subseções
+	``Tipos de Dados Produzidos'', ``Armazenamento e Preservação'' e
+	``Compartilhamento e Licenciamento'', conforme descrito acima.
+	
+	% =====================================================================
+	\section{Critério 8 --- Liderança científica (ou potencial)}
+	% =====================================================================
+	
+	\subsection{Resumo das objeções}
+	\begin{parecer}
+		\revisor{1} ``Não há evidências \ldots sobre ele ter atuado como líder
+		em pesquisa ou algum potencial de liderança''.
+	\end{parecer}
+	
+	\subsection{Resposta}
+	
+	Trata-se de uma proposta de mestrado e, portanto, de um pesquisador em início de
+	carreira, estágio em que o critério deve ser lido em termos de \emph{potencial}
+	de liderança, e não de um histórico consolidado. Nesse sentido, cabe registrar
+	que a atuação profissional do proponente como \textit{Machine Learning Engineer}, tendo também concluído uma iniciação científica na área de grandes modelos de linguagem ao final de sua graduação como cientista da computação na mesma instituiação.
+	
+	% =====================================================================
+	\section{Critério 9 --- Experiência na formação de pesquisadores}
+	% =====================================================================
+	
+	\subsection{Resumo das objeções}
+	\begin{parecer}
+		\revisor{1} ``Não há descrição \ldots sobre experiência na formação de
+		pesquisadores compatível com o estágio da carreira''.\\
+		\revisor{3} ``Não há evidências \ldots mas o autor demonstra competência e
+		domínio da pesquisa''.
+	\end{parecer}
+	
+	\subsection{Resposta}
+	
+	Como o critério prevê expressamente, a experiência na formação de pesquisadores
+	deve ser ``compatível com o estágio da carreira''. Em um projeto de mestrado, não
+	se espera que o proponente já tenha orientado formalmente outros pesquisadores.
+	
+	% =====================================================================
+	\section{Critério 10 --- Experiência / colaboração internacional}
+	% =====================================================================
+	
+	\subsection{Resumo das objeções}
+	\begin{parecer}
+		\revisor{1} ``Não há descrição \ldots sobre experiências internacionais em
+		pesquisas''.\\
+		\revisor{3} ``Não há conhecimento do histórico acadêmico \ldots internacional
+		\ldots mas o autor demonstra competência e domínio para tal''.
+	\end{parecer}
+	
+	\subsection{Resposta}
+	
+	Este critério, em sua formulação, refere-se a ``experiência internacional em
+	pesquisa após o doutoramento ou participação ativa em redes internacionais de
+	colaboração'', condição naturalmente não aplicável a um proponente em nível de
+	mestrado. O compromisso	com a publicação em código aberto e a disponibilização do conjunto de dados
+	anotado, mencionados no Plano de Gestão de Dados, criam condições concretas para
+	a inserção do proponente em redes internacionais de colaboração. A versão revisada
+	da proposta torna esse enquadramento mais explícito.
+	
+	% =====================================================================
+	\section{Considerações finais}
+	% =====================================================================
+	
+	Reitero meu agradecimento pela avaliação. As revisões acima --- em especial a
+	inclusão de um Plano de Gestão de Dados completo e o detalhamento das métricas e
+	do \textit{baseline} --- foram integralmente incorporadas à versão revisada da
+	proposta, que acredito atender de forma mais robusta aos critérios da FAPESP.
+	
+	\vspace{1.5em}
+	\noindent Atenciosamente,\\[2em]
+	\noindent\rule{6cm}{0.4pt}\\
+	Giovani Tavares\\
+	IME-USP
+	
+\end{document}

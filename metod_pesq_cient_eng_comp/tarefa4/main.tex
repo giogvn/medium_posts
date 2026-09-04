@@ -1,0 +1,258 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Tarefa IV PCS5028 - Metodologia de Pesquisa Científica em Engenharia de Computação} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{Universidade de São Paulo --- July 12, 2026} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+
+
+
+
+\section{Resumo}
+% =====================================================================
+
+Sistemas de \textit{Retrieval-Augmented Generation} (RAG) combinam grandes modelos de linguagem (LLMs) com mecanismos de recuperação de informação. Arquiteturas baseadas exclusivamente em similaridade vetorial apresentam limitações conhecidas na literatura como a recuperação de contextos semanticamente próximos, porém nem sempre factualmente pertinentes, comprometendo métricas como \textit{faithfulness} e \textit{context recall}.
+Nesse sentido, trabalhos recentes relatam ganhos consistentes em arquiteturas que integram uma camada de representação simbólica do conhecimento (ontologias e grafos) no processo de recuperação do RAG, propondo sistemas que se incluem no que se denomina IA Neurossimbólica. O OG RAG \cite{sharma2025ograg} demonstrou tais ganhos nos domínios de agricultura e jornalismo, enquanto o \cite{feng2025ontologyrag} o fez no  contexto da biomedicina. Há ainda aplicações nos contextos jurídico-regulatórias e \textit{compliance} financeiro. Este projeto investiga se o mesmo efeito se replica no domínio de modelos metabólicos em escala genômica (\textit{genome-scale metabolic models}, GEMs), propondo um estudo comparativo controlado entre três arquiteturas: RAG vetorial puro, GraphRAG e OG-RAG. Elas serão instanciadas sobre a ontologia de domínio OntoGEM \cite{souza2025ontogem} e sobre dados do repositório BiGG Models, com foco no modelo \textit{E. coli core}. A hipótese central é que a inclusão da camada simbólica melhora as métricas do \textit{framework} RAGAS \cite{es-etal-2024-ragas} neste domínio. Para testá-la, será construído, com apoio de especialistas, um conjunto anotado de perguntas de competência sobre o modelo metabólico de \textit{E. coli}, pré-classificadas por tipo de explicação exigida, com respostas de referência derivadas de forma reprodutível a partir da própria base BiGG. As três arquiteturas serão avaliadas sob condições controladas (mesmo LLM gerador, mesmo corpus-fonte, variando apenas o mecanismo de recuperação), isolando o efeito da estrutura simbólica sobre as métricas de \textit{faithfulness}, \textit{context precision}, \textit{context recall} e \textit{answer relevancy}. Espera-se produzir evidência empírica, ainda que restrita a este domínio e modelo, sobre o papel de camadas de conhecimento auditáveis e editáveis por especialistas na melhoria de sistemas de perguntas e respostas baseados em RAG.
+
+\newpage
+
+% =====================================================================
+\section{Introdução e Justificativa}
+% =====================================================================
+
+\subsection{Contextualização}
+
+Sistemas de \textit{Retrieval-Augmented Generation} \cite{lewis2020retrieval} tornaram-se a abordagem dominante para reduzir alucinações e ancorar respostas de LLMs em fontes verificáveis, recuperando trechos de um corpus externo por similaridade vetorial e condicionando a geração da resposta a esse contexto. Essa abordagem, no entanto, herda uma limitação estrutural: a similaridade vetorial captura proximidade semântica, não correção factual ou relevância segundo a estrutura do domínio, de modo que o contexto recuperado pode ser semanticamente próximo da pergunta e, ainda assim, irrelevante ou mesmo contraditório em relação aos fatos que os especialistas de domínio estabelecem como corretos. 
+
+Buscando mitigar essa limitação, a integração de representações simbólicas do conhecimento validadas por especialistas a arquiteturas de RAG tem-se demonstrado promissora em diferentes domínios \cite{sharma2025ograg} \cite{feng2025ontologyrag}. Os sistemas nascentes de tal integração fazem parte do que se denomina Inteligência Artifical Neurossimbólica. Além das melhorias em métricas como \textit{faithfulness}, \textit{context precision}, \textit{context recall} e \textit{answer relevancy}, sistemas neurossimbólicos como o OG RAG \cite{sharma2025ograg} são dotados de explicabilidade e rastreabilidade estrutural e não somente estatística como o RAG com somente busca vetorial. A integração de ontologias ao processo de recuperação de informação do RAG proposta em \cite{sharma2025ograg} permite que cada fato recuperado carregue a relação semântica que o liga à pergunta, enquanto que a busca vetorial pura apenas relaciona o fato à pergunta com métricas de similaridade vetorial de pouca interpretabilidade por seres humanos.
+
+\subsection{Bibliografia}
+
+O \textit{framework} RAGAS \cite{es-etal-2024-ragas} formalizou a avaliação de pipelines de RAG por meio de métricas derivadas automaticamente da tripla pergunta-resposta-contexto, entre as quais se destacam \textit{faithfulness} (grau em que a resposta é sustentada pelo contexto recuperado), \textit{context precision} e \textit{context recall} (adequação e completude do contexto recuperado em relação à resposta de referência) e \textit{answer relevancy}. Por não depender de anotação humana exaustiva a cada execução, o RAGAS tornou-se referência para comparação de arquiteturas de RAG e é adotado, direta ou indiretamente, pelos trabalhos discutidos a seguir.
+
+Sharma et al. propõem o OG-RAG (\textit{Ontology-Grounded RAG}) \cite{sharma2025ograg}, no qual uma ontologia de domínio é usada como esquema de extração e recuperação (o que os autores chamam de Modo A), estruturando o corpus em fatos compatíveis com a ontologia antes da indexação; os autores relatam ganhos em métricas inspiradas no RAGAS nos domínios de agricultura e jornalismo. Feng et al. \cite{feng2025ontologyrag} aplicam uma estratégia análoga ao mapeamento de códigos biomédicos, ancorando a recuperação em hierarquias terminológicas controladas (por exemplo, SNOMED CT e ICD), com ganhos reportados principalmente em \textit{faithfulness}. Kalra et al. \cite{kalra2024hyparag} propõem uma arquitetura híbrida para aplicações jurídicas e regulatórias, combinando grafos de conhecimento hierárquicos com recuperação vetorial, relatando melhorias em \textit{context recall} frente a baselines puramente vetoriais. Nie et al. \cite{nie2025aml} aplicam integração simbólica a \textit{compliance} financeiro (\textit{anti-money laundering}), reportando reduções de contexto espúrio quando a recuperação é restringida por regras e relações de domínio validadas.
+
+O GraphRAG \cite{edge2024graphrag} representa uma outra  família de arquiteturas neurossimbólicas, na qual a estrutura de conhecimento não é uma ontologia curada por especialistas, mas um grafo de entidades e relações extraído automaticamente do corpus por um LLM, posteriormente utilizado para sumarização hierárquica e recuperação. Essa distinção é relevante para o presente projeto: GraphRAG e OG-RAG compartilham o uso de uma camada estruturada intermediária entre o corpus e a geração, mas diferem quanto à origem e à validação dessa estrutura --- extraída automaticamente no primeiro caso, curada e validada por especialistas de domínio no segundo. Comparar as duas arquiteturas contra um baseline vetorial permite não apenas testar se \emph{alguma} estrutura simbólica melhora as métricas do RAGAS, mas também explorar, de forma exploratória, se a origem e o grau de curadoria dessa estrutura importam.
+
+A camada simbólica curada utilizada neste é a ontologia OntoGEM, desenvolvida por Souza \cite{souza2025ontogem} em seu projeto de doutorado do mesmo grupo de pesquisa. O trabalho de Souza propõe uma ontologia de domínio específica para Modelos Metabólicos de Escala Genômica (GEMs), formalizada a partir de perguntas de competência formadas junto a especialistas de biologia de sistemas e estruturada segundo etapas clássicas de engenharia de ontologias: especificação, conceitualização, formalização e implementação. O objetivo original dessa ontologia é acelerar e melhorar a qualidade do processo de reconstrução de GEMs, viabilizando a integração e reconciliação de dados provenientes de múltiplas bases biológicas (como BiGG, KEGG e ChEBI). Embora a motivação original da OntoGEM seja a reconstrução de modelos metabólicos, e não a recuperação de informação em sistemas de RAG, sua formalização das entidades e relações de um GEM (reações, metabólitos, genes, complexos enzimáticos, compartimentos celulares) a torna diretamente reaproveitável para a arquitetura OG-RAG neste projeto, dispensando a necessidade de desenvolver uma nova ontologia de domínio do zero.
+
+Em conjunto, esses trabalhos sugerem um padrão consistente de ganhos em \textit{faithfulness} e \textit{context recall} associados à presença de estrutura simbólica no pipeline de recuperação, em diferentes domínios. Entretanto, nenhum desses domínios possui a característica central do domínio de modelos metabólicos em escala genômica. Não há, até onde este projeto pôde levantar, evidência publicada sobre o efeito de camadas simbólicas em RAG aplicado a esse domínio.
+
+
+\subsection{O Domínio de Aplicação: Modelos Metabólicos em Escala Genômica}
+
+
+O processo de construção de um modelo computacional do metabolismo de um organismo é conhecido como reconstrução, enquanto o modelo resultante é frequentemente denominado modelo metabólico em escala genômica (GEM) \cite{souza2025ontogem}. O repositório BiGG Models \cite{king2016bigg} disponibiliza GEMs curados e padronizados, entre os quais o modelo \textit{E. coli core}, um subconjunto didático e amplamente utilizado do metabolismo central de \textit{Escherichia coli}, adequado à construção de um conjunto controlado de perguntas de domínio por combinar cobertura representativa das entidades do modelo (reações, metabólitos, genes, compartimentos) com um tamanho factível para anotação por especialistas durante o período de mestrado.
+
+A ontologia OntoGEM, desenvolvida em \cite{souza2025ontogem}, formaliza as entidades e relações de um GEM, sendo elas as reações, metabólitos, genes, complexos enzimáticos, compartimentos celulares e as relações estequiométricas e regulatórias entre eles. Dessa forma, pretende-se utilizar essa ontologia como o esquema de extração e recuperação da arquitetura OG-RAG.
+
+\subsection{Lacuna e Motivação}
+
+Não há evidência de que os ganhos reportados para RAG neurossimbólico em diferentes domínios também se aplicam ao domínio de perguntas e respostas relacionados a GEMs. Além disso, os trabalhos revisados comparam arquiteturas neurossimbólicas a baselines puramente vetoriais, mas raramente isolam o efeito específico da camada simbólica de outras variáveis do pipeline (modelo gerador, corpus, estratégia de \textit{chunking}), o que limita a atribuição causal dos ganhos observados. Este projeto propõe um desenho experimental controlado que mantém fixos o LLM gerador e o corpus-fonte, variando apenas o mecanismo de recuperação (vetorial puro, GraphRAG, OG-RAG), de modo a isolar o efeito da representação simbólica do conhecimento sobre as métricas do RAGAS.
+
+\newpage
+
+% =====================================================================
+\section{Objetivos}
+% =====================================================================
+
+\subsection{Objetivo Geral}
+
+Demonstrar o efeito da inclusão da representação simbólica do conhecimento em diferentes arquiteturas de RAG sobre as métricas do RAGAS \cite{es-etal-2024-ragas}, no domínio de modelos metabólicos em escala genômica.
+
+\subsection{Objetivos Específicos}
+
+\begin{enumerate}
+	\item Construir, com apoio de especialistas de domínio, um conjunto anotado de perguntas de competência sobre o modelo metabólico \textit{E. coli core}, pré-classificado por tipo de explicação exigida, com respostas de referência derivadas de forma reprodutível a partir do repositório BiGG Models.
+	\item Formalizar a ontologia OntoGEM como esquema de extração e recuperação (Modo A) para uso nas arquiteturas OG-RAG.
+	\item Implementar três pipelines de RAG comparáveis --- vetorial puro (\textit{baseline}), GraphRAG e OG-RAG --- operando sobre o mesmo corpus-fonte e o mesmo modelo gerador, variando apenas o mecanismo de recuperação.
+	\item Avaliar as três arquiteturas segundo as métricas do RAGAS (\textit{faithfulness}, \textit{context precision}, \textit{context recall} e \textit{answer relevancy}) sobre o conjunto de perguntas construído.
+	\item Analisar estatisticamente se as diferenças observadas entre arquiteturas com e sem camada simbólica são significativas, e se o padrão de ganhos (concentração em \textit{faithfulness} e \textit{context recall}) reportado na literatura de outros domínios se replica no domínio de GEMs.
+	\item Discutir, a partir dos resultados, os limites de generalização das evidências obtidas para modelos e domínios distintos do estudado.
+\end{enumerate}
+
+\newpage
+
+% =====================================================================
+\section{Plano de Trabalho e Cronograma de Execução}
+% =====================================================================
+
+O projeto está organizado em seis fases, detalhadas a seguir, executadas ao longo de 24 meses.
+
+\begin{enumerate}
+	\item \textbf{Revisão bibliográfica.} Consolidação da revisão sistemática sobre RAG neurossimbólico, arquiteturas de recuperação estruturada (OG-RAG, GraphRAG) e literatura de avaliação (RAGAS).
+	\item \textbf{Refinamento da OntoGEM para os frameworks de RAG e exame de qualificação.} Adaptação técnica da ontologia OntoGEM \cite{souza2025ontogem} --- cuja formalização conceitual é resultado do trabalho de Souza \cite{souza2025ontogem} --- para os formatos e esquemas exigidos pelos \textit{frameworks} de RAG utilizados (por exemplo, conversão da OWL para o esquema de extração/recuperação do OG-RAG Modo A), sem alterar sua estrutura conceitual original. Em paralelo, realização do exame de qualificação.
+	\item \textbf{Construção do dataset anotado de perguntas de domínio e implementação das arquiteturas de RAG.} Elaboração, em conjunto com especialistas em biologia de sistemas/metabolismo, de um conjunto de perguntas de competência sobre o modelo \textit{E. coli core}, com classificação por tipo de explicação e construção de respostas de referência (detalhado na Seção 5.2). Em paralelo, desenvolvimento dos três pipelines de RAG (vetorial puro, GraphRAG, OG-RAG Modo A) sobre corpus comum derivado do BiGG Models e da OntoGEM adaptada.
+	\item \textbf{Execução dos experimentos e coleta de métricas.} Execução das três arquiteturas sobre o conjunto de perguntas, coleta das métricas RAGAS e dos artefatos intermediários (contextos recuperados, respostas geradas).
+	\item \textbf{Análise dos resultados, redação e defesa.} Análise estatística comparativa entre arquiteturas, análise por tipo de pergunta, redação da dissertação e defesa final.
+\end{enumerate}
+
+\begin{table}[h]
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{@{}lcccccccc@{}}
+			\toprule
+			\textbf{Atividade} & \textbf{T1} & \textbf{T2} & \textbf{T3} & \textbf{T4} & \textbf{T5} & \textbf{T6} & \textbf{T7} & \textbf{T8} \\
+			\midrule
+			Revisão bibliográfica & X & X & & & & & & \\
+			Refinamento da OntoGEM para os frameworks de RAG & & & X & X & & & & \\
+			Exame de qualificação & & & X & X & & & & \\
+			Construção do dataset anotado (especialistas) & & & & X & X & & & \\
+			Implementação das arquiteturas de RAG (vetorial, GraphRAG, OG-RAG) & & & & X & X & & & \\
+			Execução dos experimentos e coleta de resultados (RAGAS) & & & & & & X & & \\
+			Análise estatística dos resultados & & & & & & & X & \\
+			Redação da dissertação & & & & & & & X & X \\
+			Defesa da dissertação & & & & & & & & X \\
+			\bottomrule
+		\end{tabular}%
+	}
+\end{table}
+
+\noindent \textit{Nota: T1--T8 referem-se a trimestres consecutivos ao longo de 24 meses.}
+
+\newpage
+
+% =====================================================================
+\section{Material e Métodos}
+% =====================================================================
+
+\subsection{Desenho Experimental}
+
+O estudo adota um desenho comparativo de três fases, no qual a variável manipulada é exclusivamente o mecanismo de recuperação, mantendo-se fixos o LLM gerador, o corpus-fonte e o conjunto de perguntas de avaliação, de modo a isolar o efeito da representação simbólica do conhecimento sobre as métricas do RAGAS:
+
+\begin{itemize}
+	\item \textbf{Fase A --- RAG vetorial (baseline).} Indexação do corpus textual derivado do BiGG Models por \textit{embeddings} densos, com recuperação por similaridade de cosseno, sem qualquer estrutura simbólica intermediária. Representa o estado da arte sem integração de conhecimento estruturado.
+	\item \textbf{Fase B --- GraphRAG \cite{edge2024graphrag}.} Extração automática, via LLM, de um grafo de entidades e relações a partir do mesmo corpus, com sumarização hierárquica de comunidades e recuperação orientada pelo grafo. A estrutura simbólica não é curada por especialistas, mas induzida a partir dos dados.
+	\item \textbf{Fase C --- OG-RAG, Modo A \cite{sharma2025ograg}.} Uso da ontologia OntoGEM \cite{souza2025ontogem} como esquema de extração e recuperação: o corpus é estruturado em fatos compatíveis com as classes e relações da ontologia antes da indexação, e a recuperação é restringida pelo esquema ontológico. Única fase com estrutura simbólica curada e validada por especialistas de domínio (Modo A, conforme operacionalização de \cite{sharma2025ograg}; os Modos B --- vocabulário de \textit{prompt} --- e C --- validador \textit{a posteriori} --- não são objeto deste estudo).
+\end{itemize}
+
+As três fases utilizarão o mesmo modelo gerador (LLM), a mesma estratégia de \textit{prompt} de geração de resposta final (variando apenas o contexto recuperado) e o mesmo corpus-fonte, derivado do modelo \textit{E. coli core} do repositório BiGG Models.
+
+\subsection{Construção do Dataset Anotado de Perguntas de Domínio}
+
+Um dos pilares metodológicos do projeto é a construção, junto a especialistas de domínio (pesquisadores da área de biologia de sistemas/modelagem metabólica), de um conjunto anotado de perguntas de competência sobre o modelo \textit{E. coli core}. Essa etapa seguirá o seguinte protocolo:
+
+\begin{enumerate}
+	\item \textbf{Reaproveitamento das perguntas de competência.} As perguntas de competência utilizadas neste projeto são as já elicitadas e formuladas no âmbito do trabalho de Souza \cite{souza2025ontogem}, que cobrem consultas sobre metabólitos, reações e topologia da rede (por exemplo, estequiometria de reações, direcionalidade, genes associados via regras GPR, compartimentalização e vias metabólicas). Não há, portanto, uma nova etapa de elicitação de perguntas junto a especialistas neste projeto.
+	\item \textbf{Seleção das reações para instanciação das perguntas.} Diversas perguntas de competência são parametrizadas em termos de uma reação genérica $R$ (ou de outras entidades genéricas do modelo), exigindo a seleção de instâncias concretas do modelo \textit{E. coli core} para gerar as perguntas efetivamente utilizadas na avaliação. Essa seleção considerará (i) a dificuldade esperada da pergunta em função da reação escolhida (por exemplo, reações com múltiplas isoformas enzimáticas ou regras GPR complexas tendem a gerar perguntas mais difíceis do que reações com associação gene-reação simples) e (ii) a quantidade de instanciações necessária para garantir cobertura representativa das entidades e relações do modelo em cada categoria de pergunta.
+	\item \textbf{Reaproveitamento da classificação por tipo de explicação.} As perguntas de competência de Souza \cite{souza2025ontogem} já são acompanhadas de uma classificação por categoria de explicação, definida independentemente da execução deste projeto, o que evita classificações \textit{post hoc} e o viés de confirmação associado. As categorias reaproveitadas são: \textit{reaction provenance}, \textit{metabolite provenance}, \textit{model provenance}, \textit{biological evidence}, \textit{model assumptions}, \textit{model validation}, \textit{network structure}, \textit{semantic classification}, \textit{conflict management} e \textit{accountability}. Essa classificação será utilizada diretamente como base para a análise estratificada dos resultados por categoria.
+	\item \textbf{Construção de respostas de referência (\textit{gold answers}).} As respostas de referência serão construídas em duas etapas: (i) busca e extração dos dados correspondentes diretamente na API do BiGG Models para cada instância selecionada, garantindo rastreabilidade entre cada resposta de referência e o dado-fonte correspondente; (ii) sessões de validação com especialistas de domínio para conferência e, quando necessário, correção das respostas obtidas.
+	\item \textbf{Pré-registro de hipóteses por categoria.} Dentre as categorias de pergunta reaproveitadas de Souza \cite{souza2025ontogem}, aquelas nas quais se espera maior efeito da camada simbólica (por exemplo, \textit{network structure}, \textit{reaction provenance} e \textit{metabolite provenance}, que dependem mais fortemente de restrições estruturais do modelo) serão declaradas antes da execução dos experimentos, permitindo uma análise confirmatória dessas categorias específicas, além da análise exploratória das outras.
+\end{enumerate}
+
+O conjunto resultante --- da ordem de dezenas de perguntas de competência, dimensionado para cobertura representativa das entidades e relações do modelo \textit{E. coli core} --- constitui o instrumento de avaliação comum às três fases experimentais.
+
+\subsection{Corpus e Recursos de Domínio}
+
+\begin{itemize}
+	\item \textbf{Fonte de dados:} modelo \textit{E. coli core}, obtido do repositório BiGG Models \cite{king2016bigg}, contendo reações, metabólitos, genes e regras de associação gene-proteína-reação (GPR).
+	\item \textbf{Ontologia de domínio:} OntoGEM, desenvolvida em \cite{souza2025ontogem}, formalizando classes e relações estequiométricas e regulatórias do modelo, utilizada como esquema de extração/recuperação na Fase C.
+	\item \textbf{Corpus textual comum:} representação em linguagem natural (formato \textit{markdown}) do modelo \textit{E. coli core}, gerada de forma determinística a partir dos dados estruturados do BiGG Models, garantindo que os três braços operem sobre o mesmo conteúdo informacional.
+	
+\end{itemize}
+
+\subsection{Implementação}
+
+As três arquiteturas serão implementadas com bibliotecas de código aberto de referência para cada abordagem (RAG vetorial, GraphRAG e OG-RAG), com o mesmo modelo de linguagem utilizado como gerador em todas as fases, de modo a evitar que diferenças de capacidade do LLM confundam o efeito da variável de interesse. Parâmetros comuns entre arquiteturas (tamanho de \textit{chunk}, número de documentos recuperados \textit{top-k}, temperatura de geração) serão mantidos constantes sempre que a arquitetura permitir.
+
+\newpage
+
+% =====================================================================
+\section{Forma de Análise dos Resultados}
+% =====================================================================
+
+\subsection{Métricas}
+
+Para cada par (pergunta, arquitetura), serão calculadas as métricas do RAGAS \cite{es-etal-2024-ragas}: \textit{faithfulness}, \textit{context precision}, \textit{context recall} e \textit{answer relevancy}. As distribuições dessas métricas serão comparadas entre as três fases experimentais.
+
+\subsection{Testes Estatísticos}
+
+Como cada pergunta do conjunto de avaliação criado será respondida pelas três arquiteturas, a comparação entre elas será feita a partir da diferença de cada métrica, pergunta a pergunta, entre uma arquitetura com camada simbólica (GraphRAG ou OG-RAG) e o baseline vetorial. Para testar se essas diferenças são estatisticamente significativas, será utilizado o teste de Wilcoxon signed-rank, uma alternativa não paramétrica ao teste t pareado. A escolha por um teste não paramétrico se justifica porque as métricas do RAGAS são limitadas ao intervalo $[0,1]$, o que tende a produzir distribuições assimétricas ou concentradas nas extremidades, violando a suposição de normalidade exigida pelos testes paramétricos. Como o p-valor depende fortemente do tamanho da amostra e não indica, por si só, a magnitude da diferença observada, os resultados dos testes serão complementados por uma medida de tamanho de efeito (a correlação \textit{rank-biserial} pareada), permitindo distinguir diferenças estatisticamente significativas mas pouco relevantes na prática de diferenças de fato substanciais entre arquiteturas. Essa distinção é fundamental neste trabalho dado o tamanho moderado do conjunto de perguntas de avaliação que será criado.
+
+\subsection{Análise Estratificada por Tipo de Pergunta}
+
+Consistente com o pré-registro das categorias de pergunta (Seção 5.2-e), os resultados serão analisados também de forma estratificada por tipo de explicação exigida, permitindo testar especificamente a hipótese de que o efeito da camada simbólica é mais pronunciado em perguntas relacionais/multi-\textit{hop}, nas quais a estrutura da ontologia atua como restrição sobre o espaço de recuperação.
+
+\subsection{Análise Qualitativa}
+
+Uma amostra de casos em que as arquiteturas divergem substancialmente em \textit{faithfulness} ou \textit{context recall} será inspecionada qualitativamente, com o objetivo de caracterizar os mecanismos pelos quais a estrutura simbólica altera o contexto recuperado.
+
+\subsection{Critérios de Confirmação/Refutação da Hipótese}
+
+A hipótese de que a inclusão da camada de representação simbólica do conhecimento melhora as métricas do RAGAS no domínio de GEMs será considerada válida se as fases com estrutura simbólica (GraphRAG e/ou OG-RAG) apresentarem ganhos estatisticamente significativos frente ao baseline vetorial, concentrados nas métricas de \textit{faithfulness} e \textit{context recall}, replicando o padrão relatado na literatura de outros domínios \cite{sharma2025ograg,feng2025ontologyrag,kalra2024hyparag,nie2025aml}. A comparação entre as Fases B e C permitirá discutir se o grau de curadoria da estrutura simbólica (induzida no GraphRAG versus validada por especialistas em OG RAG) influencia a magnitude dos ganhos observados.
+
+\subsection{Resultados Esperados}
+
+Espera-se demonstrar que a representação simbólica do conhecimento é responsável pela melhoria de métricas relacionadas a sistemas de perguntas e respostas baseados em RAG, fornecendo evidência sobre a importância de integrar camadas de conhecimento validadas, compreensíveis, auditáveis e editáveis por especialistas de domínio em arquiteturas até então baseadas exclusivamente em aprendizado de máquina --- das quais o RAG por busca vetorial pura é o principal exemplo.
+
+\subsection{Limitações}
+
+As evidências de melhoria, quando e se coletadas, estarão restritas às perguntas de domínio relacionadas ao modelo metabólico \textit{E. coli core}, selecionadas com apoio de especialistas de domínio. Melhorias observadas para este modelo e domínio específicos não devem ser generalizadas, sem validação adicional, a outros modelos metabólicos em escala genômica ou a outros domínios de aplicação, os quais estão fora do escopo desta pesquisa.
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

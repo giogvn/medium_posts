@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Tarefa IV PCS5028 - Metodologia de Pesquisa Científica em Engenharia de Computação} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{Universidade de São Paulo --- July 12, 2026} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+
+
+
+
+\section{Após a discussão da aula de terça-feira, você revisaria a sua “Questão de Pesquisa”? Explique}
+% =====================================================================
+
+Após a discussão da aula de terça-feira, eu revisei a minha “Questão de Pesquisa”.
+A princípio, eu consideava que a minha questão de pesquisa era uma questão de \textit{design}, porque estou interessado em demonstrar que a maneira mais efetiva de se obter boas métricas RAGAS \cite{es-etal-2024-ragas,} para um sistema de \textit{Retrieval Augmented Generation} (RAG) \cite{lewis2020retrieval}  para perguntas sobre modelos metabólicos em escala genômica é por meio de arquiteturas neurossimbólicas. Mais especificamente, minha pergunta se encaixa no \textit{template} \textit{"Qual é uma forma efetiva de se obter X?"}.
+
+No entanto, após as discussões da aula eu inclui a pergunta causal que responde se é a estrutura neurossimbólica que causa as melhorias nas métricas. Por conseguinte, também adaptei o meu projeto para que nos \textit{designs} dos meus experimentos ficasse explícita a intenção de se chegar a essa resposta, uma vez que eles serão construídos de modo a isolar o efeito da estrutura neurossimbólica na geração das métricas. Sendo assim, minha questão de pesquisa amadureceu de \textit{"Qual é uma forma efetiva de se obter melhores métricas de sistemas RAG no domínio de modelos metabólicos de escala genômica?"} para \textit{"A representação estruturada do conhecimento presente em arquiteturas neurossimbólicas de RAG é o que causa melhores métricas de sistemas RAG no domínio de modelos metabólicos de escala genômica?"}.
+
+
+\section{Em 2 ou 3 parágrafos, descreva a sua percepção sobre o processo de avaliação de projetos, e como se consolidou/mudou após a aula}
+
+A minha percepção sobre o processo de avaliação de projetos de pesquisa se insere na minha capacidade de rememorar e aplicar todos os aspectos que compõem um projeto desse tipo, os quais foram aprendidos nas aulas até hoje.
+ Mais do que buscar os pontos que  compõe um projeto de pesquisa, como objetivo, hipótese, metodologia, etc., o processo requer ater-se a captura desses pontos em diferentes formas de se escrevê-los, dado que diferentes pesquisadores escrevem de maneiras diferentes. Portanto, a atividade requer levar isso em consideração, o que significa que se deve manter o equilíbrio entre duas coisas, sendo a primeira o viés pessoal que impõe subjetividade na forma que os pontos devem ser apresentados no texto do ponto de vista sintático e a segunda as definições formais que estabelecem se esses pontos estão de fato presentes no texto ou não.
+ 
+ Dessa forma, a realização do processo de avaliação de projetos em grupo consolidou-se como a a ideal para corrigir esses vieses, de modo que com o auxílios de colegas pude reavaliar se meu objetivo de pesquisa, por exemplo, estava realmente claro e rastreável em meu projeto de pesquisa como eu imaginava que estava após os refinamentos realizados com apoio dos aprendizados adquiridos em aula e na bibliografia da disciplina. 
+ 
+
+\end{document}

@@ -1,0 +1,88 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Tarefa I PCS5028 - Metodologia de Pesquisa Científica em Engenharia de Computação} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{Universidade de São Paulo --- \today} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+\section*{Houve algum tópico/aspecto discutido que mudou a sua perspectiva? } % Unnumbered section
+
+No capítulo 3  o autor discorre sobre as diferentes etapas de preparação de um trabalho de pesquisa, bem como quais são as suas partes. Nessa discussão, o autor apresenta a \textit{revisão bibliográfica} como uma etapa que deve acontecer anteriormente à definição do \textit{objetivo} da pesquisa. Isso mudou a minha perspectiva em relação à função prática que a etapa de revisão tem em um mestrado em Ciência da Computação, uma vez que compreendia esse processo como um meio para se \textit{alcançar um objetivo} e não como um requisito para sua definir o objetivo. Essa alteração do papel da revisão bibliográfica descrita pelo autor me fez questionar qual era o processo que eu vinha utilizando até então para definir o objetivo principal e os objetivos específicos da minha pesquisa. Dessa forma, pude diagnosticar que a revisão bibliográfica que planejei até então para o meu mestrado continha não só os excessos de conteúdos com relevância considerada baixa para o meu objetivo, mas também carecia de maior destaque às referências realmente pertinentes a ele.
+
+
+Nesse sentido, a sistematização do exercício da revisão bibliográfica sugerida no capítulo supracitado, em especial a etapa que descreve a classificação de diferentes referências em relação à sua relevância para meu tema de pesquisa, alterará a forma que irei escrever o capítulo de revisão bibliográfica da minha dissertação de mestrado e as próximas iterações de revisão em si. Mais focada no objetivo principal da minha pesquisa, a minha revisão bibliográfica tenderá a ser menos cansativa ao leitor e mais focada nos assuntos que de fato apoiaram a busca pelas respostas às minhas perguntas de pesquisa.
+
+Já no capítulo 2, a descrição do autor acerca dos diferentes estilos de pesquisa correntes em computação fez-me questionar qual é estilo que minha pesquisa de mestrado se encaixa. Meu mestrado basear-se em resolver um problema de recuperação de informação em uma área específica da biologia utilizando grandes modelos de linguagem, e as técnicas e ferramentas que utilizo na pesquisa ditarão se a resolução do problema é \textit{apenas uma solução diferente das já existentes para ele} ou se é \textit{de fato uma solução melhor}. A depender da classificação do meu trabalho, os fatores requeridos para que ele seja considerado suficiente para a obtenção do meu título de mestre, uma vez que soluções presumivelmente melhores quando são apresentadas em uma monografia/artigo devem possuir métricas e \textit{benchmarks} internacionalmente aceitos e reconhecidos bem como uma compreensão profunda do estado da arte atual sendo desafiado na tese. Por outro lado, esses requisitos não necessariamente se aplicam se meu trabalho for classificado como uma solução diferente ao problema que estou estudando, classificação essa que implica em outros requisitos a serem aplicados ao meu trabalho, como o maior enfoque dado ao \textit{convencimento} do leitor em relação à confiabilidade da solução encontrada.
+
+Em suma, a leitura destes 2 capítulos em especial entre os 5 lidos alterou com efeitos a ainda serem observados a forma com que eu enxergo o objetivo da minha pesquisa. Não porque ele esteja fracamente definido, mas o  caminho para chegar a essa definição precisa ser melhor refletido nos meus exercícios de revisão bibliográfica. Isso apoiará tanto a sua sistematização quanto a classificação que minhas soluções propostas ocuparão frente ao estado da arte para o problema que estudo.
+
+
+
+\section*{Qual a sua expectativa quanto a maturidade que sua pesquisa de Pre-ME/ME/DO deve atingir, conforme Cap 5? } % Unnumbered section
+
+
+Como mestrando em Computação que estuda um problema de recuperação de informação em um domínio muito específico da biologia, minha pesquisa precisa ir além de um estudo técnico, devendo gerar algum conhecimento que ainda não existia. No caso, esse conhecimento é a demonstração de que um artefato produzido por um doutorando do meu laboratório - que é uma ontologia -  melhora sistemas de \textit{retrieval augmented generation (RAG)} em relação a diferentes métricas no domínio citado. Isso significa que meu mestrado não apenas se baseia em implementar uma pipeline que combina ontologias e LLMs para busca de reações genéticas, mas demonstra se e por que essa abordagem produz resultados melhores do que alternativas existentes consideradas o estado da arte nesse domínio.
+
+Para o nível ME, os resultados que vou encontrar deverão ser uma contribuição incremental verificável: meu objetivo é ter evidências concretas de que o uso de ontologias melhora a recuperação de reações genéticas em comparação a abordagens sem estrutura ontológica, por exemplo.
+
+Não irei apenas construir o sistema que realiza a recuperação de informação, irei testá-lo e medir o que foi proposto medir para demonstrar como ele se compara com outros métodos disponíveis.
+
+\end{document}

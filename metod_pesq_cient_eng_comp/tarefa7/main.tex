@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+
+\title{Análise de um Experimento Bem Planejado \\ \large Tarefa 7 --- Artigo Relacionado à Pesquisa} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{Universidade de São Paulo --- \today} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	
+	\maketitle % Print the title
+	
+	%----------------------------------------------------------------------------------------
+	%	NOTA
+	%----------------------------------------------------------------------------------------
+		
+	% =====================================================================
+	\section{Artigo indicado}
+	% =====================================================================
+	
+	\begin{itemize}
+		\item \textbf{Título:} OG-RAG: Ontology-Grounded Retrieval-Augmented Generation for Large Language Models.
+		\item \textbf{Autores:} Kartik Sharma, Peeyush Kumar e Yunqing Li.
+		\item \textbf{Publicação:} Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (EMNLP 2025), Suzhou, China, páginas 32962--32981. Association for Computational Linguistics.
+		\item \textbf{DOI:} \texttt{10.18653/v1/2025.emnlp-main.1674}.
+	\end{itemize}
+	
+	\noindent Este é um artigo fortemente relacionado à minha pesquisa de mestrado,
+	que investiga o efeito da inclusão de uma camada de representação simbólica do
+	conhecimento (ontologias) em arquiteturas de RAG, aplicada ao domínio de modelos
+	metabólicos em escala genômica. O OG-RAG é justamente a arquitetura central que
+	pretendo instanciar e avaliar, motivo pelo qual a análise de seu experimento é
+	diretamente informativa para o desenho do meu próprio estudo.
+	
+	% =====================================================================
+	\section{Descrição do experimento}
+	% =====================================================================
+	
+	O experimento avalia se ancorar a recuperação de informação em uma ontologia de
+	domínio melhora a qualidade das respostas geradas por LLMs, em comparação com
+	métodos de recuperação sem estrutura simbólica. A arquitetura proposta representa
+	os documentos de domínio como um \emph{hipergrafo}, no qual cada hiperaresta
+	agrupa fatos relacionados segundo a ontologia, e recupera um conjunto mínimo de
+	hiperarestas relevantes para cada consulta por meio de um algoritmo de otimização.
+	
+	A avaliação é conduzida sobre domínios especializados (como agricultura e
+	trabalho baseado em conhecimento) e compara o OG-RAG a \emph{baselines} de
+	recuperação. Os autores reportam que o OG-RAG aumenta em 55\% o \textit{recall}
+	de fatos corretos e em 40\% a correção das respostas ao longo de quatro LLMs
+	diferentes; adicionalmente, possibilita atribuição das respostas ao contexto 30\%
+	mais rápida e melhora em 27\% a acurácia de raciocínio baseado em fatos em relação
+	aos métodos de referência.
+	
+	% =====================================================================
+	\section{Por que considero o experimento bem planejado e executado}
+	% =====================================================================
+	
+	\begin{enumerate}
+		\item \textbf{Isolamento da variável de interesse com \textit{baselines} claros.}
+		O experimento compara a arquitetura proposta contra métodos de recuperação de
+		referência, permitindo atribuir os ganhos observados à camada ontológica, e não
+		a outros fatores do \textit{pipeline}. Esse cuidado com o \textit{baseline} é
+		precisamente o tipo de controle que pretendo replicar na minha pesquisa.
+		
+		\item \textbf{Generalização entre modelos geradores.} As métricas são reportadas
+		ao longo de \emph{quatro LLMs diferentes}, o que reduz o risco de que os ganhos
+		sejam um artefato de um modelo específico e fortalece a validade externa das
+		conclusões dentro dos domínios avaliados.
+		
+		\item \textbf{Métricas múltiplas e alinhadas ao objetivo.} A avaliação não se
+		apoia em uma única métrica, mas em um conjunto que cobre \textit{recall} de
+		fatos, correção das respostas, velocidade de atribuição ao contexto e raciocínio
+		factual. Essa multiplicidade caracteriza melhor o comportamento do sistema do que
+		um número isolado e é coerente com o objetivo declarado de recuperação
+		fact-cêntrica.
+		
+		\item \textbf{Reprodutibilidade.} Os autores disponibilizam publicamente o
+		código do método, o que viabiliza a verificação independente dos resultados e o
+		reaproveitamento da implementação --- aspecto essencial para que eu possa adaptar
+		a arquitetura ao meu domínio de aplicação.
+		
+		\item \textbf{Rastreabilidade como resultado mensurável.} O experimento trata a
+		atribuição das respostas ao contexto como uma propriedade mensurável (e não apenas
+		qualitativa), reforçando o argumento de que a estrutura simbólica melhora a
+		auditabilidade das respostas, um ponto central da minha investigação.
+	\end{enumerate}
+	
+	Em conjunto, esses elementos --- controle experimental por meio de
+	\textit{baselines}, avaliação sobre múltiplos modelos, uso de várias métricas
+	pertinentes e compromisso com a reprodutibilidade --- justificam minha avaliação
+	de que se trata de um experimento bem planejado e executado, além de servir como
+	referência metodológica direta para o desenho do meu próprio estudo comparativo.
+	
+	% =====================================================================
+	\begin{thebibliography}{1}
+		
+		\bibitem{sharma2025ograg}
+		Kartik Sharma, Peeyush Kumar, and Yunqing Li.
+		\newblock OG-RAG: Ontology-grounded retrieval-augmented generation for large language models.
+		\newblock In \textit{Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (EMNLP 2025)}, pages 32962--32981, Suzhou, China, 2025. Association for Computational Linguistics.
+		\newblock DOI: \texttt{10.18653/v1/2025.emnlp-main.1674}.
+		
+	\end{thebibliography}
+	
+\end{document}

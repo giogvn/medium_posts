@@ -1,0 +1,15 @@
+\frametitle{Variance Scheduler Pytorch Implementation}
+	
+	\tiny % or \scriptsize
+	\begin{python}
+	class  VarianceScheduler(nn.Module):
+	
+		def __init__(self, T: int=1000):
+			super().__init__()
+			self.beta = torch.linspace(1e-4, 0.02, T, requires_grad=False)
+			alpha = 1 - self.beta
+			self.alpha = torch.cumprod(alpha, dim=0).requires_grad_(False)
+			
+		def forward(self, t):
+			return self.beta[t], self.alpha[t]
+	\end{python}

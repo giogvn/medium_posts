@@ -1,0 +1,70 @@
+\begin{thebibliography}{1}
+
+\bibitem{edge2024graphrag}
+Darren Edge, Ha~Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody,
+  Steven Truitt, and Jonathan Larson.
+\newblock From local to global: A graph {RAG} approach to query-focused
+  summarization.
+\newblock {\em arXiv preprint arXiv:2404.16130}, 2024.
+
+\bibitem{es-etal-2024-ragas}
+Shahul Es, Jithin James, Luis Espinosa~Anke, and Steven Schockaert.
+\newblock {RAGA}s: Automated evaluation of retrieval augmented generation.
+\newblock In Nikolaos Aletras and Orphee De~Clercq, editors, {\em Proceedings
+  of the 18th Conference of the European Chapter of the Association for
+  Computational Linguistics: System Demonstrations}, pages 150--158, St.
+  Julians, Malta, March 2024. Association for Computational Linguistics.
+
+\bibitem{feng2025ontologyrag}
+Hui Feng, Yuntzu Yin, Emiliano Reynares, and Jay Nanavati.
+\newblock {OntologyRAG}: Better and faster biomedical code mapping with
+  retrieval-augmented generation ({RAG}) leveraging ontology knowledge graphs
+  and large language models.
+\newblock In {\em Proceedings of the Workshop on Knowledge-Enhanced Information
+  Retrieval (KEIR) at ECIR 2025}, 2025.
+\newblock Accepted as a workshop paper.
+
+\bibitem{kalra2024hyparag}
+Rishi Kalra, Zekun Wu, Ayesha Gulley, Airlie Hilliard, Xin Guan, Adriano
+  Koshiyama, and Philip Treleaven.
+\newblock {HyPA-RAG}: A hybrid parameter adaptive retrieval-augmented
+  generation system for {AI} legal and policy applications.
+\newblock {\em arXiv preprint arXiv:2409.09046}, 2024.
+
+\bibitem{king2016bigg}
+Zachary~A. King, Colton~J. Lloyd, Adam~M. Feist, and Bernhard~O. Palsson.
+\newblock {BiGG} models: A platform for integrating, standardizing and sharing
+  genome-scale models.
+\newblock {\em Nucleic Acids Research}, 44(D1):D515--D522, October 2016.
+
+\bibitem{lewis2020retrieval}
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
+  Karpukhin, Naman Goyal, Heinrich K{\"u}ttler, Mike Lewis, Wen-tau Yih, Tim
+  Rockt{\"a}schel, Sebastian Riedel, and Douwe Kiela.
+\newblock Retrieval-augmented generation for knowledge-intensive {NLP} tasks.
+\newblock In {\em Advances in Neural Information Processing Systems},
+  volume~33, pages 9459--9474. Curran Associates, Inc., 2020.
+
+\bibitem{nie2025aml}
+Chuanhao Nie, Yunbo Liu, and Chao Wang.
+\newblock {AI} application in anti-money laundering for sustainable and
+  transparent financial systems.
+\newblock {\em arXiv preprint arXiv:2512.06240}, 2025.
+
+\bibitem{sharma2025ograg}
+Kartik Sharma, Peeyush Kumar, and Yunqing Li.
+\newblock {OG-RAG}: Ontology-grounded retrieval-augmented generation for large
+  language models.
+\newblock In {\em Proceedings of the 2025 Conference on Empirical Methods in
+  Natural Language Processing}, pages 32962--32981, Suzhou, China, 2025.
+  Association for Computational Linguistics.
+
+\bibitem{souza2025ontogem}
+Nahim Alves~de Souza.
+\newblock An ontology-based approach to accelerate the reconstruction of
+  genome-scale metabolic models.
+\newblock Qualifying exam report, Instituto de Matemática e Estatística,
+  Universidade de São Paulo, São Paulo, Brazil, August 2025.
+\newblock Advisor: Renata Wassermann; Co-advisor: Mariana Galvão Ferrarini.
+
+\end{thebibliography}

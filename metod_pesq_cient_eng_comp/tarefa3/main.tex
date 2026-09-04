@@ -1,0 +1,93 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% LaTeX Template
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{purple},
+	showstringspaces=false,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	breaklines=true,
+	frame=single,
+	captionpos=b
+}
+\newtheorem{definition}{Definition}[section]
+
+\input{structure.tex} % Include the file specifying the document structure and custom commands
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Tarefa III PCS5028 - Metodologia de Pesquisa Científica em Engenharia de Computação} % Title of the assignment
+
+\author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
+
+\date{Universidade de São Paulo --- July 26, 2026} % University, school and/or department name(s) and a date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+
+
+\section*{Submeter breve relato sobre discussão em aula, a sua percepção, avaliando o que é preciso amadurecer/melhorar no seu projeto.}
+
+Em especial, três aspectos discurtidos em aula me levaram a reavaliar alguns aspectos do meu projeto de pesquisa. 
+
+O primeiro refere-se à metodologia de pesquisa, a qual deve refletir a sequência de passos necessária para se atingir o objetivo principal e, portanto, também contem a sequência de passos para refletir os objetivos secundários relacionados ao principal. Até então, a metodologia que vinha escrevendo em meus rascunhos estava mais relacionada à sequência de tarefas que venho realizando desde o início do meu mestrado, a qual não reflete \textit{somente} o caminho para atingir meu objetivo, apesar de também incluí-lo. Eu havia escrito na metodologia as etapas de definição do objetivo em si, as quais devem fazer parte das iterações de revisão bibliográfica discutidas em aula e não necessariamente precisam contar no exame de qualificação ou na dissertação final.
+
+Sendo assim, retirei da metodologia todas as discussões sobre como eu cheguei ao objetivo de pesquisa e todos os experimentos que realizei para chegar nele. No lugar, deixei apenas as etapas que completei e ainda irei completar para atingí-lo. 
+
+O segundo ponto que merece amadurecimento em meu projeto e exame de qualificação refere-se a justificativa de minha hipótese de pesquisa. Eu a considerava minha hipótese como sendo válida e digna de ser investigada pelo fato de que em minhas iterações de revisão bibliográfica eu não encontrei pesquisas que avaliassem o uso de ontologias e \textit{large language models} (LLMs)  no domínio específico que estou estudando. Por outro lado, as discussões em sala de aula me levaram a adicionar o \textit{porquê} esse uso pode fazer sentido, e isso se explica nas minhas próprias referências principais que aplicam as técnicas que estudo em outros domínios. Ou seja, melhorei a forma de justificar a minha hipótese explicitando pesquisas em que o uso de ontologias com LLMs se demonstrou bem sucedido em outros domínios. 
+
+Por último, a atividade em grupo ao final da aula, em que tivemos que avaliar o projeto de pesquisa de outro grupo inciou uma discussão interessante sobre o que deveria ser considerado ou não uma limitação do trabalho avaliado. Discutimos se a falta de dados anotados para o trabalho era uma limitação ou apenas uma dificuldade, dado que esses dados poderiam ser obtidos, sendo tal obtenção parte da metodologia para se atingir o objetivo proposto. Não chegamos a um consenso no grupo, mas a discussão me fez refletir sobre esse aspecto em minha própria pesquisa, uma vez que eu tenha dados para realizá-la, entretanto o fato de que eles não são abundantes no formato que preciso me levou a reduzir o escopo daquilo que estou pesquisando.
+
+
+\section*{Identificar as 3 principais referências para o seu trabalho, justificando}
+
+As três mais importantes referências para meu trabalho são:
+
+1. Sharma et al. (2025) — OG-RAG** `arXiv:2412.15235`
+Demonstra que recuperar informação sobre uma ontologia formal pré-definida produz respostas mais corretas do que recuperar sobre texto plano ou sobre grafos extraídos automaticamente do corpus. Isso justifica diretamente a hipótese central deste trabalho: que responder perguntas de domínio sobre GEMs usando OntoGEM como estrutura de recuperação produz respostas de maior qualidade do que sistemas que ignoram a ontologia.
+
+2. Edge et al. (2024) — GraphRAG** `arXiv:2404.16130`
+Para afirmar que *ontologia* melhora as respostas, não basta comparar com texto plano — é preciso mostrar que a melhora vai além do que qualquer estrutura de grafo (mesmo sem schema formal) já proporcionaria. GraphRAG é o método que fornece essa estrutura sem ontologia, tornando possível isolar se o ganho vem da formalidade do schema ou simplesmente de haver um grafo.
+
+3. King et al. (2020) — BiGG Models** `NAR 48:D402`
+As perguntas de domínio sobre GEMs frequentemente exigem combinar dados estruturados (regras GPR, estequiometria) com texto de publicações científicas. A hipótese de que a ontologia degrada menos nessa combinação do que os baselines só é testável num corpus que tenha os dois lados — e BiGG é esse corpus, com modelos curados, API estável e referências às publicações originais.
+
+\end{document}

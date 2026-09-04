@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{\textit {Retrieval Augmented Generation} (RAG)}{2}{0}{1}
+\beamer@sectionintoc {2}{Alternativas Neurossimbólicas}{5}{0}{2}
+\beamer@sectionintoc {3}{OntoGEM}{7}{0}{3}
+\beamer@sectionintoc {4}{Perguntas de Pesquisa}{9}{0}{4}
+\beamer@sectionintoc {5}{Metodologia}{10}{0}{5}
