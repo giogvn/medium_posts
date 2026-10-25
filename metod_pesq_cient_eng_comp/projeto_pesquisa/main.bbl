@@ -1,74 +1,481 @@
-\begin{thebibliography}{10}
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem{edge2024graphrag}
-Darren Edge, Ha~Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody,
-  Steven Truitt, and Jonathan Larson.
-\newblock From local to global: A graph {RAG} approach to query-focused
-  summarization.
-\newblock {\em arXiv preprint arXiv:2404.16130}, 2024.
 
-\bibitem{es-etal-2024-ragas}
-Shahul Es, Jithin James, Luis Espinosa~Anke, and Steven Schockaert.
-\newblock {RAGA}s: Automated evaluation of retrieval augmented generation.
-\newblock In Nikolaos Aletras and Orphee De~Clercq, editors, {\em Proceedings
-  of the 18th Conference of the European Chapter of the Association for
-  Computational Linguistics: System Demonstrations}, pages 150--158, St.
-  Julians, Malta, March 2024. Association for Computational Linguistics.
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{edge2024graphrag}{article}{}{}
+      \name{author}{8}{}{%
+        {{hash=189e08257df5e44d50272dc5a180d62e}{%
+           family={Edge},
+           familyi={E\bibinitperiod},
+           given={Darren},
+           giveni={D\bibinitperiod}}}%
+        {{hash=287352c7f17de381db14926f95d9bc52}{%
+           family={Trinh},
+           familyi={T\bibinitperiod},
+           given={Ha},
+           giveni={H\bibinitperiod}}}%
+        {{hash=57b0bb5fdbcf443dd639970a5d1b62dc}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Newman},
+           giveni={N\bibinitperiod}}}%
+        {{hash=53f364f633d1ea34d2d95ddca01e95af}{%
+           family={Bradley},
+           familyi={B\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=dd15086451465719641101890732c9c1}{%
+           family={Chao},
+           familyi={C\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=51eec0e4d9cc0304cad3dc1704e38d18}{%
+           family={Mody},
+           familyi={M\bibinitperiod},
+           given={Apurva},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0569001cdb7082046697bf8c8ac11504}{%
+           family={Truitt},
+           familyi={T\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+        {{hash=97756ebad7b6772e7c17c98cb8203e67}{%
+           family={Larson},
+           familyi={L\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ed2bef9783d9e58731f105d6eec07ac}
+      \strng{fullhash}{db5dcd08a3e6551eee9213e980135509}
+      \strng{fullhashraw}{db5dcd08a3e6551eee9213e980135509}
+      \strng{bibnamehash}{3ed2bef9783d9e58731f105d6eec07ac}
+      \strng{authorbibnamehash}{3ed2bef9783d9e58731f105d6eec07ac}
+      \strng{authornamehash}{3ed2bef9783d9e58731f105d6eec07ac}
+      \strng{authorfullhash}{db5dcd08a3e6551eee9213e980135509}
+      \strng{authorfullhashraw}{db5dcd08a3e6551eee9213e980135509}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2404.16130}
+      \field{title}{From Local to Global: A Graph {RAG} Approach to Query-Focused Summarization}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.48550/arXiv.2404.16130
+      \endverb
+    \endentry
+    \entry{es-etal-2024-ragas}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=d8dead04bec0d1ebb462dd6ac4504a36}{%
+           family={Es},
+           familyi={E\bibinitperiod},
+           given={Shahul},
+           giveni={S\bibinitperiod}}}%
+        {{hash=5ebf432f1942f224b50ebd01708c854c}{%
+           family={James},
+           familyi={J\bibinitperiod},
+           given={Jithin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f6e179e8b9bcb004c549ae195861cad8}{%
+           family={Espinosa\bibnamedelima Anke},
+           familyi={E\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Luis},
+           giveni={L\bibinitperiod}}}%
+        {{hash=b66c934ea85e43f75cae6e977ceaca03}{%
+           family={Schockaert},
+           familyi={S\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=ef0e94c920293ddc3c52b6569a53efab}{%
+           family={Aletras},
+           familyi={A\bibinitperiod},
+           given={Nikolaos},
+           giveni={N\bibinitperiod}}}%
+        {{hash=a27ed3d3bf4dfdc14f4f0619fabdad03}{%
+           family={De\bibnamedelima Clercq},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Orphee},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {St. Julians, Malta}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{c1c4ea85e78c313d8c00616419b5c4d6}
+      \strng{fullhash}{09e9f306f0df3e788d5db5f592fafe9c}
+      \strng{fullhashraw}{09e9f306f0df3e788d5db5f592fafe9c}
+      \strng{bibnamehash}{c1c4ea85e78c313d8c00616419b5c4d6}
+      \strng{authorbibnamehash}{c1c4ea85e78c313d8c00616419b5c4d6}
+      \strng{authornamehash}{c1c4ea85e78c313d8c00616419b5c4d6}
+      \strng{authorfullhash}{09e9f306f0df3e788d5db5f592fafe9c}
+      \strng{authorfullhashraw}{09e9f306f0df3e788d5db5f592fafe9c}
+      \strng{editorbibnamehash}{ca07223820e9ba37703c52599451627e}
+      \strng{editornamehash}{ca07223820e9ba37703c52599451627e}
+      \strng{editorfullhash}{ca07223820e9ba37703c52599451627e}
+      \strng{editorfullhashraw}{ca07223820e9ba37703c52599451627e}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics: System Demonstrations}
+      \field{month}{3}
+      \field{title}{{RAGA}s: Automated Evaluation of Retrieval Augmented Generation}
+      \field{year}{2024}
+      \field{pages}{150\bibrangedash 158}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.18653/v1/2024.eacl-demo.16
+      \endverb
+      \verb{urlraw}
+      \verb https://aclanthology.org/2024.eacl-demo.16/
+      \endverb
+      \verb{url}
+      \verb https://aclanthology.org/2024.eacl-demo.16/
+      \endverb
+    \endentry
+    \entry{feng2025ontologyrag}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=f8ee30c3df8567c05e12589d44c35168}{%
+           family={Feng},
+           familyi={F\bibinitperiod},
+           given={Hui},
+           giveni={H\bibinitperiod}}}%
+        {{hash=b1fd8aefaf4e61408e6f9bc20afae5f0}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Yuntzu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=f5576617e9b2c6cde37f12a1a70e8969}{%
+           family={Reynares},
+           familyi={R\bibinitperiod},
+           given={Emiliano},
+           giveni={E\bibinitperiod}}}%
+        {{hash=b09a0a41158ea1e9b8de0c9ff43ef12a}{%
+           family={Nanavati},
+           familyi={N\bibinitperiod},
+           given={Jay},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{cbefd2f379fffa78c17d81af62559b40}
+      \strng{fullhash}{808a5f71a70dc329be841f3bd9e6989b}
+      \strng{fullhashraw}{808a5f71a70dc329be841f3bd9e6989b}
+      \strng{bibnamehash}{cbefd2f379fffa78c17d81af62559b40}
+      \strng{authorbibnamehash}{cbefd2f379fffa78c17d81af62559b40}
+      \strng{authornamehash}{cbefd2f379fffa78c17d81af62559b40}
+      \strng{authorfullhash}{808a5f71a70dc329be841f3bd9e6989b}
+      \strng{authorfullhashraw}{808a5f71a70dc329be841f3bd9e6989b}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Workshop on Knowledge-Enhanced Information Retrieval (KEIR) at ECIR 2025}
+      \field{note}{Accepted as a workshop paper}
+      \field{title}{{OntologyRAG}: Better and Faster Biomedical Code Mapping with Retrieval-Augmented Generation ({RAG}) Leveraging Ontology Knowledge Graphs and Large Language Models}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.48550/arXiv.2502.18992
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2502.18992
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2502.18992
+      \endverb
+    \endentry
+    \entry{king2016bigg}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=28d450c30d5b17f10fb57452732b037d}{%
+           family={King},
+           familyi={K\bibinitperiod},
+           given={Zachary\bibnamedelima A.},
+           giveni={Z\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=b8b7ac8843f22db60e7d4ca677e5b8ea}{%
+           family={Lloyd},
+           familyi={L\bibinitperiod},
+           given={Colton\bibnamedelima J.},
+           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=2132dda35458461091bc0ee948c463fd}{%
+           family={Feist},
+           familyi={F\bibinitperiod},
+           given={Adam\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=671aeb8decdb8c2284aae5e2f2c9342b}{%
+           family={Palsson},
+           familyi={P\bibinitperiod},
+           given={Bernhard\bibnamedelima O.},
+           giveni={B\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+      }
+      \strng{namehash}{4e3031c85da87521904b1ca189348824}
+      \strng{fullhash}{9e1ad42a8ba7025930267b96a6ffd7cc}
+      \strng{fullhashraw}{9e1ad42a8ba7025930267b96a6ffd7cc}
+      \strng{bibnamehash}{4e3031c85da87521904b1ca189348824}
+      \strng{authorbibnamehash}{4e3031c85da87521904b1ca189348824}
+      \strng{authornamehash}{4e3031c85da87521904b1ca189348824}
+      \strng{authorfullhash}{9e1ad42a8ba7025930267b96a6ffd7cc}
+      \strng{authorfullhashraw}{9e1ad42a8ba7025930267b96a6ffd7cc}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nucleic Acids Research}
+      \field{month}{10}
+      \field{number}{D1}
+      \field{title}{{BiGG} Models: A Platform for Integrating, Standardizing and Sharing Genome-Scale Models}
+      \field{volume}{44}
+      \field{year}{2016}
+      \field{pages}{D515\bibrangedash D522}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1093/nar/gkv1049
+      \endverb
+    \endentry
+    \entry{lewis2020retrieval}{inproceedings}{}{}
+      \name{author}{12}{}{%
+        {{hash=ecbe786a5668bf643d74bb24fe1c3cfe}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+        {{hash=79978685fd7b37606022b06c0f6419a1}{%
+           family={Perez},
+           familyi={P\bibinitperiod},
+           given={Ethan},
+           giveni={E\bibinitperiod}}}%
+        {{hash=d205faec67355b6e0ec49f82a492324c}{%
+           family={Piktus},
+           familyi={P\bibinitperiod},
+           given={Aleksandra},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e1c32989a78998fe3c03c981d0da2dc7}{%
+           family={Petroni},
+           familyi={P\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=b24392ebfb2c0a35979fc689c389c649}{%
+           family={Karpukhin},
+           familyi={K\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+        {{hash=78a420900f50a8470ad085fb05231bf6}{%
+           family={Goyal},
+           familyi={G\bibinitperiod},
+           given={Naman},
+           giveni={N\bibinitperiod}}}%
+        {{hash=4eadcf26f55e11fe4be834b52d9b7fdf}{%
+           family={Küttler},
+           familyi={K\bibinitperiod},
+           given={Heinrich},
+           giveni={H\bibinitperiod}}}%
+        {{hash=c97f53fdeeb04c28de19e3324cb4bc0a}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d4d56d3d370b3afd4ad2ebf985fbd3f8}{%
+           family={Yih},
+           familyi={Y\bibinitperiod},
+           given={Wen-tau},
+           giveni={W\bibinithyphendelim t\bibinitperiod}}}%
+        {{hash=b3ff4029884ead9928954ea33714192c}{%
+           family={Rocktäschel},
+           familyi={R\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod}}}%
+        {{hash=6cd024b217f3f2f8126e253b8c84d24d}{%
+           family={Riedel},
+           familyi={R\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ca01c762f4a52dd8a8548508f8d727c9}{%
+           family={Kiela},
+           familyi={K\bibinitperiod},
+           given={Douwe},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Curran Associates, Inc.}%
+      }
+      \strng{namehash}{f238c3bfc4b30650dd17e65c4aadfc66}
+      \strng{fullhash}{22489b764620b23a8cc8547a492f0763}
+      \strng{fullhashraw}{22489b764620b23a8cc8547a492f0763}
+      \strng{bibnamehash}{f238c3bfc4b30650dd17e65c4aadfc66}
+      \strng{authorbibnamehash}{f238c3bfc4b30650dd17e65c4aadfc66}
+      \strng{authornamehash}{f238c3bfc4b30650dd17e65c4aadfc66}
+      \strng{authorfullhash}{22489b764620b23a8cc8547a492f0763}
+      \strng{authorfullhashraw}{22489b764620b23a8cc8547a492f0763}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in Neural Information Processing Systems}
+      \field{title}{Retrieval-Augmented Generation for Knowledge-Intensive {NLP} Tasks}
+      \field{volume}{33}
+      \field{year}{2020}
+      \field{pages}{9459\bibrangedash 9474}
+      \range{pages}{16}
+    \endentry
+    \entry{shakarian2023neurosymbolic}{book}{}{}
+      \name{author}{5}{}{%
+        {{hash=638e25739500788c9adeed4447afa8fe}{%
+           family={Shakarian},
+           familyi={S\bibinitperiod},
+           given={Paulo},
+           giveni={P\bibinitperiod}}}%
+        {{hash=121708a74e1528d506fc79a1638d9e8f}{%
+           family={Baral},
+           familyi={B\bibinitperiod},
+           given={Chitta},
+           giveni={C\bibinitperiod}}}%
+        {{hash=e128c978fbbc333b23e2f473ee249155}{%
+           family={Simari},
+           familyi={S\bibinitperiod},
+           given={Gerardo\bibnamedelima I.},
+           giveni={G\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=fe3fadea19d2292cbbd1c07f362a0c30}{%
+           family={Xi},
+           familyi={X\bibinitperiod},
+           given={Bowen},
+           giveni={B\bibinitperiod}}}%
+        {{hash=3221cd351f911fa594e0f7aa869691d2}{%
+           family={Pokala},
+           familyi={P\bibinitperiod},
+           given={Lahari},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{86499ade1c78a1c28500d73ce86c654e}
+      \strng{fullhash}{c7d975b629e5364500c475efebd7104b}
+      \strng{fullhashraw}{c7d975b629e5364500c475efebd7104b}
+      \strng{bibnamehash}{86499ade1c78a1c28500d73ce86c654e}
+      \strng{authorbibnamehash}{86499ade1c78a1c28500d73ce86c654e}
+      \strng{authornamehash}{86499ade1c78a1c28500d73ce86c654e}
+      \strng{authorfullhash}{c7d975b629e5364500c475efebd7104b}
+      \strng{authorfullhashraw}{c7d975b629e5364500c475efebd7104b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-031-39178-1}
+      \field{series}{SpringerBriefs in Computer Science}
+      \field{title}{Neuro Symbolic Reasoning and Learning}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.1007/978-3-031-39179-8
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-031-39179-8
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-031-39179-8
+      \endverb
+    \endentry
+    \entry{sharma2025ograg}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=bec1f97b633481a79ab56f8706ee5991}{%
+           family={Sharma},
+           familyi={S\bibinitperiod},
+           given={Kartik},
+           giveni={K\bibinitperiod}}}%
+        {{hash=d25c96f60ce3b68ad4ddccff16ebd25d}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Peeyush},
+           giveni={P\bibinitperiod}}}%
+        {{hash=91e17dff0e357a3da2bb895d5d2e3e19}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Yunqing},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Suzhou, China}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{e5233f5bbd43928841ad408bf665b28d}
+      \strng{fullhash}{e5233f5bbd43928841ad408bf665b28d}
+      \strng{fullhashraw}{e5233f5bbd43928841ad408bf665b28d}
+      \strng{bibnamehash}{e5233f5bbd43928841ad408bf665b28d}
+      \strng{authorbibnamehash}{e5233f5bbd43928841ad408bf665b28d}
+      \strng{authornamehash}{e5233f5bbd43928841ad408bf665b28d}
+      \strng{authorfullhash}{e5233f5bbd43928841ad408bf665b28d}
+      \strng{authorfullhashraw}{e5233f5bbd43928841ad408bf665b28d}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing}
+      \field{title}{{OG-RAG}: Ontology-Grounded for Large Language Models}
+      \field{year}{2025}
+      \field{pages}{32962\bibrangedash 32981}
+      \range{pages}{20}
+      \verb{urlraw}
+      \verb https://aclanthology.org/2025.emnlp-main.1674/
+      \endverb
+      \verb{url}
+      \verb https://aclanthology.org/2025.emnlp-main.1674/
+      \endverb
+    \endentry
+    \entry{souza2025ontogem}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{hash=4f5772b659b1334b0cebbb0e4aa38d51}{%
+           family={Souza},
+           familyi={S\bibinitperiod},
+           given={Nahim\bibnamedelimb Alves\bibnamedelima de},
+           giveni={N\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Instituto de Matemática e Estatística, Universidade de São Paulo}%
+      }
+      \list{location}{1}{%
+        {São Paulo, Brazil}%
+      }
+      \strng{namehash}{4f5772b659b1334b0cebbb0e4aa38d51}
+      \strng{fullhash}{4f5772b659b1334b0cebbb0e4aa38d51}
+      \strng{fullhashraw}{4f5772b659b1334b0cebbb0e4aa38d51}
+      \strng{bibnamehash}{4f5772b659b1334b0cebbb0e4aa38d51}
+      \strng{authorbibnamehash}{4f5772b659b1334b0cebbb0e4aa38d51}
+      \strng{authornamehash}{4f5772b659b1334b0cebbb0e4aa38d51}
+      \strng{authorfullhash}{4f5772b659b1334b0cebbb0e4aa38d51}
+      \strng{authorfullhashraw}{4f5772b659b1334b0cebbb0e4aa38d51}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{8}
+      \field{note}{Advisor: Renata Wassermann; Co-advisor: Mariana Galvão Ferrarini}
+      \field{title}{An Ontology-Based Approach to Accelerate the Reconstruction of Genome-Scale Metabolic Models}
+      \field{type}{Qualifying Exam Report}
+      \field{year}{2025}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
 
-\bibitem{feng2025ontologyrag}
-Hui Feng, Yuntzu Yin, Emiliano Reynares, and Jay Nanavati.
-\newblock {OntologyRAG}: Better and faster biomedical code mapping with
-  retrieval-augmented generation ({RAG}) leveraging ontology knowledge graphs
-  and large language models.
-\newblock In {\em Proceedings of the Workshop on Knowledge-Enhanced Information
-  Retrieval (KEIR) at ECIR 2025}, 2025.
-\newblock Accepted as a workshop paper.
-
-\bibitem{kalra2024hyparag}
-Rishi Kalra, Zekun Wu, Ayesha Gulley, Airlie Hilliard, Xin Guan, Adriano
-  Koshiyama, and Philip Treleaven.
-\newblock {HyPA-RAG}: A hybrid parameter adaptive retrieval-augmented
-  generation system for {AI} legal and policy applications.
-\newblock {\em arXiv preprint arXiv:2409.09046}, 2024.
-
-\bibitem{king2016bigg}
-Zachary~A. King, Colton~J. Lloyd, Adam~M. Feist, and Bernhard~O. Palsson.
-\newblock {BiGG} models: A platform for integrating, standardizing and sharing
-  genome-scale models.
-\newblock {\em Nucleic Acids Research}, 44(D1):D515--D522, October 2016.
-
-\bibitem{lewis2020retrieval}
-Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
-  Karpukhin, Naman Goyal, Heinrich K{\"u}ttler, Mike Lewis, Wen-tau Yih, Tim
-  Rockt{\"a}schel, Sebastian Riedel, and Douwe Kiela.
-\newblock Retrieval-augmented generation for knowledge-intensive {NLP} tasks.
-\newblock In {\em Advances in Neural Information Processing Systems},
-  volume~33, pages 9459--9474. Curran Associates, Inc., 2020.
-
-\bibitem{nie2025aml}
-Chuanhao Nie, Yunbo Liu, and Chao Wang.
-\newblock {AI} application in anti-money laundering for sustainable and
-  transparent financial systems.
-\newblock {\em arXiv preprint arXiv:2512.06240}, 2025.
-
-\bibitem{shakarian2023neurosymbolic}
-Paulo Shakarian, Chitta Baral, Gerardo~I. Simari, Bowen Xi, and Lahari Pokala.
-\newblock {\em Neuro Symbolic Reasoning and Learning}.
-\newblock SpringerBriefs in Computer Science. Springer, Cham, 2023.
-
-\bibitem{sharma2025ograg}
-Kartik Sharma, Peeyush Kumar, and Yunqing Li.
-\newblock {OG-RAG}: Ontology-grounded for large language models.
-\newblock In {\em Proceedings of the 2025 Conference on Empirical Methods in
-  Natural Language Processing}, pages 32962--32981, Suzhou, China, 2025.
-  Association for Computational Linguistics.
-
-\bibitem{souza2025ontogem}
-Nahim Alves~de Souza.
-\newblock An ontology-based approach to accelerate the reconstruction of
-  genome-scale metabolic models.
-\newblock Qualifying exam report, Instituto de Matemática e Estatística,
-  Universidade de São Paulo, São Paulo, Brazil, August 2025.
-\newblock Advisor: Renata Wassermann; Co-advisor: Mariana Galvão Ferrarini.
-
-\end{thebibliography}

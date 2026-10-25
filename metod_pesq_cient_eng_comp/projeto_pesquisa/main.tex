@@ -24,7 +24,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{graphicx}
-\usepackage{cite}
+\usepackage[backend=biber]{biblatex}
 \usepackage{longtable}
 \usepackage{array}
 \usepackage{booktabs}
@@ -43,6 +43,7 @@
 	captionpos=b
 }
 \newtheorem{definition}{Definition}[section]
+\addbibresource{references.bib}
 
 \input{structure.tex} % Include the file specifying the document structure and custom commands
 
@@ -57,7 +58,7 @@
 
 \author{Giovani Tavares\\ \texttt{giovanitavares@usp.br}} % Author name and email address
 
-\date{Universidade de São Paulo --- 4 de Setembro de 2026} % University, school and/or department name(s) and a date
+\date{Universidade de São Paulo} % University, school and/or department name(s) and a date
 
 %----------------------------------------------------------------------------------------
 
@@ -256,7 +257,5 @@ Espera-se demonstrar que a representação simbólica do conhecimento é respons
 As evidências de melhoria, quando e se coletadas, estarão restritas às perguntas de domínio relacionadas ao modelos metabólicos representados no \textit{dataset} construíodo, selecionadas com apoio de especialistas de domínio. Melhorias observadas para estes modelos e domínio específicos não devem ser generalizadas, sem validação adicional, a outros modelos metabólicos em escala genômica ou a outros domínios de aplicação, os quais estão fora do escopo desta pesquisa.
 
 
-\bibliographystyle{plain}
-\bibliography{references}
-
+\printbibliography
 \end{document}
