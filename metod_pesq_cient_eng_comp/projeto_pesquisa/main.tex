@@ -77,13 +77,9 @@
 \section{Resumo}
 % =====================================================================
 
-Sistemas de \textit{Retrieval-Augmented Generation} (RAG) combinam grandes modelos de linguagem (LLMs) com mecanismos de recuperação de informação responsáveis por integrar os conhecimentos contidos em documentos acerca de um ou mais domínios à entrada enviada para o modelo gerador. Quando baseados exclusivamente em similaridade vetorial, os mecanismos de recuperação de informação podem apresentar limitações conhecidas na literatura como a recuperação de contextos semanticamente próximos às entradas do sistema, porém nem sempre factualmente pertinentes a ela.  Além  disso, a  busca vetorial frequentemente falha em recuperar todos os documentos pertinentes à entrada. Essas limitações estão relacionadas à piora na qualidade dos textos e respostas gerados por sistemas de RAG, o que pode ser verificado por métricas como \textit{context recall} e \textit{answer correctness}.
+Sistemas de \textit{Retrieval-Augmented Generation} (RAG) baseados em texto combinam grandes modelos de linguagem (LLMs) com um mecanismo de recuperação de informação responsável por buscar os documentos pertinentes a uma entrada de usuário (\textit{query}). Essa entrada é enviada ao modelo gerador junto ao resultado da busca no que se denomina contexto. Quando a busca é baseada apenas em similaridade semântica e limitada a um conjunto de $k$ documentos, prejuízos a métricas como \textit{context recall} e \textit{answer correctness} podem ocorrer, em especial quando mensuradas em conjuntos de perguntas respondidas por mais de $k$ documentos e aquelas relacionadas a identidade e semântica de entidades textuais. Visando minimizar esses problemas, trabalhos recentes relatam ganhos consistentes nessas métricas ao integrar uma camada de representação simbólica do conhecimento no processo de recuperação do RAG, propondo arquiteturas que podem ser incluídas no que se denomina IA Neurossimbólica \cite{shakarian2023neurosymbolic}. Dentre elas,  o OG-RAG \cite{sharma2025ograg} demonstrou tais ganhos para documentos dos domínios de agricultura e jornalismo. O presente projeto investiga se os mesmos efeitos se replicam no domínio de modelos metabólicos em escala genômica (\textit{genome-scale metabolic models}, GEMs), propondo um estudo comparativo controlado entre três arquiteturas: RAG com busca vetorial pura, OG-RAG e GraphRAG. o domínio em questão será o \textit{yeast-GEM: O modelo consensual em escala genômica do Saccharomyces cerevisiae} \cite{zhang2024yeast9}. A representação simbólica do conhecimento em questão será a ontologia OntoGEM \cite{souza2025ontogem} e sobre dados do repositório BiGG Models \cite{king2016bigg}. A hipótese central é que a inclusão de uma camada simbólica de representação do conhecimento sobre os GEMs selecionados melhora as métricas derivadas do \textit{framework} RAGAS \cite{ragas2024docs} neste domínio. 
 
-Visando minimizar esses problemas, trabalhos recentes relatam ganhos consistentes nessas métricas ao integrar uma camada de representação simbólica do conhecimento no processo de recuperação do RAG, propondo arquiteturas que podem ser incluídas no que se denomina IA Neurossimbólica \cite{shakarian2023neurosymbolic}.
-
-Dentre elas,  o OG RAG \cite{sharma2025ograg} demonstrou tais ganhos nos domínios de agricultura e jornalismo, enquanto o \cite{feng2025ontologyrag} o fez no  contexto da biomedicina. Há ainda aplicações nos contextos jurídico-regulatórias e \textit{compliance} financeiro. O presente projeto investiga se os mesmos efeitos se replicam no domínio de modelos metabólicos em escala genômica (\textit{genome-scale metabolic models}, GEMs), propondo um estudo comparativo controlado entre três arquiteturas: RAG com busca vetorial pura, GraphRAG e OG-RAG. Elas serão instanciadas sobre a ontologia de domínio OntoGEM \cite{souza2025ontogem} e sobre dados do repositório BiGG Models \cite{king2016bigg}. A hipótese central é que a inclusão de uma camada simbólica de representação do conhecimento sobre os GEMs selecionados melhora as métricas derivadas do \textit{framework} RAGAS \cite{es-etal-2024-ragas} neste domínio. 
-
-Para testá-la, será construído um conjunto anotado de perguntas de competência e respostas sobre os GEMs selecionados com o apoio de especialistas do domínio. Essas perguntas serão pré-classificadas por tipo de explicação exigida para respondê-las, com respostas de referência derivadas dos modelos extraídos da própria base BiGG. As três arquiteturas serão avaliadas sob condições controladas (mesmo LLM gerador, mesmo conjuntos de GEMs fonte, variando apenas o mecanismo de recuperação de informação), visando ao isolamento do efeito da estrutura simbólica sobre métricas do RAGAS. Espera-se produzir evidência empírica, ainda que restrita a este domínio e aos modelos selecionados, sobre o papel da representação simbólica do conhecimento na melhoria das métricas citadas, além de fornecer um conjunto de perguntas e respostas anotado e verificado por especialistas sobre o modelos selecionados.
+Para testá-la, será construído um conjunto anotado de perguntas de competência e respostas sobre os GEMs selecionados com o apoio de especialistas do domínio. Essas perguntas serão pré-classificadas por tipo de explicação exigida para respondê-las, com respostas de referência derivadas do  \textit{yeast-GEM}. As três arquiteturas serão avaliadas sob condições controladas (mesmo LLM gerador, mesmo conjuntos de GEMs fonte, variando apenas o mecanismo de recuperação de informação), visando ao isolamento do efeito da estrutura simbólica sobre as métricas. Espera-se produzir evidência empírica, ainda que restrita a este domínio e aos modelo selecionado, sobre o papel da representação simbólica do conhecimento na melhoria das métricas citadas, além de fornecer um conjunto de perguntas e respostas anotado e verificado por especialistas sobre o modelo selecionado.
 
 \newpage
 
@@ -91,7 +87,95 @@ Para testá-la, será construído um conjunto anotado de perguntas de competênc
 \section{Introdução}
 % =====================================================================
 
-Sistemas de \textit{Retrieval-Augmented Generation} \cite{lewis2020retrieval} tornaram-se a abordagem dominante para reduzir alucinações e ancorar respostas de LLMs em fontes de documentos verificados por especialistas em aplicações que visam fornecer ao usuário final uma interface de pergunta (\textit{query}) e resposta acerca de tais documentos. Apesar de apresentar variações, a arquitetura mais difundida do RAG utiliza a similaridade vetorial entre a \textit{query} e os documentos consultados como métrica que define os resultados da busca dos trechos do \textit{corpus} que serão enviados como contexto ao LLM a fim de que ele gere a resposta. Quando a indexação dos documentos é feita sem levar em consideração suas estruturas e o conhecimento representado neles, a busca vetorial pode apresentar limitações quanto às métricas que avaliam a qualidade de sistemas de RAG, dentre as quais as principais encontradas na literatura estão definidas no \textit{framework open-source} RAGAS \cite{es-etal-2024-ragas}.
+Sistemas de \textit{Retrieval-Augmented Generation} \cite{lewis2020retrieval} tornaram-se a abordagem dominante para reduzir alucinações e ancorar o texto gerado por grandes modelos de linguagem (LLMs, na sigla em inglês) em fontes de documentos verificados por especialistas --- o \textit{corpus}. Em geral, essa arquitetura é utilizada em aplicações que visam fornecer ao usuário final uma interface de pergunta (\textit{query}) e resposta acerca de tais documentos, sendo a \textit{query} a entrada do usuário e a saída a resposta textual gerada pelo LLM. Apesar de apresentar variações, a abordagem mais difundida do RAG --- aqui denominado RAG tradicional --- utiliza como critério de relevância para a busca a similaridade vetorial entre a \textit{query} e os trechos processados e indexados do \textit{corpus}. Tanto o processamento e indexação do \textit{corpus} ocorrem em tempo de construção da aplicação, enquanto o processamento da \textit{query} de usuário e do resultado da busca ocorrem antes da geração de todo e qualquer texto de \textit{output}.
+
+No RAG tradicional, o processamento do \textit{corpus} divide os documentos em trechos contíguos (\textit{chunks}) e indexa seus \textit{embeddings}, que podem ser compreendidos como representações vetoriais dos \textit{chunks} em um espaço vetorial contínuo de dimensão fixa, construídas de modo que trechos semanticamente semelhantes fiquem próximos nesse espaço.
+Já a \textit{query} do usuário pode passar por duas etapas:
+
+\begin{enumerate}[a)]
+	\item \textbf{reescrita} (\textit{query rewriting}), que reformula a consulta original em uma versão mais clara, completa ou adequada ao \textit{corpus}, por exemplo resolvendo ambiguidades e ajustando os termos ao vocabulário dos documentos, com o objetivo de aumentar a precisão da recuperação;
+	\item \textbf{expansão} (\textit{query expansion}), que acrescenta termos ou gera consultas adicionais (sinônimos, termos relacionados ou subperguntas) a partir da original, de modo a alcançar documentos que usam outras palavras para o mesmo conceito, com o objetivo de aumentar a revocação (\textit{recall}).
+\end{enumerate}
+
+
+As métricas definidas no RAGAS a serem utilizadas no presente trabalho para avaliar sistemas de RAG são apresentadas a seguir.
+
+\subsection{Métricas de avaliação}
+
+As perguntas do conjunto de avaliação diferem quanto ao formato da resposta esperada, o que impede o uso de uma única métrica de corretude. Por isso, foram classificadas em cinco tipos (Tabela~\ref{tab:tipos-perguntas}). A avaliação foi dividida em três dimensões: (i) a qualidade do contexto recuperado e (ii) a fidelidade da resposta a esse contexto, comuns a todos os tipos, e (iii) a corretude da resposta, medida por uma métrica adequada a cada tipo.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Tipos de pergunta e métricas de corretude associadas.}
+	\label{tab:tipos-perguntas}
+	\begin{tabular}{p{2.6cm} p{6.2cm} p{3.6cm}}
+		\hline
+		\textbf{Tipo} & \textbf{Exemplo} & \textbf{Métrica de corretude} \\
+		\hline
+		Binária & \textit{Is the model stoichiometrically consistent?} & Acurácia e MCC \\
+		Categórica & \textit{What type of reaction is reaction R?} & Acurácia e F1-macro \\
+		Lista & \textit{Which reactions produce metabolite M?} & Precisão, revocação e F1 de conjuntos \\
+		Numérica & \textit{How many blocked reactions are in the model?} & Acerto exato e erro relativo \\
+		Aberta & \textit{What evidence supports the GPR rule of reaction R?} & \textit{Answer Correctness} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Métricas de recuperação e fidelidade}
+
+As métricas definidas no RAGAS~\cite{es-etal-2024-ragas, ragas2024docs} a serem utilizadas no presente trabalho para avaliar sistemas de RAG são apresentadas a seguir. Todas são calculadas com o auxílio de um LLM avaliador, e os escores pertencem ao intervalo $[0, 1]$.
+
+\begin{itemize}
+	\item \textbf{Context Precision (C-Prec):} Avalia se os trechos relevantes do contexto recuperado estão nas primeiras posições do ranqueamento. Para os $K$ trechos recuperados,
+	\begin{equation}
+		\text{C-Prec@}K = \frac{\sum_{k=1}^{K} \text{Precision@}k \cdot v_k}{\text{número de trechos relevantes entre os } K},
+	\end{equation}
+	em que $v_k \in \{0, 1\}$ indica se o trecho na posição $k$ é relevante.
+
+	\item \textbf{Context Recall (C-Rec):} Proporção das afirmações da resposta de referência que podem ser atribuídas ao contexto recuperado. Mede se o \textit{retrieval} trouxe a informação necessária para responder à pergunta.
+
+	\item \textbf{Faithfulness (Faith):} Proporção das afirmações da resposta gerada que podem ser inferidas do contexto recuperado,
+	\begin{equation}
+		\text{Faith} = \frac{|\{\text{afirmações sustentadas pelo contexto}\}|}{|\{\text{afirmações da resposta}\}|}.
+	\end{equation}
+	É a métrica utilizada para quantificar alucinações em relação ao contexto. Como respostas binárias, categóricas e numéricas contêm uma única afirmação, o sistema foi instruído a acompanhar cada resposta de uma justificativa que cite os elementos recuperados, e a \textit{Faithfulness} é calculada sobre a resposta acrescida da justificativa.
+\end{itemize}
+
+\subsubsection{Métricas de corretude}
+
+\paragraph{Perguntas binárias.} Utiliza-se a acurácia e, devido ao possível desbalanceamento entre respostas positivas e negativas, o coeficiente de correlação de Matthews (MCC),
+\begin{equation}
+	\text{MCC} = \frac{TP \cdot TN - FP \cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}},
+\end{equation}
+em que $TP$, $TN$, $FP$ e $FN$ são calculados considerando ``sim'' como a classe positiva.
+
+\paragraph{Perguntas categóricas.} Utiliza-se a acurácia e o F1-macro sobre os rótulos possíveis de cada pergunta.
+
+\paragraph{Perguntas de lista.} Seja $\hat{Y}$ o conjunto de entidades da resposta gerada e $Y$ o conjunto de referência, após a normalização dos identificadores (por exemplo, para os identificadores do modelo). Definem-se
+\begin{equation}
+	P = \frac{|\hat{Y} \cap Y|}{|\hat{Y}|}, \qquad
+	R = \frac{|\hat{Y} \cap Y|}{|Y|}, \qquad
+	F_1 = \frac{2PR}{P + R},
+\end{equation}
+calculados por pergunta e agregados pela média (\textit{macro-average}). A precisão penaliza entidades inexistentes ou incorretas, e a revocação penaliza omissões.
+
+\paragraph{Perguntas numéricas.} Reporta-se a proporção de acertos exatos e o erro relativo $|\hat{y} - y| / |y|$. Para proporções, utiliza-se o erro absoluto.
+
+\paragraph{Perguntas abertas.}
+\begin{itemize}
+	\item \textbf{Answer Similarity (A-Sim):} Similaridade do cosseno entre os \textit{embeddings} da resposta gerada $a$ e da resposta de referência $g$, $\text{A-Sim} = \cos(e(a), e(g))$.
+
+	\item \textbf{Answer Correctness (A-Corr):} Combinação da \textit{answer similarity} com a similaridade factual, que corresponde ao \textit{F1-score} entre as afirmações da resposta de referência e as da resposta gerada. Um LLM classifica as afirmações em verdadeiros positivos ($TP$, presentes nas duas respostas), falsos positivos ($FP$, presentes apenas na resposta gerada) e falsos negativos ($FN$, presentes apenas na referência), e
+	\begin{equation}
+		F_1^{\text{fact}} = \frac{|TP|}{|TP| + 0{,}5\,(|FP| + |FN|)}, \qquad
+		\text{A-Corr} = w_1 \, F_1^{\text{fact}} + w_2 \, \text{A-Sim},
+	\end{equation}
+	com $w_1 = 0{,}75$ e $w_2 = 0{,}25$, valores padrão da biblioteca.
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{Answer Correctness (A-Corr):} Combinação da \textit{answer similarity} (definida acima) com a similaridade factual, que corresponde ao \textit{F1-score} entre as afirmações da resposta de referência e as da resposta gerada.
+\end{itemize}
 
  Dentre outras causas, o prejuízo a essas métricas se deve sobretudo à recuperação de amostras de documentos semanticamente próximos à \textit{query}, mas irrelevantes a ela ou mesmo contraditórios em relação aos fatos que os especialistas de domínio estabelecem como corretos no tempo de geração da resposta. Por ignorar os metadados dos documentos e a estrutura geral do conhecimento do \textit{corpus}, a busca vetorial pura tende a falhar em perguntas de \textbf{negação/ contrafactuais} que pressupõem raciocínio sobre o que não se aplica fora do escopo; \textit{\textbf{multi-hop}}, as quais exigem raciocínio encadeado sobre fatos; \textbf{proveniência}, que necessitam do carregamentos de metadados.
  

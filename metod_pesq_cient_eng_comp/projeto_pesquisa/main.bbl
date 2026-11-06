@@ -154,54 +154,28 @@
       \verb https://aclanthology.org/2024.eacl-demo.16/
       \endverb
     \endentry
-    \entry{feng2025ontologyrag}{inproceedings}{}{}
-      \name{author}{4}{}{%
-        {{hash=f8ee30c3df8567c05e12589d44c35168}{%
-           family={Feng},
-           familyi={F\bibinitperiod},
-           given={Hui},
-           giveni={H\bibinitperiod}}}%
-        {{hash=b1fd8aefaf4e61408e6f9bc20afae5f0}{%
-           family={Yin},
-           familyi={Y\bibinitperiod},
-           given={Yuntzu},
-           giveni={Y\bibinitperiod}}}%
-        {{hash=f5576617e9b2c6cde37f12a1a70e8969}{%
-           family={Reynares},
-           familyi={R\bibinitperiod},
-           given={Emiliano},
-           giveni={E\bibinitperiod}}}%
-        {{hash=b09a0a41158ea1e9b8de0c9ff43ef12a}{%
-           family={Nanavati},
-           familyi={N\bibinitperiod},
-           given={Jay},
-           giveni={J\bibinitperiod}}}%
+    \entry{ragas2024docs}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=b311ab15749440af65a277121417dd9c}{%
+           family={{Exploding Gradients}},
+           familyi={E\bibinitperiod}}}%
       }
-      \strng{namehash}{cbefd2f379fffa78c17d81af62559b40}
-      \strng{fullhash}{808a5f71a70dc329be841f3bd9e6989b}
-      \strng{fullhashraw}{808a5f71a70dc329be841f3bd9e6989b}
-      \strng{bibnamehash}{cbefd2f379fffa78c17d81af62559b40}
-      \strng{authorbibnamehash}{cbefd2f379fffa78c17d81af62559b40}
-      \strng{authornamehash}{cbefd2f379fffa78c17d81af62559b40}
-      \strng{authorfullhash}{808a5f71a70dc329be841f3bd9e6989b}
-      \strng{authorfullhashraw}{808a5f71a70dc329be841f3bd9e6989b}
-      \field{sortinit}{F}
-      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \strng{namehash}{b311ab15749440af65a277121417dd9c}
+      \strng{fullhash}{b311ab15749440af65a277121417dd9c}
+      \strng{fullhashraw}{b311ab15749440af65a277121417dd9c}
+      \strng{bibnamehash}{b311ab15749440af65a277121417dd9c}
+      \strng{authorbibnamehash}{b311ab15749440af65a277121417dd9c}
+      \strng{authornamehash}{b311ab15749440af65a277121417dd9c}
+      \strng{authorfullhash}{b311ab15749440af65a277121417dd9c}
+      \strng{authorfullhashraw}{b311ab15749440af65a277121417dd9c}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of the Workshop on Knowledge-Enhanced Information Retrieval (KEIR) at ECIR 2025}
-      \field{note}{Accepted as a workshop paper}
-      \field{title}{{OntologyRAG}: Better and Faster Biomedical Code Mapping with Retrieval-Augmented Generation ({RAG}) Leveraging Ontology Knowledge Graphs and Large Language Models}
-      \field{year}{2025}
-      \verb{doi}
-      \verb 10.48550/arXiv.2502.18992
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2502.18992
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2502.18992
-      \endverb
+      \field{howpublished}{\url{https://docs.ragas.io/}}
+      \field{note}{Versão X.Y.Z. Acesso em: nov. 2026}
+      \field{title}{Ragas: Evaluation Framework for {LLM} Applications --- Documentation}
+      \field{year}{2024}
     \endentry
     \entry{king2016bigg}{article}{}{}
       \name{author}{4}{}{%
@@ -474,6 +448,114 @@
       \field{title}{An Ontology-Based Approach to Accelerate the Reconstruction of Genome-Scale Metabolic Models}
       \field{type}{Qualifying Exam Report}
       \field{year}{2025}
+    \endentry
+    \entry{zhang2024yeast9}{article}{}{}
+      \name{author}{15}{}{%
+        {{hash=89d0fd1b750c42f731a6b221530ca497}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Chengyu},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1b646aa8527a73d5ddab5c7e70054811}{%
+           family={Sánchez},
+           familyi={S\bibinitperiod},
+           given={Benjamín\bibnamedelima J.},
+           giveni={B\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=6c33b1963946e0547cc768a962fc2ec0}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Feiran},
+           giveni={F\bibinitperiod}}}%
+        {{hash=ef8d418f2f0bb19878e3650742c8d24e}{%
+           family={Eiden},
+           familyi={E\bibinitperiod},
+           given={Cheng\bibnamedelimb Wei\bibnamedelima Quan},
+           giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim Q\bibinitperiod}}}%
+        {{hash=375bd2f5a0115ea0fb50ef02ccf2f41d}{%
+           family={Scott},
+           familyi={S\bibinitperiod},
+           given={William\bibnamedelima T.},
+           giveni={W\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=96b3ab52e11db242e78bc341a8170697}{%
+           family={Liebal},
+           familyi={L\bibinitperiod},
+           given={Ulf\bibnamedelima W.},
+           giveni={U\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=c64090c19de0db9990558831124189db}{%
+           family={Blank},
+           familyi={B\bibinitperiod},
+           given={Lars\bibnamedelima M.},
+           giveni={L\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=21f61d728d43e68733a7730050f5fa9e}{%
+           family={Mengers},
+           familyi={M\bibinitperiod},
+           given={Hendrik\bibnamedelima G.},
+           giveni={H\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=db707b63ba9d7a97d649d8de56d25f64}{%
+           family={Anton},
+           familyi={A\bibinitperiod},
+           given={Mihail},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b437ca8b8076ae889375784701790ba6}{%
+           family={Rangel},
+           familyi={R\bibinitperiod},
+           given={Albert\bibnamedelima Tafur},
+           giveni={A\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=b71e8b03268ff1a30c906cecacf2a3e2}{%
+           family={Mendoza},
+           familyi={M\bibinitperiod},
+           given={Sebastián\bibnamedelima N.},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=2f45bfc05e8eb6048fd83964eb54e2ea}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Lixin},
+           giveni={L\bibinitperiod}}}%
+        {{hash=7367c4123d321556d38803b11cd83308}{%
+           family={Nielsen},
+           familyi={N\bibinitperiod},
+           given={Jens},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d1d75046dd932324dfb6271f32dadad6}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Hongzhong},
+           giveni={H\bibinitperiod}}}%
+        {{hash=c1863fc4d0ea312ba80cf85f4b697ad6}{%
+           family={Kerkhoven},
+           familyi={K\bibinitperiod},
+           given={Eduard\bibnamedelima J.},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{317163ac3e7fd8a271f4fa821b013c8c}
+      \strng{fullhash}{1a6fb5e32968b5b7faab141f403d9c86}
+      \strng{fullhashraw}{1a6fb5e32968b5b7faab141f403d9c86}
+      \strng{bibnamehash}{317163ac3e7fd8a271f4fa821b013c8c}
+      \strng{authorbibnamehash}{317163ac3e7fd8a271f4fa821b013c8c}
+      \strng{authornamehash}{317163ac3e7fd8a271f4fa821b013c8c}
+      \strng{authorfullhash}{1a6fb5e32968b5b7faab141f403d9c86}
+      \strng{authorfullhashraw}{1a6fb5e32968b5b7faab141f403d9c86}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Molecular Systems Biology}
+      \field{month}{10}
+      \field{number}{10}
+      \field{title}{{Yeast9}: A Consensus Genome-Scale Metabolic Model for {S. cerevisiae} Curated by the Community}
+      \field{volume}{20}
+      \field{year}{2024}
+      \field{pages}{1134\bibrangedash 1150}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1038/s44320-024-00060-7
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1038/s44320-024-00060-7
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1038/s44320-024-00060-7
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

@@ -2374,12 +2374,13 @@
   <bcf:section number="0">
     <bcf:citekey order="1" intorder="1">shakarian2023neurosymbolic</bcf:citekey>
     <bcf:citekey order="2" intorder="1">sharma2025ograg</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">feng2025ontologyrag</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">zhang2024yeast9</bcf:citekey>
     <bcf:citekey order="4" intorder="1">souza2025ontogem</bcf:citekey>
     <bcf:citekey order="5" intorder="1">king2016bigg</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">es-etal-2024-ragas</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">ragas2024docs</bcf:citekey>
     <bcf:citekey order="7" intorder="1">lewis2020retrieval</bcf:citekey>
     <bcf:citekey order="8" intorder="1">es-etal-2024-ragas</bcf:citekey>
+    <bcf:citekey order="8" intorder="2">ragas2024docs</bcf:citekey>
     <bcf:citekey order="9" intorder="1">souza2025ontogem</bcf:citekey>
     <bcf:citekey order="10" intorder="1">king2016bigg</bcf:citekey>
     <bcf:citekey order="11" intorder="1">souza2025ontogem</bcf:citekey>
